@@ -17,7 +17,7 @@
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.
  */
-
+//
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -30,7 +30,7 @@ import java.util.ListIterator;
  * Represents a single book
  *
  * @author Brahma Dathan and Sarnath Ramnath
- *
+ * hi
  */
 public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
