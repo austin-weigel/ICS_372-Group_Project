@@ -36,7 +36,11 @@ public class Organization {
 		}
 	}
 
-	public double processDonations() {
+	/**
+	 * Creates a transaction for every donation. Prints the total amount of
+	 * donations collected.
+	 */
+	public void processDonations() {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
@@ -44,16 +48,21 @@ public class Organization {
 				total += donation.getAmount();
 			}
 		}
-		return total;
+		System.out.print("Total amount in donations: $");
+		System.out.format("%10.2f", total);
 	}
 
-	public String listTransactions() {
-		String res = "";
+	/**
+	 * Prints all transactions to the console.
+	 */
+	public void printTransactions() {
+		System.out.println("Credit card Amount Date");
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
-				// todo
+				System.out.format("%016d%n", transaction.getCreditCard());
+				System.out.format("%10.2f%n", transaction.getAmount());
+				System.out.println(transaction.getDate());
 			}
 		}
-		return res;
 	}
 }

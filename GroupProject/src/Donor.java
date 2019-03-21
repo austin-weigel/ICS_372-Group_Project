@@ -1,10 +1,16 @@
 
+/**
+ * 
+ * A donor or someone who has promised 0-many donations and has 0-many
+ * transactions.
+ *
+ */
 public class Donor {
-	int id;
-	String name;
-	int phoneNumber;
-	DonationList donations;
-	TransactionList transactions;
+	int id; // The id of the donor.
+	String name; // The name of the donor.
+	int phoneNumber; // The phone number of the donor.
+	DonationList donations; // The list of donations promised by the donor.
+	TransactionList transactions; // The list of completed transactions from the donor
 
 	/**
 	 * Creates a new donor with no donations or transaction history.
@@ -20,22 +26,48 @@ public class Donor {
 		transactions = new TransactionList();
 	}
 
+	/**
+	 * Returns the name of the donor.
+	 * 
+	 * @return The name of the donor.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets the phone number of the donor.
+	 * 
+	 * @return the phone number of the donor.
+	 */
 	public int getPhone() {
 		return phoneNumber;
 	}
 
+	/**
+	 * Gets the ID of the donor.
+	 * 
+	 * @return The ID of the donor.
+	 */
 	public int getID() {
 		return id;
 	}
 
+	/**
+	 * Gets the list of donations, which is a credit card and amount, for that
+	 * donor.
+	 * 
+	 * @return
+	 */
 	public DonationList getDonationList() {
 		return donations;
 	}
 
+	/**
+	 * Gets a list of all transactions by that donor.
+	 * 
+	 * @return The list of all transactions by that donor
+	 */
 	public TransactionList getTransactionList() {
 		return transactions;
 	}

@@ -69,10 +69,17 @@ public class DonorList implements Iterable<Donor> {
 		return new DonorIterator();
 	}
 
+	/**
+	 * Iterator for donors.
+	 *
+	 */
 	private class DonorIterator implements Iterator<Donor> {
 
-		int count;
+		int count; // The index of the current donor for the iterator.
 
+		/**
+		 * Starts the iterator at the begining of the donor list.
+		 */
 		DonorIterator() {
 			count = 0;
 		}

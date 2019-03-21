@@ -3,8 +3,6 @@ import java.util.Date;
 /**
  * A Transaction is a Donation that has been recorded with a date.
  * 
- * @author Austin Weigel
- *
  */
 public class Transaction {
 
