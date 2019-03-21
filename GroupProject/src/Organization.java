@@ -65,4 +65,8 @@ public class Organization {
 			}
 		}
 	}
+
+	public Donor removeDonor(int id) {
+		return donors.removeDonor(id);
+	}
 }

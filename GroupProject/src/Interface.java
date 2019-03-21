@@ -83,6 +83,12 @@ public class Interface {
 		}
 	}
 
+	public Donor removeDonorUI() {
+		System.out.println("Please enter donor ID");
+		int id = Integer.parseInt(reader.readLine());
+		return Organization.removeDonor(id);
+	}
+
 	/**
 	 * Prints a list of all the command options.
 	 */
