@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -5,8 +6,9 @@ import java.util.Iterator;
  * A list of donors. Manages creations of donor IDs.
  *
  */
-public class DonorList implements Iterable<Donor> {
+public class DonorList implements Iterable<Donor>, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	public ArrayList<Donor> donors;
 	int idCount;
 

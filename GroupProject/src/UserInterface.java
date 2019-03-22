@@ -7,18 +7,23 @@ import java.io.InputStreamReader;
  * Manages displaying command options and processing commands given by the user.
  *
  */
-public class Interface {
+public class UserInterface {
 
-	Organization org; // The organization to process the commands on.
-	BufferedReader reader; // Input reader to get user commands and other data.
+	private Organization org; // The organization to process the commands on.
+	private BufferedReader reader; // Input reader to get user commands and other data.
+	private static UserInterface userInterface = new UserInterface();
+
+	public static void main(String[] args) {
+		userInterface.start();
+	}
 
 	/**
 	 * Creates a new interface for the given organization.
 	 * 
 	 * @param org The organization to provide a Interface for.
 	 */
-	public Interface(Organization org) {
-		this.org = org;
+	private UserInterface() {
+		this.org = new Organization();
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 
@@ -72,6 +77,8 @@ public class Interface {
 		case 6: // List a specific donor
 			break;
 		case 7: // Remove a specific donor
+			removeDonorUI();
+			start();
 			break;
 		case 8: // Remove a credit card
 			break;
@@ -85,8 +92,13 @@ public class Interface {
 
 	public Donor removeDonorUI() {
 		System.out.println("Please enter donor ID");
-		int id = Integer.parseInt(reader.readLine());
-		return Organization.removeDonor(id);
+		int id = 0;
+		try {
+			id = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+		return org.removeDonor(id);
 	}
 
 	/**

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 
 /**
  * A Donations is a credit card and an amount. Once the donations has been made
@@ -6,8 +7,9 @@
  * @author Austin Weigel
  *
  */
-public class Donation {
+public class Donation implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int creditCard; // The credit card to be charged.
 	private double amount; // The amount to charge to the credit card.
 

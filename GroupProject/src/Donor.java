@@ -1,3 +1,4 @@
+import java.io.Serializable;
 
 /**
  * 
@@ -5,7 +6,9 @@
  * transactions.
  *
  */
-public class Donor {
+public class Donor implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	int id; // The id of the donor.
 	String name; // The name of the donor.
 	int phoneNumber; // The phone number of the donor.

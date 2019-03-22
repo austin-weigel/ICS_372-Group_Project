@@ -1,11 +1,13 @@
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * A Transaction is a Donation that has been recorded with a date.
  * 
  */
-public class Transaction {
+public class Transaction implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	int creditCard;
 	double amount;
 	Date date;

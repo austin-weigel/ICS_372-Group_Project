@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,9 +8,10 @@ import java.util.Iterator;
  * @author Austin Weigel
  *
  */
-public class DonationList implements Iterable<Donation> {
+public class DonationList implements Iterable<Donation>, Serializable {
 
-	private ArrayList<Donation> donations;		//A list of all the donations
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Donation> donations; // A list of all the donations
 
 	/**
 	 * Creates a new list of donations initially empty.
@@ -20,16 +22,19 @@ public class DonationList implements Iterable<Donation> {
 
 	/**
 	 * Adds a donation to the donations list
+	 * 
 	 * @param creditCard The number of the credit card to be added
-	 * @param amount The amount to be charged to the credit card. 
+	 * @param amount     The amount to be charged to the credit card.
 	 */
 	public void addDonation(int creditCard, double amount) {
 		donations.add(new Donation(creditCard, amount));
 	}
 
 	/**
-	 * Removes the first donation in the donations list with a matching credit card number.
-	 * @param creditCard The number of the credit card to remove. 
+	 * Removes the first donation in the donations list with a matching credit card
+	 * number.
+	 * 
+	 * @param creditCard The number of the credit card to remove.
 	 */
 	public void removeDonation(int creditCard) {
 		donations.remove(new Donation(creditCard, 0));
@@ -39,20 +44,22 @@ public class DonationList implements Iterable<Donation> {
 	public Iterator<Donation> iterator() {
 		return new DonationsIterator();
 	}
-	
-	private class DonationsIterator implements Iterator<Donation>{
+
+	private class DonationsIterator implements Iterator<Donation> {
 		int counter;
-		
-		DonationsIterator(){
+
+		DonationsIterator() {
 			counter = 0;
 		}
-		
-		public Donation next(){
-			if(hasNext())
+
+		@Override
+		public Donation next() {
+			if (hasNext())
 				return donations.get(counter++);
 			return null;
 		}
-		
+
+		@Override
 		public boolean hasNext() {
 			return counter < donations.size();
 		}

@@ -1,5 +1,13 @@
-public class Organization {
+import java.io.Serializable;
 
+/**
+ * An organization object that contains the methods for all use cases called by
+ * the Interface.
+ *
+ */
+public class Organization implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	DonorList donors;
 
 	/**
@@ -66,6 +74,12 @@ public class Organization {
 		}
 	}
 
+	/**
+	 * Removes a donor from the organization
+	 * 
+	 * @param id The id of the donor to remove
+	 * @return The donor who was removed.
+	 */
 	public Donor removeDonor(int id) {
 		return donors.removeDonor(id);
 	}

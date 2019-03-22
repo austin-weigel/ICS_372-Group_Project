@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -5,8 +6,9 @@ import java.util.Iterator;
  * A list of all transactions given by some donor.
  *
  */
-public class TransactionList implements Iterable<Transaction> {
+public class TransactionList implements Iterable<Transaction>, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	ArrayList<Transaction> transactions; // The list of transactions
 
 	/**
