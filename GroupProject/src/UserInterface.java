@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 /**
  * 
@@ -9,12 +9,12 @@ import java.io.InputStreamReader;
  */
 public class UserInterface {
 
-	private Organization org; // The organization to process the commands on.
+	private static Organization org; // The organization to process the commands on.
 	private BufferedReader reader; // Input reader to get user commands and other data.
-	private static UserInterface userInterface = new UserInterface();
+	private static UserInterface userInterface;
 
 	public static void main(String[] args) {
-		userInterface.start();
+		UserInterface.instance().start();
 	}
 
 	/**
@@ -22,9 +22,92 @@ public class UserInterface {
 	 * 
 	 * @param org The organization to provide a Interface for.
 	 */
+
+	/**
+	 * Made private for singleton pattern. Conditionally looks for any saved data.
+	 * Otherwise, it gets a singleton Library object.
+	 * 
+	 * @author Bramha Dathan
+	 */
 	private UserInterface() {
-		this.org = new Organization();
-		reader = new BufferedReader(new InputStreamReader(System.in));
+		if (yesOrNo("Look for saved data and  use it?")) {
+			retrieve();
+		} else {
+			org = new Organization();
+		}
+	}
+
+	/**
+	 * Method to be called for retrieving saved data. Uses the appropriate Library
+	 * method for retrieval.
+	 * 
+	 */
+	private void retrieve() {
+		try {
+			if (org == null) {
+				org = Organization.retrieve();
+				if (org != null) {
+					System.out.println(
+							" The organization has been successfully retrieved from the file OrganizationData \n");
+				} else {
+					System.out.println("File doesnt exist; creating new Organization");
+					org = Organization.instance();
+				}
+			}
+		} catch (Exception cnfe) {
+			cnfe.printStackTrace();
+		}
+	}
+
+	/**
+	 * Supports the singleton pattern
+	 * 
+	 * @return the singleton object
+	 */
+	public static UserInterface instance() {
+		if (userInterface == null) {
+			return userInterface = new UserInterface();
+		} else {
+			return userInterface;
+		}
+	}
+
+	/**
+	 * Gets a token after prompting
+	 * 
+	 * @param prompt - whatever the user wants as prompt
+	 * @return - the token from the keyboard
+	 * 
+	 */
+	public String getToken(String prompt) {
+		do {
+			try {
+				System.out.println(prompt);
+				String line = reader.readLine();
+				StringTokenizer tokenizer = new StringTokenizer(line, "\n\r\f");
+				if (tokenizer.hasMoreTokens()) {
+					return tokenizer.nextToken();
+				}
+			} catch (IOException ioe) {
+				System.exit(0);
+			}
+		} while (true);
+	}
+
+	/**
+	 * Queries for a yes or no and returns true for yes and false for no
+	 * 
+	 * @author Bramha Dathan
+	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @return true for yes and false for no
+	 * 
+	 */
+	private boolean yesOrNo(String prompt) {
+		String more = getToken(prompt + " (Y|y)[es] or anything else for no");
+		if (more.charAt(0) != 'y' && more.charAt(0) != 'Y') {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -34,7 +117,6 @@ public class UserInterface {
 	 */
 	public void start() {
 
-		printMainMenu();
 		int command = -1; // Set to -1 to indicate that no valid command has been picked.
 
 		// While there is not a valid command the system will loop and ask for a valid
@@ -77,20 +159,35 @@ public class UserInterface {
 		case 6: // List a specific donor
 			break;
 		case 7: // Remove a specific donor
-			removeDonorUI();
+			removeDonor();
 			start();
 			break;
 		case 8: // Remove a credit card
 			break;
 		case 9: // Save the data
+			save();
 			break;
 		case 10: // Help
+			help();
 			start();
 			break;
 		}
 	}
 
-	public Donor removeDonorUI() {
+	/**
+	 * Creates a save of the donors DonorList object in Organization
+	 * 
+	 * @author Brahma Dathan
+	 */
+	private void save() {
+		if (Organization.save()) {
+			System.out.println(" The Organization has been successfully saved in the file OrganizationData \n");
+		} else {
+			System.out.println(" There has been an error in saving \n");
+		}
+	}
+
+	public Donor removeDonor() {
 		System.out.println("Please enter donor ID");
 		int id = 0;
 		try {
@@ -104,7 +201,7 @@ public class UserInterface {
 	/**
 	 * Prints a list of all the command options.
 	 */
-	public void printMainMenu() {
+	public static void help() {
 		System.out.println("Please select a Business Process:");
 		System.out.println("\t0: Exit the application");
 		System.out.println("\t1: Add a donor");

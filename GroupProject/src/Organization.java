@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -9,12 +14,65 @@ public class Organization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	DonorList donors;
+	private static Organization org;
+	private static ObjectInputStream input;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
 		donors = new DonorList();
+	}
+
+	/**
+	 * Supports the singleton pattern
+	 * 
+	 * @return the singleton object
+	 */
+	public static Organization instance() {
+		if (org == null) {
+			return (org = new Organization());
+		} else {
+			return org;
+		}
+	}
+
+	/**
+	 * Retrieves a deserialized version of the library from disk
+	 * 
+	 * @return a Library object
+	 */
+	public static Organization retrieve() {
+		try {
+			FileInputStream file = new FileInputStream("OrganizationData");
+			input = new ObjectInputStream(file);
+			org = (Organization) input.readObject();
+			return org;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Serializes the Library object
+	 * 
+	 * @return true iff the data could be saved
+	 */
+	public static boolean save() {
+		try {
+			FileOutputStream file = new FileOutputStream("OrganizationData");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			output.writeObject(org);
+			file.close();
+			return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
 	}
 
 	/**

@@ -1,3 +1,6 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +12,8 @@ import java.util.Iterator;
 public class DonorList implements Iterable<Donor>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public ArrayList<Donor> donors;
-	int idCount;
+	private static ArrayList<Donor> donors;
+	private static int idCount;
 
 	/**
 	 * Creates a new DonorList object with an initial ID of 0 that gets incremented
@@ -61,6 +64,27 @@ public class DonorList implements Iterable<Donor>, Serializable {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * Serializes the Library object
+	 * 
+	 * @author Brahma Dathan
+	 * @return true iff the data could be saved
+	 */
+	public static boolean save() {
+		try {
+			FileOutputStream file = new FileOutputStream("OrganizationData");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			output.writeObject(donors);
+			output.writeObject(idCount);
+			file.close();
+			return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
