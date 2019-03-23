@@ -31,9 +31,9 @@ public class DonorList implements Iterable<Donor>, Serializable {
 	 * @param phone The phone number of the new donor
 	 * @return The integer generated as an ID for the donor.
 	 */
-	public int addDonor(String name, int phone) {
+	public Donor addDonor(String name, String phone) {
 		donors.add(new Donor(name, phone, idCount++));
-		return donors.size() - 1;
+		return donors.get(donors.size() - 1);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 		@Override
 		public Donor next() {
 			if (hasNext())
-				return donors.get(count);
+				return donors.get(count++);
 			return null;
 		}
 

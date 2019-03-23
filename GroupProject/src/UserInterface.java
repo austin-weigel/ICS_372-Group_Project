@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
@@ -10,7 +11,8 @@ import java.util.StringTokenizer;
 public class UserInterface {
 
 	private static Organization org; // The organization to process the commands on.
-	private BufferedReader reader; // Input reader to get user commands and other data.
+	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // Input reader to get user
+																							// commands and other data.
 	private static UserInterface userInterface;
 
 	public static void main(String[] args) {
@@ -35,6 +37,7 @@ public class UserInterface {
 		} else {
 			org = new Organization();
 		}
+		help();
 	}
 
 	/**
@@ -143,8 +146,11 @@ public class UserInterface {
 		case 0: // Exit
 			break;
 		case 1: // Add a donor
+			addDonor();
+			start();
 			break;
 		case 2: // Add a creadit card
+			start();
 			break;
 		case 3: // Process transactions
 			org.processDonations();
@@ -155,17 +161,22 @@ public class UserInterface {
 			start();
 			break;
 		case 5: // List all donors
+			listAllDonors();
+			start();
 			break;
 		case 6: // List a specific donor
+			start();
 			break;
 		case 7: // Remove a specific donor
 			removeDonor();
 			start();
 			break;
 		case 8: // Remove a credit card
+			start();
 			break;
 		case 9: // Save the data
 			save();
+			start();
 			break;
 		case 10: // Help
 			help();
@@ -187,6 +198,17 @@ public class UserInterface {
 		}
 	}
 
+	public void addDonor() {
+		String name = getToken("Enter donor name");
+		String phone = getToken("Enter phone");
+		Donor result;
+		result = org.addDonor(name, phone);
+		if (result == null) {
+			System.out.println("Could not add member");
+		}
+		System.out.println(result);
+	}
+
 	public Donor removeDonor() {
 		System.out.println("Please enter donor ID");
 		int id = 0;
@@ -196,6 +218,10 @@ public class UserInterface {
 			System.out.println("Donors are removed using a integer ID.");
 		}
 		return org.removeDonor(id);
+	}
+
+	public void listAllDonors() {
+		org.printDonors();
 	}
 
 	/**

@@ -11,7 +11,7 @@ public class Donor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	int id; // The id of the donor.
 	String name; // The name of the donor.
-	int phoneNumber; // The phone number of the donor.
+	String phoneNumber; // The phone number of the donor.
 	DonationList donations; // The list of donations promised by the donor.
 	TransactionList transactions; // The list of completed transactions from the donor
 
@@ -21,7 +21,7 @@ public class Donor implements Serializable {
 	 * @param name        The name of the new donor.
 	 * @param phoneNumber The phone number of the donor.
 	 */
-	public Donor(String name, int phoneNumber, int id) {
+	public Donor(String name, String phoneNumber, int id) {
 		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
@@ -43,7 +43,7 @@ public class Donor implements Serializable {
 	 * 
 	 * @return the phone number of the donor.
 	 */
-	public int getPhone() {
+	public String getPhone() {
 		return phoneNumber;
 	}
 
@@ -73,6 +73,11 @@ public class Donor implements Serializable {
 	 */
 	public TransactionList getTransactionList() {
 		return transactions;
+	}
+
+	@Override
+	public String toString() {
+		return "Donor: Name " + name + ", Phone " + phoneNumber + ", ID " + id;
 	}
 
 	@Override

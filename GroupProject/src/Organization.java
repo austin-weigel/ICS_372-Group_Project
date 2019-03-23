@@ -21,7 +21,7 @@ public class Organization implements Serializable {
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
-		donors = new DonorList();
+		donors = new DonorList.instance();
 	}
 
 	/**
@@ -67,6 +67,7 @@ public class Organization implements Serializable {
 			FileOutputStream file = new FileOutputStream("OrganizationData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
 			output.writeObject(org);
+			output.writeObject(donors);
 			file.close();
 			return true;
 		} catch (IOException ioe) {
@@ -82,7 +83,7 @@ public class Organization implements Serializable {
 	 * @param name        The name of the new donor
 	 * @param phoneNumber The phone number of the new donor.
 	 */
-	public int addDonor(String name, int phoneNumber) {
+	public Donor addDonor(String name, String phoneNumber) {
 		return donors.addDonor(name, phoneNumber);
 	}
 
@@ -129,6 +130,12 @@ public class Organization implements Serializable {
 				System.out.format("%10.2f%n", transaction.getAmount());
 				System.out.println(transaction.getDate());
 			}
+		}
+	}
+
+	public void printDonors() {
+		for (Donor donor : donors) {
+			System.out.println(donor);
 		}
 	}
 
