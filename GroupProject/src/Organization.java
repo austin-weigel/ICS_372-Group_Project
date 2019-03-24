@@ -102,6 +102,20 @@ public class Organization implements Serializable {
 			}
 		}
 	}
+	
+	/**
+	 * Removes a credit card to the donor with the given ID
+	 * @param id	ID of the donor
+	 * @param creditCard	Credit card to be removed
+	 */
+	public void removeCreditCard(int id, int creditCard) {
+		for (Donor donor : donors) {
+			if (donor.getID() == id) {
+				donor.getDonationList().removeDonation(creditCard);
+				return;
+			}
+		}
+	}
 
 	/**
 	 * Creates a transaction for every donation. Prints the total amount of
