@@ -172,6 +172,7 @@ public class UserInterface {
 			start();
 			break;
 		case 8: // Remove a credit card
+			removeCreditCard();
 			start();
 			break;
 		case 9: // Save the data
@@ -218,6 +219,19 @@ public class UserInterface {
 			System.out.println("Donors are removed using a integer ID.");
 		}
 		return org.removeDonor(id);
+	}
+	
+	public void removeCreditCard()	{
+		System.out.println("Please enter donor ID, and Credit Card to be removed");
+		int id = 0;
+		int cardNumber = 0;
+		try {
+			id = Integer.parseInt(reader.readLine());
+			cardNumber = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+		org.removeCreditCard(id, cardNumber);
 	}
 
 	public void listAllDonors() {
