@@ -75,9 +75,35 @@ public class Donor implements Serializable {
 		return transactions;
 	}
 
+	/**
+	 * Overrides the toString method. Prints all donor info (except credit card
+	 * info)
+	 */
 	@Override
 	public String toString() {
 		return "Donor: Name " + name + ", Phone " + phoneNumber + ", ID " + id;
+	}
+
+	/**
+	 * Return all donor information including credit cards [JJS]
+	 * 
+	 * @return
+	 */
+	public String getAllDonorInfo() {
+		// Get the standard donor information
+		String output = toString();
+		int sumOfCreditCards = 0;
+
+		// Output all credit cards and keep track of total value of those cards
+		for (Donation item : donations) {
+			output += " Card number " + item.getCreditCard();
+			sumOfCreditCards += item.getAmount();
+		}
+
+		// Add the total value of the cards to the output
+		output += "Total donations per cycle " + sumOfCreditCards;
+
+		return output;
 	}
 
 	@Override

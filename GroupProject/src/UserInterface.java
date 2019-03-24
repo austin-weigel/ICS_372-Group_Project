@@ -248,7 +248,7 @@ public class UserInterface {
 	 * Prints a specific donor according to the donor id entered by the user. [JJS]
 	 */
 	public void listSpecificDonor() {
-		System.out.println(org.getDonor(promptForNumericValue("Enter donor ID\n")));
+		System.out.println(org.getDonor(promptForNumericValue("Enter donor ID\n")).getAllDonorInfo());
 	}
 
 	/**
