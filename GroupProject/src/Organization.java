@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Organization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	DonorList donors;
+	static DonorList donors;
 	private static Organization org;
 	private static ObjectInputStream input;
 
@@ -21,7 +21,7 @@ public class Organization implements Serializable {
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
-		donors = new DonorList.instance();
+		donors = new DonorList();
 	}
 
 	/**
@@ -102,11 +102,12 @@ public class Organization implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Removes a credit card to the donor with the given ID
-	 * @param id	ID of the donor
-	 * @param creditCard	Credit card to be removed
+	 * 
+	 * @param id         ID of the donor
+	 * @param creditCard Credit card to be removed
 	 */
 	public void removeCreditCard(int id, int creditCard) {
 		for (Donor donor : donors) {
@@ -129,7 +130,7 @@ public class Organization implements Serializable {
 				total += donation.getAmount();
 			}
 		}
-		System.out.print("Total amount in donations: $");
+		System.out.print("Total amount in donations: $"); // TODO: This needs to be moved to the UserInterface class!
 		System.out.format("%10.2f", total);
 	}
 
@@ -137,12 +138,12 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card Amount Date");
+		System.out.println("Credit card Amount Date"); // TODO: This needs to be moved to the UserInterface class!
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
 				System.out.format("%016d%n", transaction.getCreditCard());
 				System.out.format("%10.2f%n", transaction.getAmount());
-				System.out.println(transaction.getDate());
+				System.out.println(transaction.getDate()); // TODO: This needs to be moved to the UserInterface class!
 			}
 		}
 	}
@@ -152,7 +153,7 @@ public class Organization implements Serializable {
 	 */
 	public void printDonors() {
 		for (Donor donor : donors) {
-			System.out.println(donor);
+			System.out.println(donor); // TODO: This needs to be moved to the UserInterface class!
 		}
 	}
 
