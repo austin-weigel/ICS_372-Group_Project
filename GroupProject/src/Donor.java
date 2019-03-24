@@ -91,17 +91,17 @@ public class Donor implements Serializable {
 	 */
 	public String getAllDonorInfo() {
 		// Get the standard donor information
-		String output = toString();
+		String output = toString() + ",";
 		int sumOfCreditCards = 0;
 
 		// Output all credit cards and keep track of total value of those cards
 		for (Donation item : donations) {
-			output += " Card number " + item.getCreditCard();
+			output += " Card number " + item.getCreditCard() + ",";
 			sumOfCreditCards += item.getAmount();
 		}
 
 		// Add the total value of the cards to the output
-		output += "Total donations per cycle " + sumOfCreditCards;
+		output += " Total donations per cycle " + sumOfCreditCards;
 
 		return output;
 	}
