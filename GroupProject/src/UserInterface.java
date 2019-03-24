@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -165,7 +166,7 @@ public class UserInterface {
 			start();
 			break;
 		case 6: // List a specific donor
-			start();
+			listSpecificDonor();
 			break;
 		case 7: // Remove a specific donor
 			removeDonor();
@@ -241,6 +242,35 @@ public class UserInterface {
 		for (Donor donor : org.getAllDonors()) {
 			System.out.println(donor);
 		}
+	}
+
+	/**
+	 * Prints a specific donor according to the donor id entered by the user. [JJS]
+	 */
+	public void listSpecificDonor() {
+		System.out.println(org.getDonor(promptForNumericValue("Enter donor ID\n")));
+	}
+
+	/**
+	 * Get a numeric value from the user. [JJS]
+	 * 
+	 * @param prompt The prompting string
+	 * @return The integer value entered by the user
+	 */
+	public int promptForNumericValue(String prompt) {
+		// Use a scanner to read in integers
+		Scanner scan = new Scanner(System.in);
+
+		// Prompt the user
+		System.out.print(prompt);
+
+		// Retrieve the value the user enters
+		int userInput = scan.nextInt();
+
+		// Close the scanner after use
+		scan.close();
+
+		return userInput;
 	}
 
 	/**

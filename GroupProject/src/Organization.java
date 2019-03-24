@@ -149,10 +149,22 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Prints a list of all donors. Each donor gets it's own line
+	 * Returns a list of all donors in the system. [JJS]
+	 * 
+	 * @return The full donor list
 	 */
 	public DonorList getAllDonors() {
 		return donors;
+	}
+
+	/**
+	 * Returns a specific donor. [JJS]
+	 * 
+	 * @param donorId The Id of the donor to be returned
+	 * @return The donor
+	 */
+	public Donor getDonor(int donorId) {
+		return donors.getDonor(donorId);
 	}
 
 	/**
