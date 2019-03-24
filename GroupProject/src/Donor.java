@@ -87,7 +87,7 @@ public class Donor implements Serializable {
 	/**
 	 * Return all donor information including credit cards [JJS]
 	 * 
-	 * @return
+	 * @return Donor information including credit cards
 	 */
 	public String getAllDonorInfo() {
 		// Get the standard donor information
