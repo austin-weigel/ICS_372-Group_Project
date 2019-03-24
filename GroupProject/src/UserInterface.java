@@ -220,8 +220,8 @@ public class UserInterface {
 		}
 		return org.removeDonor(id);
 	}
-	
-	public void removeCreditCard()	{
+
+	public void removeCreditCard() {
 		System.out.println("Please enter donor ID, and Credit Card to be removed");
 		int id = 0;
 		int cardNumber = 0;
@@ -234,8 +234,13 @@ public class UserInterface {
 		org.removeCreditCard(id, cardNumber);
 	}
 
+	/**
+	 * Prints all donors on file. Each donor is printed on their own line [JJS].
+	 */
 	public void listAllDonors() {
-		org.printDonors();
+		for (Donor donor : org.getAllDonors()) {
+			System.out.println(donor);
+		}
 	}
 
 	/**

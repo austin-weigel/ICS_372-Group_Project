@@ -151,10 +151,8 @@ public class Organization implements Serializable {
 	/**
 	 * Prints a list of all donors. Each donor gets it's own line
 	 */
-	public void printDonors() {
-		for (Donor donor : donors) {
-			System.out.println(donor); // TODO: This needs to be moved to the UserInterface class!
-		}
+	public DonorList getAllDonors() {
+		return donors;
 	}
 
 	/**
