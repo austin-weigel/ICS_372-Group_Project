@@ -1,3 +1,24 @@
+
+/**
+ * 
+ * @author Brahma Dathan and Sarnath Ramnath
+ * @Copyright (c) 2010
+ 
+ * Redistribution and use with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - the use is for academic purpose only
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   - Neither the name of Brahma Dathan or Sarnath Ramnath
+ *     may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * The authors do not make any claims regarding the correctness of the code in this module
+ * and are not responsible for any loss or damage resulting from its use.  
+ */
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,15 +34,14 @@ import java.io.Serializable;
 public class Organization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	static DonorList donors;
-	private static Organization org;
-	private static ObjectInputStream input;
+	private DonorList donors;
+	private static Organization organization;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
-		donors = new DonorList();
+		donors = DonorList.instance();
 	}
 
 	/**
@@ -30,10 +50,10 @@ public class Organization implements Serializable {
 	 * @return the singleton object
 	 */
 	public static Organization instance() {
-		if (org == null) {
-			return (org = new Organization());
+		if (organization == null) {
+			return (organization = new Organization());
 		} else {
-			return org;
+			return organization;
 		}
 	}
 
@@ -45,9 +65,10 @@ public class Organization implements Serializable {
 	public static Organization retrieve() {
 		try {
 			FileInputStream file = new FileInputStream("OrganizationData");
-			input = new ObjectInputStream(file);
-			org = (Organization) input.readObject();
-			return org;
+			ObjectInputStream input = new ObjectInputStream(file);
+			organization = (Organization) input.readObject();
+			DonorIDServer.retrieve(input);
+			return organization;
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			return null;
@@ -66,8 +87,8 @@ public class Organization implements Serializable {
 		try {
 			FileOutputStream file = new FileOutputStream("OrganizationData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
-			output.writeObject(org);
-			output.writeObject(donors);
+			output.writeObject(organization);
+			output.writeObject(DonorIDServer.instance());
 			file.close();
 			return true;
 		} catch (IOException ioe) {
@@ -77,14 +98,18 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Creates a new donor with the total number of existing donors being the new
-	 * donor's id.
+	 * Organizes the operations for adding a donor
 	 * 
-	 * @param name        The name of the new donor
-	 * @param phoneNumber The phone number of the new donor.
+	 * @param name  donor name
+	 * @param phone donor phone
+	 * @return the Donor object created
 	 */
 	public Donor addDonor(String name, String phoneNumber) {
-		return donors.addDonor(name, phoneNumber);
+		Donor donor = new Donor(name, phoneNumber);
+		if (donors.addDonor(donor)) {
+			return donor;
+		}
+		return null;
 	}
 
 	/**
