@@ -172,8 +172,12 @@ public class UserInterface {
 		} catch (Exception e) {
 			System.out.println("Donors are removed using a integer ID.");
 		}
-		organization.removeDonor(id);
-		System.out.println("Donor has been removed.");
+		Donor donor = organization.removeDonor(id);
+		if (donor != null) {
+			System.out.println(donor + " has been removed.");
+		} else {
+			System.out.println("No donor found with ID " + id);
+		}
 	}
 
 	public void addDonation() {
