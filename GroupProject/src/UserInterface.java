@@ -173,6 +173,7 @@ public class UserInterface {
 			System.out.println("Donors are removed using a integer ID.");
 		}
 		organization.removeDonor(id);
+		System.out.println("Donor has been removed.");
 	}
 
 	public void addDonation() {
@@ -242,16 +243,25 @@ public class UserInterface {
 	}
 
 	public void removeCreditCard() {
-		System.out.println("Please enter donor ID, and Credit Card to be removed");
+		System.out.println("Please enter donor ID");
 		int id = 0;
-		int cardNumber = 0;
 		try {
 			id = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+		System.out.println("Please enter credit card");
+
+		long cardNumber = 0;
+		try {
 			cardNumber = Integer.parseInt(reader.readLine());
 		} catch (Exception e) {
 			System.out.println("Donors are removed using a integer ID.");
 		}
+
 		organization.removeCreditCard(id, cardNumber);
+		System.out.println("Credit card has been removed.");
+
 	}
 
 	/**
