@@ -164,7 +164,7 @@ public class UserInterface {
 		System.out.println(result);
 	}
 
-	public Donor removeDonor() {
+	public void removeDonor() {
 		System.out.println("Please enter donor ID");
 		int id = 0;
 		try {
@@ -172,7 +172,73 @@ public class UserInterface {
 		} catch (Exception e) {
 			System.out.println("Donors are removed using a integer ID.");
 		}
-		return organization.removeDonor(id);
+		organization.removeDonor(id);
+	}
+
+	public void addDonation() {
+
+		System.out.println("Please enter donor ID.");
+		Donor donor = null;
+		do {
+			int id = 0;
+			try {
+				id = Integer.parseInt(reader.readLine());
+			} catch (Exception e) {
+				System.out.println("Credit cards are looked up using the donors integer ID.");
+			}
+			donor = organization.getDonor(id);
+			if (donor == null) {
+				System.out.println("No donor found with that donor ID.");
+				if (yesOrNo("Would you like to cancel card addition?")) {
+					return;
+				}
+			}
+
+		} while (donor == null);
+
+		long cardNumber = 0;
+		do {
+			System.out.println("Please enter credit card number.");
+			try {
+				cardNumber = Long.parseLong(reader.readLine());
+			} catch (Exception e) {
+				System.out.println("Credit cards numbers are whole integer values.");
+			}
+			if (cardNumber == 0) {
+				System.out.println("Credit card number can not be 0.");
+				if (yesOrNo("Would you like to cancel card addition?")) {
+					return;
+				}
+			}
+		} while (cardNumber == 0);
+
+		double amount = 0;
+		do {
+			System.out.println("Please enter donation amount greater than 0.");
+			try {
+				amount = Double.parseDouble(reader.readLine());
+			} catch (Exception e) {
+				System.out.println("Donation amounts can be integer and decimal values.");
+			}
+			if (amount <= 0.0) {
+				System.out.println("Donation amount can not be negative or 0.");
+				if (yesOrNo("Would you like to cancel card addition?")) {
+					return;
+				}
+			}
+		} while (amount == 0);
+
+		Donation donation = new Donation(cardNumber, amount);
+		donor.addDonation(donation);
+		System.out.println(donor.toString() + " added Card: " + cardNumber + " with a donation amount of " + amount);
+	}
+
+	public void processTransactions() {
+		organization.processDonations();
+	}
+
+	public void listTransactions() {
+		organization.printTransactions();
 	}
 
 	public void removeCreditCard() {
@@ -240,15 +306,16 @@ public class UserInterface {
 			addDonor();
 			start();
 			break;
-		case 2: // Add a creadit card
+		case 2: // Add a credit card
+			addDonation();
 			start();
 			break;
 		case 3: // Process transactions
-			organization.processDonations();
+			processTransactions();
 			start();
 			break;
 		case 4: // List transactions
-			organization.printTransactions();
+			listTransactions();
 			start();
 			break;
 		case 5: // List all donors

@@ -75,6 +75,10 @@ public class Donor implements Serializable {
 		return id;
 	}
 
+	public void addDonation(Donation donation) {
+		donations.addDonation(donation);
+	}
+
 	/**
 	 * Gets the list of donations, which is a credit card and amount, for that
 	 * donor.

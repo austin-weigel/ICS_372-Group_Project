@@ -26,8 +26,8 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	 * @param creditCard The number of the credit card to be added
 	 * @param amount     The amount to be charged to the credit card.
 	 */
-	public void addDonation(int creditCard, double amount) {
-		donations.add(new Donation(creditCard, amount));
+	public void addDonation(Donation donation) {
+		donations.add(donation);
 	}
 
 	/**

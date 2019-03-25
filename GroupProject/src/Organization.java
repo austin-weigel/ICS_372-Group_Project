@@ -113,22 +113,6 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Adds a credit card to the donor with the given ID
-	 * 
-	 * @param id         The ID of the donor to add the credit card to.
-	 * @param creditCard The number of the credit card.
-	 * @param amount     The amount to charge the credit card on each transaction.
-	 */
-	public void addCreditCard(int id, int creditCard, double amount) {
-		for (Donor donor : donors) {
-			if (donor.getID() == id) {
-				donor.getDonationList().addDonation(creditCard, amount);
-				return;
-			}
-		}
-	}
-
-	/**
 	 * Removes a credit card to the donor with the given ID
 	 * 
 	 * @param id         ID of the donor
@@ -157,18 +141,22 @@ public class Organization implements Serializable {
 		}
 		System.out.print("Total amount in donations: $"); // TODO: This needs to be moved to the UserInterface class!
 		System.out.format("%10.2f", total);
+		System.out.println();
 	}
 
 	/**
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card Amount Date"); // TODO: This needs to be moved to the UserInterface class!
+		System.out.println("Credit card          Amount    Date"); // TODO: This needs to be moved to the UserInterface
+																	// class!
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
-				System.out.format("%016d%n", transaction.getCreditCard());
-				System.out.format("%10.2f%n", transaction.getAmount());
-				System.out.println(transaction.getDate()); // TODO: This needs to be moved to the UserInterface class!
+
+				System.out.printf("%016d", transaction.getCreditCard());
+				System.out.printf("%10.2f", transaction.getAmount());
+				System.out.println("     " + transaction.getDate()); // TODO: This needs to be moved to the
+																		// UserInterface class!
 			}
 		}
 	}
