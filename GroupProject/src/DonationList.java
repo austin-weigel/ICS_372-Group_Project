@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Container class for Donations for each donor.
  * 
- * @author Austin Weigel
+ * 
  *
  */
 public class DonationList implements Iterable<Donation>, Serializable {
@@ -23,18 +23,20 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	/**
 	 * Adds a donation to the donations list
 	 * 
-	 * @param creditCard The number of the credit card to be added
-	 * @param amount     The amount to be charged to the credit card.
+	 * @param creditCard
+	 *            The number of the credit card to be added
+	 *            The amount to be charged to the credit card.
 	 */
 	public void addDonation(int creditCard, double amount) {
 		donations.add(new Donation(creditCard, amount));
 	}
 
 	/**
-	 * Removes the first donation in the donations list with a matching credit card
-	 * number.
+	 * Removes the first donation in the donations list with a matching credit
+	 * card number.
 	 * 
-	 * @param creditCard The number of the credit card to remove.
+	 * @param creditCard
+	 *            The number of the credit card to remove.
 	 */
 	public void removeDonation(int creditCard) {
 		donations.remove(new Donation(creditCard, 0));
