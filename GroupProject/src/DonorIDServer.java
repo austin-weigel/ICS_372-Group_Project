@@ -28,6 +28,7 @@ import java.io.Serializable;
  * @author Brahma Dathan and Sarnath Ramnath
  *
  */
+@SuppressWarnings("serial")
 public class DonorIDServer implements Serializable {
 	private int idCounter;
 	private static DonorIDServer server;
