@@ -8,7 +8,7 @@ import java.util.Date;
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	int creditCard;
+	long creditCard;
 	double amount;
 	Date date;
 
@@ -30,7 +30,7 @@ public class Transaction implements Serializable {
 	 * 
 	 * @return The credit card associated with the transaction
 	 */
-	public int getCreditCard() {
+	public long getCreditCard() {
 		return creditCard;
 	}
 

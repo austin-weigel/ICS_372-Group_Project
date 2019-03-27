@@ -1,3 +1,24 @@
+
+/**
+ * 
+ * @author Brahma Dathan and Sarnath Ramnath
+ * @Copyright (c) 2010
+ 
+ * Redistribution and use with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - the use is for academic purpose only
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   - Neither the name of Brahma Dathan or Sarnath Ramnath
+ *     may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * The authors do not make any claims regarding the correctness of the code in this module
+ * and are not responsible for any loss or damage resulting from its use.  
+ */
+
 import java.io.Serializable;
 
 /**
@@ -11,9 +32,9 @@ public class Donor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	int id; // The id of the donor.
 	String name; // The name of the donor.
-	int phoneNumber; // The phone number of the donor.
-	DonationList donations; // The list of donations promised by the donor.
-	TransactionList transactions; // The list of completed transactions from the donor
+	String phoneNumber; // The phone number of the donor.
+	DonationList donations = new DonationList(); // The list of donations promised by the donor.
+	TransactionList transactions = new TransactionList(); // The list of completed transactions from the donor
 
 	/**
 	 * Creates a new donor with no donations or transaction history.
@@ -21,12 +42,10 @@ public class Donor implements Serializable {
 	 * @param name        The name of the new donor.
 	 * @param phoneNumber The phone number of the donor.
 	 */
-	public Donor(String name, int phoneNumber, int id) {
-		this.id = id;
+	public Donor(String name, String phoneNumber) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-		donations = new DonationList();
-		transactions = new TransactionList();
+		id = DonorIDServer.instance().getId();
 	}
 
 	/**
@@ -43,7 +62,7 @@ public class Donor implements Serializable {
 	 * 
 	 * @return the phone number of the donor.
 	 */
-	public int getPhone() {
+	public String getPhone() {
 		return phoneNumber;
 	}
 
@@ -54,6 +73,10 @@ public class Donor implements Serializable {
 	 */
 	public int getID() {
 		return id;
+	}
+
+	public void addDonation(Donation donation) {
+		donations.addDonation(donation);
 	}
 
 	/**
@@ -73,6 +96,37 @@ public class Donor implements Serializable {
 	 */
 	public TransactionList getTransactionList() {
 		return transactions;
+	}
+
+	/**
+	 * Overrides the toString method. Prints all donor info (except credit card
+	 * info)
+	 */
+	@Override
+	public String toString() {
+		return "Donor: Name " + name + ", Phone " + phoneNumber + ", ID " + id;
+	}
+
+	/**
+	 * Return all donor information including credit cards [JJS]
+	 * 
+	 * @return Donor information including credit cards
+	 */
+	public String getAllDonorInfo() {
+		// Get the standard donor information
+		String output = toString() + ",";
+		int sumOfCreditCards = 0;
+
+		// Output all credit cards and keep track of total value of those cards
+		for (Donation item : donations) {
+			output += " Card number " + item.getCreditCard() + ",";
+			sumOfCreditCards += item.getAmount();
+		}
+
+		// Add the total value of the cards to the output
+		output += " Total donations per cycle " + sumOfCreditCards;
+
+		return output;
 	}
 
 	@Override

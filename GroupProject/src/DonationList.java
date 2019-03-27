@@ -28,8 +28,8 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	 * @param amount
 	 *            The amount to be charged to the credit card.
 	 */
-	public void addDonation(int creditCard, double amount) {
-		donations.add(new Donation(creditCard, amount));
+	public void addDonation(Donation donation) {
+		donations.add(donation);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	 * @param creditCard
 	 *            The number of the credit card to remove.
 	 */
-	public void removeDonation(int creditCard) {
+	public void removeDonation(long creditCard) {
 		donations.remove(new Donation(creditCard, 0));
 	}
 

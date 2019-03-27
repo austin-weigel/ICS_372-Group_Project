@@ -1,3 +1,24 @@
+
+/**
+ * 
+ * @author Brahma Dathan and Sarnath Ramnath
+ * @Copyright (c) 2010
+ 
+ * Redistribution and use with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - the use is for academic purpose only
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   - Neither the name of Brahma Dathan or Sarnath Ramnath
+ *     may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * The authors do not make any claims regarding the correctness of the code in this module
+ * and are not responsible for any loss or damage resulting from its use.  
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,16 +30,27 @@ import java.util.Iterator;
 public class DonorList implements Iterable<Donor>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	public ArrayList<Donor> donors;
-	int idCount;
+	private ArrayList<Donor> donors = new ArrayList<Donor>();
+	private static DonorList donorList;
 
 	/**
 	 * Creates a new DonorList object with an initial ID of 0 that gets incremented
 	 * at every addDonor. ID never gets decremented.
 	 */
 	public DonorList() {
-		donors = new ArrayList<Donor>();
-		idCount = 0;
+	}
+
+	/**
+	 * Supports the singleton pattern
+	 * 
+	 * @return the singleton object
+	 */
+	public static DonorList instance() {
+		if (donorList == null) {
+			return (donorList = new DonorList());
+		} else {
+			return donorList;
+		}
 	}
 
 	/**
@@ -28,9 +60,9 @@ public class DonorList implements Iterable<Donor>, Serializable {
 	 * @param phone The phone number of the new donor
 	 * @return The integer generated as an ID for the donor.
 	 */
-	public int addDonor(String name, int phone) {
-		donors.add(new Donor(name, phone, idCount++));
-		return donors.size() - 1;
+	public boolean addDonor(Donor donor) {
+		donors.add(donor);
+		return true;
 	}
 
 	/**
@@ -89,7 +121,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 		@Override
 		public Donor next() {
 			if (hasNext())
-				return donors.get(count);
+				return donors.get(count++);
 			return null;
 		}
 

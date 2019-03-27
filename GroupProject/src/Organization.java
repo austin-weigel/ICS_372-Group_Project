@@ -1,3 +1,29 @@
+
+/**
+ * 
+ * @author Brahma Dathan and Sarnath Ramnath
+ * @Copyright (c) 2010
+ 
+ * Redistribution and use with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *   - the use is for academic purpose only
+ *   - Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   - Neither the name of Brahma Dathan or Sarnath Ramnath
+ *     may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
+ *
+ * The authors do not make any claims regarding the correctness of the code in this module
+ * and are not responsible for any loss or damage resulting from its use.  
+ */
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -8,37 +34,94 @@ import java.io.Serializable;
 public class Organization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	DonorList donors;
+	private DonorList donors;
+	private static Organization organization;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
-		donors = new DonorList();
+		donors = DonorList.instance();
 	}
 
 	/**
-	 * Creates a new donor with the total number of existing donors being the new
-	 * donor's id.
+	 * Supports the singleton pattern
 	 * 
-	 * @param name        The name of the new donor
-	 * @param phoneNumber The phone number of the new donor.
+	 * @return the singleton object
 	 */
-	public int addDonor(String name, int phoneNumber) {
-		return donors.addDonor(name, phoneNumber);
+	public static Organization instance() {
+		if (organization == null) {
+			return (organization = new Organization());
+		} else {
+			return organization;
+		}
 	}
 
 	/**
-	 * Adds a credit card to the donor with the given ID
+	 * Retrieves a deserialized version of the library from disk
 	 * 
-	 * @param id         The ID of the donor to add the credit card to.
-	 * @param creditCard The number of the credit card.
-	 * @param amount     The amount to charge the credit card on each transaction.
+	 * @return a Library object
 	 */
-	public void addCreditCard(int id, int creditCard, double amount) {
+	public static Organization retrieve() {
+		try {
+			FileInputStream file = new FileInputStream("OrganizationData");
+			ObjectInputStream input = new ObjectInputStream(file);
+			organization = (Organization) input.readObject();
+			DonorIDServer.retrieve(input);
+			return organization;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * Serializes the Library object
+	 * 
+	 * @return true iff the data could be saved
+	 */
+	public static boolean save() {
+		try {
+			FileOutputStream file = new FileOutputStream("OrganizationData");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			output.writeObject(organization);
+			output.writeObject(DonorIDServer.instance());
+			file.close();
+			return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Organizes the operations for adding a donor
+	 * 
+	 * @param name  donor name
+	 * @param phone donor phone
+	 * @return the Donor object created
+	 */
+	public Donor addDonor(String name, String phoneNumber) {
+		Donor donor = new Donor(name, phoneNumber);
+		if (donors.addDonor(donor)) {
+			return donor;
+		}
+		return null;
+	}
+
+	/**
+	 * Removes a credit card to the donor with the given ID
+	 * 
+	 * @param id         ID of the donor
+	 * @param creditCard Credit card to be removed
+	 */
+	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
 			if (donor.getID() == id) {
-				donor.getDonationList().addDonation(creditCard, amount);
+				donor.getDonationList().removeDonation(creditCard);
 				return;
 			}
 		}
@@ -56,22 +139,45 @@ public class Organization implements Serializable {
 				total += donation.getAmount();
 			}
 		}
-		System.out.print("Total amount in donations: $");
+		System.out.print("Total amount in donations: $"); // TODO: This needs to be moved to the UserInterface class!
 		System.out.format("%10.2f", total);
+		System.out.println();
 	}
 
 	/**
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card Amount Date");
+		System.out.println("Credit card          Amount    Date"); // TODO: This needs to be moved to the UserInterface
+																	// class!
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
-				System.out.format("%016d%n", transaction.getCreditCard());
-				System.out.format("%10.2f%n", transaction.getAmount());
-				System.out.println(transaction.getDate());
+
+				System.out.printf("%016d", transaction.getCreditCard());
+				System.out.printf("%10.2f", transaction.getAmount());
+				System.out.println("     " + transaction.getDate()); // TODO: This needs to be moved to the
+																		// UserInterface class!
 			}
 		}
+	}
+
+	/**
+	 * Returns a list of all donors in the system. [JJS]
+	 * 
+	 * @return The full donor list
+	 */
+	public DonorList getAllDonors() {
+		return donors;
+	}
+
+	/**
+	 * Returns a specific donor. [JJS]
+	 * 
+	 * @param donorId The Id of the donor to be returned
+	 * @return The donor
+	 */
+	public Donor getDonor(int donorId) {
+		return donors.getDonor(donorId);
 	}
 
 	/**

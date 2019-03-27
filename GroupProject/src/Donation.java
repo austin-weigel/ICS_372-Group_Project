@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Donation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int creditCard; // The credit card to be charged.
+	private long creditCard; // The credit card to be charged.
 	private double amount; // The amount to charge to the credit card.
 
 	/**
@@ -22,7 +22,7 @@ public class Donation implements Serializable {
 	 * @param amount
 	 *            The amount to be charged to the credit card.
 	 */
-	Donation(int creditCard, double amount) {
+	Donation(long creditCard, double amount) {
 		this.creditCard = creditCard;
 		this.amount = amount;
 	}
@@ -32,7 +32,7 @@ public class Donation implements Serializable {
 	 * 
 	 * @return The credit card that will be charged.
 	 */
-	int getCreditCard() {
+	long getCreditCard() {
 		return creditCard;
 	}
 
@@ -43,14 +43,6 @@ public class Donation implements Serializable {
 	 */
 	double getAmount() {
 		return amount;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + creditCard;
-		return result;
 	}
 
 	@Override
