@@ -100,8 +100,10 @@ public class Organization implements Serializable {
 	/**
 	 * Organizes the operations for adding a donor
 	 * 
-	 * @param name  donor name
-	 * @param phone donor phone
+	 * @param name
+	 *            donor name
+	 * @param phone
+	 *            donor phone
 	 * @return the Donor object created
 	 */
 	public Donor addDonor(String name, String phoneNumber) {
@@ -115,8 +117,10 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a credit card to the donor with the given ID
 	 * 
-	 * @param id         ID of the donor
-	 * @param creditCard Credit card to be removed
+	 * @param id
+	 *            ID of the donor
+	 * @param creditCard
+	 *            Credit card to be removed
 	 */
 	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
@@ -139,7 +143,10 @@ public class Organization implements Serializable {
 				total += donation.getAmount();
 			}
 		}
-		System.out.print("Total amount in donations: $"); // TODO: This needs to be moved to the UserInterface class!
+		System.out.print("Total amount in donations: $"); // TODO: This needs to
+															// be moved to the
+															// UserInterface
+															// class!
 		System.out.format("%10.2f", total);
 		System.out.println();
 	}
@@ -148,15 +155,26 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card          Amount    Date"); // TODO: This needs to be moved to the UserInterface
+		System.out.println("Credit card          Amount    Date"); // TODO: This
+																	// needs to
+																	// be moved
+																	// to the
+																	// UserInterface
 																	// class!
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
 
 				System.out.printf("%016d", transaction.getCreditCard());
 				System.out.printf("%10.2f", transaction.getAmount());
-				System.out.println("     " + transaction.getDate()); // TODO: This needs to be moved to the
-																		// UserInterface class!
+				System.out.println("     " + transaction.getDate()); // TODO:
+																		// This
+																		// needs
+																		// to be
+																		// moved
+																		// to
+																		// the
+																		// UserInterface
+																		// class!
 			}
 		}
 	}
@@ -173,7 +191,8 @@ public class Organization implements Serializable {
 	/**
 	 * Returns a specific donor. [JJS]
 	 * 
-	 * @param donorId The Id of the donor to be returned
+	 * @param donorId
+	 *            The Id of the donor to be returned
 	 * @return The donor
 	 */
 	public Donor getDonor(int donorId) {
@@ -183,7 +202,8 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a donor from the organization
 	 * 
-	 * @param id The id of the donor to remove
+	 * @param id
+	 *            The id of the donor to remove
 	 * @return The donor who was removed.
 	 */
 	public Donor removeDonor(int id) {

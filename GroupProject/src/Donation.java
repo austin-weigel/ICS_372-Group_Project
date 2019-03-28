@@ -22,7 +22,7 @@ public class Donation implements Serializable {
 	 * @param amount
 	 *            The amount to be charged to the credit card.
 	 */
-	Donation(long creditCard, double amount) {
+	public Donation(long creditCard, double amount) {
 		this.creditCard = creditCard;
 		this.amount = amount;
 	}
@@ -32,7 +32,7 @@ public class Donation implements Serializable {
 	 * 
 	 * @return The credit card that will be charged.
 	 */
-	long getCreditCard() {
+	public long getCreditCard() {
 		return creditCard;
 	}
 
@@ -41,7 +41,7 @@ public class Donation implements Serializable {
 	 * 
 	 * @return The amount that will be charged to the credit card.
 	 */
-	double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 

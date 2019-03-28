@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Container class for Donations for each donor.
  * 
- * 
+ * -
  *
  */
 public class DonationList implements Iterable<Donation>, Serializable {

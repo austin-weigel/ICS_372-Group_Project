@@ -30,17 +30,26 @@ import java.io.Serializable;
 public class Donor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	int id; // The id of the donor.
-	String name; // The name of the donor.
-	String phoneNumber; // The phone number of the donor.
-	DonationList donations = new DonationList(); // The list of donations promised by the donor.
-	TransactionList transactions = new TransactionList(); // The list of completed transactions from the donor
+	private int id; // The id of the donor.
+	private String name; // The name of the donor.
+	private String phoneNumber; // The phone number of the donor.
+	private DonationList donations = new DonationList(); // The list of
+															// donations
+															// promised by the
+															// donor.
+	private TransactionList transactions = new TransactionList(); // The list of
+																	// completed
+																	// transactions
+																	// from the
+																	// donor
 
 	/**
 	 * Creates a new donor with no donations or transaction history.
 	 * 
-	 * @param name        The name of the new donor.
-	 * @param phoneNumber The phone number of the donor.
+	 * @param name
+	 *            The name of the new donor.
+	 * @param phoneNumber
+	 *            The phone number of the donor.
 	 */
 	public Donor(String name, String phoneNumber) {
 		this.name = name;
