@@ -338,6 +338,7 @@ public class UserInterface {
 			break;
 		case 6: // List a specific donor
 			listSpecificDonor();
+			start();
 			break;
 		case 7: // Remove a specific donor
 			removeDonor();
