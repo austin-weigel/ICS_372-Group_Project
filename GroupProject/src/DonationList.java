@@ -23,21 +23,18 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	/**
 	 * Adds a donation to the donations list
 	 * 
-	 * @param creditCard
-	 *            The number of the credit card to be added
-	 * @param amount
-	 *            The amount to be charged to the credit card.
+	 * @param creditCard The number of the credit card to be added
+	 * @param amount     The amount to be charged to the credit card.
 	 */
 	public void addDonation(Donation donation) {
 		donations.add(donation);
 	}
 
 	/**
-	 * Removes the first donation in the donations list with a matching credit
-	 * card number.
+	 * Removes the first donation in the donations list with a matching credit card
+	 * number.
 	 * 
-	 * @param creditCard
-	 *            The number of the credit card to remove.
+	 * @param creditCard The number of the credit card to remove.
 	 */
 	public void removeDonation(long creditCard) {
 		donations.remove(new Donation(creditCard, 0));
@@ -48,6 +45,9 @@ public class DonationList implements Iterable<Donation>, Serializable {
 		return new DonationsIterator();
 	}
 
+	/**
+	 * An implementation of Iterator for the DonationList class.
+	 */
 	private class DonationsIterator implements Iterator<Donation> {
 		int counter;
 
