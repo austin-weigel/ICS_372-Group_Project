@@ -149,6 +149,9 @@ public class UserInterface {
 		System.out.println("\t10: Help");
 	}
 
+	/**
+	 * Adds a donor to the organization
+	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
 		String phone = getToken("Enter phone");
@@ -176,6 +179,9 @@ public class UserInterface {
 		}
 	}
 
+	/**
+	 * Adds a donation to a donor in the Organization.
+	 */
 	public void addDonation() {
 
 		System.out.println("Please enter donor ID.");
@@ -234,6 +240,9 @@ public class UserInterface {
 		System.out.println(donor.toString() + " added Card: " + cardNumber + " with a donation amount of " + amount);
 	}
 
+	/**
+	 * Creates a transaction for every donation for all donor
+	 */
 	public void processTransactions() {
 		organization.processDonations();
 	}
