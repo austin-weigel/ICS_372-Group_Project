@@ -143,10 +143,7 @@ public class Organization implements Serializable {
 				total += donation.getAmount();
 			}
 		}
-		System.out.print("Total amount in donations: $"); // TODO: This needs to
-															// be moved to the
-															// UserInterface
-															// class!
+		System.out.print("Total amount in donations: $");
 		System.out.format("%10.2f", total);
 		System.out.println();
 	}
@@ -155,26 +152,13 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card          Amount    Date"); // TODO: This
-																	// needs to
-																	// be moved
-																	// to the
-																	// UserInterface
-																	// class!
+		System.out.println("Credit card          Amount    Date");
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
 
 				System.out.printf("%016d", transaction.getCreditCard());
 				System.out.printf("%10.2f", transaction.getAmount());
-				System.out.println("     " + transaction.getDate()); // TODO:
-																		// This
-																		// needs
-																		// to be
-																		// moved
-																		// to
-																		// the
-																		// UserInterface
-																		// class!
+				System.out.println("     " + transaction.getDate()); 
 			}
 		}
 	}
