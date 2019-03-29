@@ -18,6 +18,11 @@
  * The authors do not make any claims regarding the correctness of the code in this module
  * and are not responsible for any loss or damage resulting from its use.  
  */
+
+/**
+ * This class makes use of MemberIDServer by Dathan, and Ramnath adaptations and additions made by 
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;

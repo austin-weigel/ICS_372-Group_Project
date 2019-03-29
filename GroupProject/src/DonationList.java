@@ -1,12 +1,14 @@
+
+/**
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Container class for Donations for each donor.
- * 
- * -
- *
+ * Container class for Donations for Donations.
  */
 public class DonationList implements Iterable<Donation>, Serializable {
 

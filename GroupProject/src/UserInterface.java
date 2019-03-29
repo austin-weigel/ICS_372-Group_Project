@@ -19,6 +19,11 @@
  * and are not responsible for any loss or damage resulting from its use.  
  */
 
+/**
+ * This class makes use of UserInterface by Dathan, and Ramnath adaptations and additions made by 
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -150,10 +155,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for adding donors
-	 * It takes takes in the name and phone number
-	 * then calls the add donor method from 
-	 * organization.java
+	 * This method is for adding donors It takes takes in the name and phone number
+	 * then calls the add donor method from organization.java
 	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
@@ -167,10 +170,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for removing donors
-	 * it will check to make sure the id entered exists
-	 * if so it will call the remove donor method from 
-	 * organization.java
+	 * This method is for removing donors it will check to make sure the id entered
+	 * exists if so it will call the remove donor method from organization.java
 	 */
 	public void removeDonor() {
 		System.out.println("Please enter donor ID");
@@ -189,9 +190,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for adding a donation.
-	 * It checks to make sure the id exists, the credit card is a integer, and the amount is not negative
-	 * if all pass, it will call the add donation method found in the organization.java
+	 * This is a method for adding a donation. It checks to make sure the id exists,
+	 * the credit card is a integer, and the amount is not negative if all pass, it
+	 * will call the add donation method found in the organization.java
 	 */
 	public void addDonation() {
 
@@ -251,29 +252,26 @@ public class UserInterface {
 		System.out.println(donor.toString() + " added Card: " + cardNumber + " with a donation amount of " + amount);
 	}
 
-	
 	/**
-	 * This method process all transactions.
-	 * It does this by calling the processDonations method 
-	 * found in organizaion.java
+	 * This method process all transactions. It does this by calling the
+	 * processDonations method found in organizaion.java
 	 */
 	public void processTransactions() {
 		organization.processDonations();
 	}
 
 	/**
-	 * This method list all the transactions for the organization. 
-	 * It calls the print transactions method found in organization.java
+	 * This method list all the transactions for the organization. It calls the
+	 * print transactions method found in organization.java
 	 */
 	public void listTransactions() {
 		organization.printTransactions();
 	}
 
 	/**
-	 * This is a method for removing a credit card.
-	 * It will take in the Id and card number and check for being valid
-	 * If both are vaild it will call the remove credit card method from
-	 * organization.java
+	 * This is a method for removing a credit card. It will take in the Id and card
+	 * number and check for being valid If both are vaild it will call the remove
+	 * credit card method from organization.java
 	 */
 	public void removeCreditCard() {
 		System.out.println("Please enter donor ID");

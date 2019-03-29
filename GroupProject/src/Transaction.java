@@ -1,9 +1,17 @@
+
+/**
+ *
+ * @author  Brodsky R, Schreifels J, Vang J, Weigel A
+ *
+ */
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * A Transaction is a Donation that has been recorded with a date.
- * 
+ * A Transaction object that is made from a donation, copying the card number
+ * and amount to donate. The Transaction also has a Date object recorded at time
+ * of creation.
+ *
  */
 public class Transaction implements Serializable {
 
@@ -13,12 +21,11 @@ public class Transaction implements Serializable {
 	private Date date;
 
 	/**
-	 * Creates a new transaction based off a provided donation and the current
-	 * date and time.
+	 * Creates a new transaction based off a provided donation and the current date
+	 * and time.
 	 * 
-	 * @param donation
-	 *            The donation, or the credit card and amount to be charged to
-	 *            the card, to be made a transaction
+	 * @param donation The donation, or the credit card and amount to be charged to
+	 *                 the card, to be made a transaction
 	 */
 	public Transaction(Donation donation) {
 		creditCard = donation.getCreditCard();

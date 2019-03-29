@@ -19,6 +19,10 @@
  * and are not responsible for any loss or damage resulting from its use.  
  */
 
+/**
+ * This class makes use of MemberList by Dathan, and Ramnath adaptations and additions made by 
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

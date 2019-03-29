@@ -1,10 +1,15 @@
+
+/**
+ *
+ * @author  Brodsky R, Schreifels J, Vang J, Weigel A
+ *
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * A list of all transactions given by some donor.
- *
+ * Container class for the Transaction object
  */
 public class TransactionList implements Iterable<Transaction>, Serializable {
 
@@ -21,9 +26,8 @@ public class TransactionList implements Iterable<Transaction>, Serializable {
 	/**
 	 * Adds a transaction to the list of transactions.
 	 * 
-	 * @param donation
-	 *            The donations which gives the credit card and amount for the
-	 *            transaction.
+	 * @param donation The donations which gives the credit card and amount for the
+	 *                 transaction.
 	 */
 	public void addTransaction(Donation donation) {
 		transactions.add(new Transaction(donation));

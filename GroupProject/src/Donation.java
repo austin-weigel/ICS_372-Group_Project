@@ -1,3 +1,8 @@
+
+/**
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ */
+
 import java.io.Serializable;
 
 /**
@@ -17,10 +22,8 @@ public class Donation implements Serializable {
 	 * Creates a new donations. Credit card number and amount must be given at
 	 * construction of class.
 	 * 
-	 * @param creditCard
-	 *            The credit card number to charge the donation amount to.
-	 * @param amount
-	 *            The amount to be charged to the credit card.
+	 * @param creditCard The credit card number to charge the donation amount to.
+	 * @param amount     The amount to be charged to the credit card.
 	 */
 	public Donation(long creditCard, double amount) {
 		this.creditCard = creditCard;
