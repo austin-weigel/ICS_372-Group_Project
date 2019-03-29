@@ -150,10 +150,14 @@ public class UserInterface {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This method is for adding donors
 	 * It takes takes in the name and phone number
 	 * then calls the add donor method from 
 	 * organization.java
+=======
+	 * Adds a donor to the organization
+>>>>>>> 90b37f76d7e96e66c388a8a63bd1240e38b36544
 	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
@@ -189,9 +193,13 @@ public class UserInterface {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * This is a method for adding a donation.
 	 * It checks to make sure the id exists, the credit card is a integer, and the amount is not negative
 	 * if all pass, it will call the add donation method found in the organization.java
+=======
+	 * Adds a donation to a donor in the Organization.
+>>>>>>> 90b37f76d7e96e66c388a8a63bd1240e38b36544
 	 */
 	public void addDonation() {
 
@@ -250,11 +258,17 @@ public class UserInterface {
 		donor.addDonation(donation);
 		System.out.println(donor.toString() + " added Card: " + cardNumber + " with a donation amount of " + amount);
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * This method process all transactions.
 	 * It does this by calling the processDonations method 
 	 * found in organizaion.java
+=======
+
+	/**
+	 * Creates a transaction for every donation for all donor
+>>>>>>> 90b37f76d7e96e66c388a8a63bd1240e38b36544
 	 */
 	public void processTransactions() {
 		organization.processDonations();
