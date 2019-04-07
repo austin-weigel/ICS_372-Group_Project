@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class Donation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private long creditCard; // The credit card to be charged.
 	private double amount; // The amount to charge to the credit card.
 
 	/**
