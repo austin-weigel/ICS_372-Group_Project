@@ -157,7 +157,7 @@ public class Organization implements Serializable {
 		for (Donor donor : donors) {
 			for (Transaction transaction : donor.getTransactionList()) {
 
-				System.out.printf("%016d", transaction.getCreditCard());
+				System.out.printf("%016d", transaction.getAccountNumber());
 				System.out.printf("%10.2f", transaction.getAmount());
 				System.out.println("     " + transaction.getDate());
 			}
