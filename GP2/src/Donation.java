@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class Donation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private long accountNumber;
 	private double amount; // The amount to charge to the credit card.
 
 	/**
@@ -24,8 +25,8 @@ public class Donation implements Serializable {
 	 * @param creditCard The credit card number to charge the donation amount to.
 	 * @param amount     The amount to be charged to the credit card.
 	 */
-	public Donation(long creditCard, double amount) {
-		this.creditCard = creditCard;
+	public Donation(long accountNumber, double amount) {
+		this.accountNumber = accountNumber;
 		this.amount = amount;
 	}
 
@@ -34,8 +35,8 @@ public class Donation implements Serializable {
 	 * 
 	 * @return The credit card that will be charged.
 	 */
-	public long getCreditCard() {
-		return creditCard;
+	public long getAccountNumber() {
+		return accountNumber;
 	}
 
 	/**
@@ -45,19 +46,5 @@ public class Donation implements Serializable {
 	 */
 	public double getAmount() {
 		return amount;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Donation other = (Donation) obj;
-		if (creditCard != other.creditCard)
-			return false;
-		return true;
 	}
 }

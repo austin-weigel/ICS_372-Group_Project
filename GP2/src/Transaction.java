@@ -16,21 +16,18 @@ import java.util.Date;
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private long creditCard;
+	private long accountNumber;
 	private double amount;
 	private Date date;
 
 	/**
-	 * Creates a new transaction based off a provided donation and the current date
-	 * and time.
-	 * 
-	 * @param donation The donation, or the credit card and amount to be charged to
-	 *                 the card, to be made a transaction
+	 * Transaction must be created from either a Donation or expense.
 	 */
+	private Transaction() {
+	}
+
 	public Transaction(Donation donation) {
-		creditCard = donation.getCreditCard();
-		amount = donation.getAmount();
-		date = new Date();
+
 	}
 
 	/**
@@ -38,8 +35,8 @@ public class Transaction implements Serializable {
 	 * 
 	 * @return The credit card associated with the transaction
 	 */
-	public long getCreditCard() {
-		return creditCard;
+	public long getAccountNumber() {
+		return accountNumber;
 	}
 
 	/**
