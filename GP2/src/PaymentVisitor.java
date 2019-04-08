@@ -1,14 +1,13 @@
 
-public class ThresholdVisitor implements Visitor {
+public class PaymentVisitor implements Visitor {
 
 	int threshold = 1;
 
-	public ThresholdVisitor() {
+	public PaymentVisitor() {
 	}
 
 	@Override
 	public String visit(CreditCard item) {
-
 		if (item.getDonationValue() < threshold)
 			return "Account type: " + 1 + " Number of associated transactions: " + 1 + " Total amount donated: "
 					+ item.getDonationValue();
@@ -18,8 +17,11 @@ public class ThresholdVisitor implements Visitor {
 
 	@Override
 	public String visit(BankAccount item) {
-		// TODO Auto-generated method stub
-		return null;
+		if (item.getDonationValue() < threshold)
+			return "Account type: " + 1 + " Number of associated transactions: " + 1 + " Total amount donated: "
+					+ item.getDonationValue();
+
+		return "";
 	}
 
 }
