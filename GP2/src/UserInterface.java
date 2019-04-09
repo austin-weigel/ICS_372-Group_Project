@@ -143,15 +143,20 @@ public class UserInterface {
 		System.out.println("Please select a Business Process:");
 		System.out.println("\t0: Exit the application");
 		System.out.println("\t1: Add a donor");
-		System.out.println("\t2: Add a credit card");
+		System.out.println("\t2: Add a Payment Method");
 		System.out.println("\t3: Process donations");
 		System.out.println("\t4: List all transactions");
 		System.out.println("\t5: List all donors");
 		System.out.println("\t6: List a specific donor");
 		System.out.println("\t7: Remove a specific donor");
 		System.out.println("\t8: Remove a credit card");
-		System.out.println("\t9: Save the data");
-		System.out.println("\t10: Help");
+		System.out.println("\t9: Remove Bank Account");
+		System.out.println("\t10: Add Expenses");
+		System.out.println("\t11: Organization Info");
+		System.out.println("\t12: List Payment Method Info");
+		System.out.println("\t13: List All Expenses");
+		System.out.println("\t14: Save the data");
+		System.out.println("\t15: Help");
 	}
 
 	/**
@@ -347,8 +352,9 @@ public class UserInterface {
 			addDonor();
 			start();
 			break;
-		case 2: // Add a credit card
-			addDonation();
+		case 2: // This is now Add Payment Method
+			//Needs to be implemented
+			//addDonation(); //old code
 			start();
 			break;
 		case 3: // Process transactions
@@ -375,11 +381,31 @@ public class UserInterface {
 			removeCreditCard();
 			start();
 			break;
-		case 9: // Save the data
+		case 9: // Remove Bank Account
+			//Needs to be implemented
+			start();
+			break;
+		case 10: // Add Expenses
+			//Needs to be implemented
+			start();
+			break;
+		case 11: // Organization Info
+			//Needs to be implemented
+			start();
+			break;
+		case 12: // List Payment Method Info
+			//Needs to be implemented
+			start();
+			break;
+		case 13: // List all Expenses
+			//Needs to be implemented
+			start();
+			break;
+		case 14: // Save the data
 			save();
 			start();
 			break;
-		case 10: // Help
+		case 15: // Help
 			help();
 			start();
 			break;
