@@ -1,12 +1,11 @@
 
 public class BankAccount extends Donation implements Visitable {
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public BankAccount(long bankAccountNumber, double amount) {
+	public BankAccount(String bankAccountNumber, double amount) {
 		super(bankAccountNumber, amount);
 	}
 
