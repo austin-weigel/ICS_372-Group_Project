@@ -336,10 +336,10 @@ public class UserInterface {
 			}
 			try {
 				command = Integer.parseInt(input);
-				if (command < 0 || command > 10)
+				if (command < 0 || command > 15)
 					throw new NumberFormatException();
 			} catch (NumberFormatException nfe) {
-				System.out.println("'" + input + "' is not a valid command. Please choose a command number 0-10.");
+				System.out.println("'" + input + "' is not a valid command. Please choose a command number 0-15.");
 			}
 		}
 
