@@ -143,6 +143,7 @@ public class Organization implements Serializable {
 			for (Donation donation : donor.getDonationList()) {
 				donor.getTransactionList().addTransaction(donation);
 				total += donation.getAmount();
+				donation.incrementTally();
 			}
 		}
 		System.out.print("Total amount in donations: $");
@@ -177,8 +178,8 @@ public class Organization implements Serializable {
 	/**
 	 * Returns a specific donor. [JJS]
 	 *
-	 * @param donorId The Id of the donor to be returned
-	 * @return The donor
+	 * @param donorId The ID of the donor to be returned
+	 * @return The donor or null if none exists
 	 */
 	public Donor getDonor(int donorId) {
 		return donors.getDonor(donorId);
@@ -233,12 +234,26 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Searches the donorList for a donor with the given donorID
+	 * For each bank account and credit card, the number of transactions and the
+	 * amount received through it, provided the amount received is more than the
+	 * threshold amount. [JJS]
 	 * 
-	 * @param donorID
-	 * @return donor with the matching id number
+	 * @param threshold The minimum amount a payment method must have to be
+	 *                  included.
+	 * @return A string containing all the requested information
 	 */
-	public Donor searchDonors(int donorId) {
-		return donors.getDonor(donorId);
+	public String listPaymentMethodInfo(int threshold) {
+
+		String output = "";
+
+		PaymentVisitor paymentVisitor = new PaymentVisitor(threshold);
+
+		for (Donor donor : donors) {
+			for (Donation donation : donor.getDonationList()) {
+				output += donation.accept(paymentVisitor) + "\n\n";
+			}
+		}
+
+		return output;
 	}
 }

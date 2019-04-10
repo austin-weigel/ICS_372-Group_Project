@@ -206,7 +206,7 @@ public class UserInterface {
 	 */
 	public void addDonation() {
 		int donorID = Integer.parseInt(getToken("Enter donor ID"));
-		if (organization.searchDonors(donorID) == null) {
+		if (organization.getDonor(donorID) == null) {
 			System.out.println("No such member exist with the ID given");
 			return;
 		}
@@ -296,10 +296,11 @@ public class UserInterface {
 	 * The actor supplies a threshold amount and the system displays for each bank
 	 * account and credit card, the number of transactions and the amount received
 	 * through it, provided the amount received is more than the threshold amount.
+	 * [JJS]
 	 */
 	public void listPaymentMethodInfo() {
 		int threshold = getNumber("Enter threshold amount\n");
-
+		System.out.println(organization.listPaymentMethodInfo(threshold));
 	}
 
 	/**
@@ -342,7 +343,6 @@ public class UserInterface {
 			start();
 			break;
 		case 2: // This is now Add Payment Method
-			// Needs to be implemented
 			addDonation();
 			start();
 			break;

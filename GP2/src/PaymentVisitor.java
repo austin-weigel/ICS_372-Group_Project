@@ -10,8 +10,8 @@ public class PaymentVisitor implements Visitor {
 	@Override
 	public String visit(CreditCard item) {
 		if (item.getAmount() >= threshold)
-			return "Account type: Credit Card. Number of associated transactions: " + 1 + " Total amount donated: "
-					+ item.getAmount();
+			return "Account type: Credit Card. Number of associated transactions: " + item.getTally()
+					+ ". Total amount donated: " + item.getAmount() + ".";
 
 		return "";
 	}
@@ -19,8 +19,8 @@ public class PaymentVisitor implements Visitor {
 	@Override
 	public String visit(BankAccount item) {
 		if (item.getAmount() >= threshold)
-			return "Account type: Bank Account. Number of associated transactions: " + 1 + " Total amount donated: "
-					+ item.getAmount();
+			return "Account type: Bank Account. Number of associated transactions: " + item.getTally()
+					+ ". Total amount donated: " + item.getAmount() + ".";
 
 		return "";
 	}

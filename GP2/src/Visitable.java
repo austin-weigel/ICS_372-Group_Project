@@ -4,5 +4,5 @@ public interface Visitable {
 	 * through which they will connect to the appropriate method in the
 	 * PaymentVisitor class
 	 */
-	public String accept(Visitor vistor);
+	public abstract String accept(Visitor vistor);
 }
