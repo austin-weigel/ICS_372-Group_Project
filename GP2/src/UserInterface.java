@@ -152,14 +152,14 @@ public class UserInterface {
 		System.out.println("Please select a Business Process:");
 		System.out.println("\t0: Exit the application");
 		System.out.println("\t1: Add a donor");
-		System.out.println("\t2: Add a Payment Method");
+		System.out.println("\t2: Add a payment method");
 		System.out.println("\t3: Process donations");
 		System.out.println("\t4: List all transactions");
 		System.out.println("\t5: List all donors");
 		System.out.println("\t6: List a specific donor");
 		System.out.println("\t7: Remove a specific donor");
 		System.out.println("\t8: Remove a credit card");
-		System.out.println("\t9: Remove Bank Account");
+		System.out.println("\t9: Remove bank account");
 		System.out.println("\t10: Add Expenses");
 		System.out.println("\t11: Organization Info");
 		System.out.println("\t12: List Payment Method Info");
@@ -211,72 +211,32 @@ public class UserInterface {
 	 * organization.java
 	 */
 	public void addDonation() {
-
-		System.out.println("Please enter donor ID.");
-		Donor donor = null;
+		int donorID = Integer.parseInt(getToken("Enter donor ID"));
+		if (organization.searchDonors(donorID) == null) {
+			System.out.println("No such member exist with the ID given");
+			return;
+		}
+		Donation result;
 		do {
-			int id = 0;
-			try {
-				id = Integer.parseInt(reader.readLine());
-			} catch (Exception e) {
-				System.out.println("Credit cards or bank accounts are looked up using the donors integer ID.");
-			}
-			donor = organization.getDonor(id);
-			if (donor == null) {
-				System.out.println("No donor found with that donor ID.");
-				if (yesOrNo("Would you like to cancel card addition?")) {
-					return;
-				}
-			}
+			long accountNumber = Long.parseLong(getToken("Enter a bank account or credit card number"));
 
-		} while (donor == null);
-
-		long accountNumber = 0;
-
-		do {
 			if (yesOrNo("Is this a credit card?")) {
-				try {
-					accountNumber = Long.parseLong(reader.readLine());
-
-				} catch (Exception e) {
-					System.out.println("Credit card are whole integer values.");
-				}
+				double amount = Double.parseDouble(getToken("Enter the amount"));
+				result = organization.addCreditCardDonation(donorID, accountNumber, amount);
 			} else {
-
-				try {
-					accountNumber = Long.parseLong(("Enter in the bank account number."));
-				} catch (Exception e) {
-					System.out.println("Bank account care whole integer values.");
-				}
+				int routingNumber = Integer.parseInt(getToken("Enter bank routing number"));
+				double amount = Double.parseDouble(getToken("Enter the amount"));
+				result = organization.addBankAccountDonation(donorID, accountNumber, routingNumber, amount);
 			}
 
-			if (accountNumber == 0) {
-				System.out.println("Credit card number can not be 0.");
-				if (yesOrNo("Would you like to cancel card addition?")) {
-					return;
-				}
+			if (result != null) {
+				System.out.println(result);
+			} else {
+				System.out.println("Donation could not be added");
 			}
-		} while (accountNumber == 0);
 
-		double amount = 0;
-		do {
-			System.out.println("Please enter donation amount greater than 0.");
-			try {
-				amount = Double.parseDouble(reader.readLine());
-			} catch (Exception e) {
-				System.out.println("Donation amounts can be integer and decimal values.");
-			}
-			if (amount <= 0.0) {
-				System.out.println("Donation amount can not be negative or 0.");
-				if (yesOrNo("Would you like to cancel card addition?")) {
-					return;
-				}
-			}
-		} while (amount == 0);
+		} while (yesOrNo("Add more payment methods?"));
 
-		// Donation donation = new Donation(accountNumber, amount);
-		// donor.addDonation(donation);
-		System.out.println(donor.toString() + " added Card: " + accountNumber + " with a donation amount of " + amount);
 	}
 
 	/**
@@ -380,7 +340,7 @@ public class UserInterface {
 			break;
 		case 2: // This is now Add Payment Method
 			// Needs to be implemented
-			// addDonation(); //old code
+			addDonation();
 			start();
 			break;
 		case 3: // Process transactions

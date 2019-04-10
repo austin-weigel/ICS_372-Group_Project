@@ -41,6 +41,7 @@ public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DonorList donors;
 	private static Organization organization;
+	private DonationList donationList;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
@@ -197,5 +198,53 @@ public class Organization implements Serializable {
 	 */
 	public Donor removeDonor(int id) {
 		return donors.removeDonor(id);
+	}
+
+	/**
+	 * Add a credit card donation to the donation list through the donor
+	 * 
+	 * @param donorID
+	 * @param accountNumber
+	 * @param amount
+	 * @return Donation with credit card
+	 */
+	public Donation addCreditCardDonation(int donorID, long accountNumber, double amount) {
+		Donation donation = new Donation(accountNumber, amount);
+		Donor donor = donors.search(donorID);
+		if (donor != null) {
+			donor.addDonation(donation);
+			return donation;
+		}
+		return null;
+	}
+
+	/**
+	 * Add a bank account donation to the donation list through the donor
+	 * 
+	 * @param donorID
+	 * @param accountNumber
+	 * @param routingNumber
+	 * @param amount
+	 * @return Donation with bank account
+	 */
+	public Donation addBankAccountDonation(int donorID, long accountNumber, long routingNumber, double amount) {
+		Donation donation = new Donation(accountNumber, routingNumber, amount);
+		Donor donor = donors.search(donorID);
+		if (donor != null) {
+			donor.addDonation(donation);
+			return donation;
+		}
+		return null;
+
+	}
+
+	/**
+	 * Searches the donorList for a donor with the given donorID
+	 * 
+	 * @param donorID
+	 * @return donor with the matching id number
+	 */
+	public Donor searchDonors(int donorId) {
+		return donors.search(donorId);
 	}
 }

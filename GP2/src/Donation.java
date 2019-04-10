@@ -18,9 +18,6 @@ public class Donation implements Serializable {
 	private long accountNumber;
 	private long routingNumber;
 	private double amount; // The amount to charge to the credit card.
-	private int accountType;
-	private static final int BANK = 1;
-	private static final int CCARD = 2;
 
 	/**
 	 * Creates a new donations. Credit card number and amount must be given at
@@ -35,7 +32,6 @@ public class Donation implements Serializable {
 	public Donation(long accountNumber, double amount) {
 		this.accountNumber = accountNumber;
 		this.amount = amount;
-		accountType = CCARD;
 	}
 
 	/**
@@ -49,7 +45,6 @@ public class Donation implements Serializable {
 		this.accountNumber = accountNumber;
 		this.routingNumber = routingNumber;
 		this.amount = amount;
-		accountType = BANK;
 	}
 
 	/**
@@ -61,14 +56,6 @@ public class Donation implements Serializable {
 		return accountNumber;
 	}
 
-	public void addDonation(long accountNumber, long routingNumber, double amount) {
-		// to be impletemented
-	}
-
-	public void addDonation(long accountNumber, double amount) {
-		// to be implemented
-	}
-
 	/**
 	 * Returns the amount that will be charged to the credit card.
 	 *
@@ -77,4 +64,11 @@ public class Donation implements Serializable {
 	public double getAmount() {
 		return amount;
 	}
+
+	@Override
+	public String toString() {
+		return "Donation: payment method number is " + accountNumber + "\nif it is a bank account the routingNumber is "
+				+ routingNumber + "\nwith a donation amout of " + amount;
+	}
+
 }

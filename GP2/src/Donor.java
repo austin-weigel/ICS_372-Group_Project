@@ -46,8 +46,10 @@ public class Donor implements Serializable {
 	/**
 	 * Creates a new donor with no donations or transaction history.
 	 * 
-	 * @param name        The name of the new donor.
-	 * @param phoneNumber The phone number of the donor.
+	 * @param name
+	 *            The name of the new donor.
+	 * @param phoneNumber
+	 *            The phone number of the donor.
 	 */
 	public Donor(String name, String phoneNumber) {
 		this.name = name;
