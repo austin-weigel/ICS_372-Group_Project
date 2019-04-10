@@ -230,7 +230,7 @@ public class UserInterface {
 			}
 
 			if (result != null) {
-				System.out.println("It works! :P Print to display string method still to be implemented");
+				System.out.println(result);
 			} else {
 				System.out.println("Donation could not be added");
 			}

@@ -67,8 +67,8 @@ public class Donation implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Donation [accountNumber=" + accountNumber + ", routingNumber=" + routingNumber + ", amount=" + amount
-				+ "]";
+		return "Donation: payment method number is " + accountNumber + "\nif it is a bank account the routingNumber is "
+				+ routingNumber + "\nwith a donation amout of " + amount;
 	}
 
 }
