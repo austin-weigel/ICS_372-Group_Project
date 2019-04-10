@@ -10,10 +10,6 @@ public class CreditCard extends Donation implements Visitable {
 		super(cardNumber, amount);
 	}
 
-	public int getDonationValue() {
-		return 0;
-	}
-
 	@Override
 	public String accept(Visitor visitor) {
 		return visitor.visit(this);
