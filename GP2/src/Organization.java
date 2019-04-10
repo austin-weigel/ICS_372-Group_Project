@@ -136,6 +136,24 @@ public class Organization implements Serializable {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Removes a Bank Account to the donor with the given ID
+	 *
+	 * @param id         ID of the donor
+	 * @param accountNumber Bank Account to be removed
+	 */
+	public void removeBankAccount(int id, long accountNumber) {
+		for (Donor donor : donors) {
+			for (Donation donation : donor.getDonationList()) {
+				if (donor.getID() == id && donation.getAccountNumber() == accountNumber) {
+					donor.getDonationList().removeDonation(donation);
+					return;
+				}
+			}
+		}
+	}
 
 	/**
 	 * Creates a transaction for every donation. Prints the total amount of

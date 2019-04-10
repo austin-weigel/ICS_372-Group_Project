@@ -296,7 +296,7 @@ public class UserInterface {
 
 	/**
 	 * This is a method for removing a credit card. It will take in the Id and card
-	 * number and check for being valid If both are vaild it will call the remove
+	 * number and check for being valid If both are valid it will call the remove
 	 * credit card method from organization.java
 	 */
 	public void removeCreditCard() {
@@ -321,6 +321,33 @@ public class UserInterface {
 
 	}
 
+	/**
+	 * This is a method for removing a Bank Account. It will take in the Id and account
+	 * number and check for being valid If both are valid it will call the remove
+	 * bank account method from organization.java
+	 */
+	public void removeBankAccount() {
+		System.out.println("Please enter donor ID");
+		int id = 0;
+		try {
+			id = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+		System.out.println("Please enter Bank Account Number");
+
+		long accountNumber = 0;
+		try {
+			accountNumber = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+
+		organization.removeBankAccount(id, accountNumber);
+		
+		System.out.println("Bank Account has been removed.");
+
+	}
 	/**
 	 * Prints all donors on file. Each donor is printed on their own line [JJS].
 	 */
@@ -416,7 +443,7 @@ public class UserInterface {
 			start();
 			break;
 		case 9: // Remove Bank Account
-			// Needs to be implemented
+			removeBankAccount();
 			start();
 			break;
 		case 10: // Add Expenses
