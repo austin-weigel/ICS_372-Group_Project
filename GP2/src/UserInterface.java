@@ -1,9 +1,9 @@
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -16,11 +16,11 @@
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 
 /**
- * This class makes use of UserInterface by Dathan, and Ramnath adaptations and additions made by 
+ * This class makes use of UserInterface by Dathan, and Ramnath adaptations and additions made by
  * @author Brodsky R, Schreifels J, Vang J, Weigel A
  */
 
@@ -30,15 +30,20 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * 
+ *
  * Manages displaying command options and processing commands given by the user.
  *
  */
 public class UserInterface {
 
 	private static UserInterface userInterface;
-	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // Input reader to get user
-	private static Organization organization; // The organization to process the commands on.
+	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // Input
+																							// reader
+																							// to
+																							// get
+																							// user
+	private static Organization organization; // The organization to process the
+												// commands on.
 	// commands and other data.
 
 	public static void main(String[] args) {
@@ -47,14 +52,15 @@ public class UserInterface {
 
 	/**
 	 * Creates a new interface for the given organization.
-	 * 
-	 * @param org The organization to provide a Interface for.
+	 *
+	 * @param org
+	 *            The organization to provide a Interface for.
 	 */
 
 	/**
-	 * Made private for singleton pattern. Conditionally looks for any saved data.
-	 * Otherwise, it gets a singleton Library object.
-	 * 
+	 * Made private for singleton pattern. Conditionally looks for any saved
+	 * data. Otherwise, it gets a singleton Library object.
+	 *
 	 * @author Bramha Dathan
 	 */
 	private UserInterface() {
@@ -68,7 +74,7 @@ public class UserInterface {
 
 	/**
 	 * Supports the singleton pattern
-	 * 
+	 *
 	 * @return the singleton object
 	 */
 	public static UserInterface instance() {
@@ -81,10 +87,11 @@ public class UserInterface {
 
 	/**
 	 * Gets a token after prompting
-	 * 
-	 * @param prompt - whatever the user wants as prompt
+	 *
+	 * @param prompt
+	 *            - whatever the user wants as prompt
 	 * @return - the token from the keyboard
-	 * 
+	 *
 	 */
 	public String getToken(String prompt) {
 		do {
@@ -103,11 +110,12 @@ public class UserInterface {
 
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
-	 * 
+	 *
 	 * @author Bramha Dathan
-	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @param prompt
+	 *            The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
-	 * 
+	 *
 	 */
 	private boolean yesOrNo(String prompt) {
 		String more = getToken(prompt + " (Y|y)[es] or anything else for no");
@@ -119,10 +127,11 @@ public class UserInterface {
 
 	/**
 	 * Converts the string to a number
-	 * 
-	 * @param prompt the string for prompting
+	 *
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the integer corresponding to the string
-	 * 
+	 *
 	 */
 	public int getNumber(String prompt) {
 		do {
@@ -160,8 +169,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for adding donors It takes takes in the name and phone number
-	 * then calls the add donor method from organization.java
+	 * This method is for adding donors It takes takes in the name and phone
+	 * number then calls the add donor method from organization.java
 	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
@@ -175,8 +184,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for removing donors it will check to make sure the id entered
-	 * exists if so it will call the remove donor method from organization.java
+	 * This method is for removing donors it will check to make sure the id
+	 * entered exists if so it will call the remove donor method from
+	 * organization.java
 	 */
 	public void removeDonor() {
 		System.out.println("Please enter donor ID");
@@ -195,9 +205,10 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for adding a donation. It checks to make sure the id exists,
-	 * the credit card is a integer, and the amount is not negative if all pass, it
-	 * will call the add donation method found in the organization.java
+	 * This is a method for adding a donation. It checks to make sure the id
+	 * exists, the credit card is a integer, and the amount is not negative if
+	 * all pass, it will call the add donation method found in the
+	 * organization.java
 	 */
 	public void addDonation() {
 
@@ -208,7 +219,7 @@ public class UserInterface {
 			try {
 				id = Integer.parseInt(reader.readLine());
 			} catch (Exception e) {
-				System.out.println("Credit cards are looked up using the donors integer ID.");
+				System.out.println("Credit cards or bank accounts are looked up using the donors integer ID.");
 			}
 			donor = organization.getDonor(id);
 			if (donor == null) {
@@ -220,21 +231,38 @@ public class UserInterface {
 
 		} while (donor == null);
 
-		long cardNumber = 0;
+		long accountNumber = 0;
+
 		do {
+			if (yesOrNo("Is this a credit card?")) {
+				try {
+					accountNumber = Long.parseLong(reader.readLine());
+
+				} catch (Exception e) {
+					System.out.println("Credit card are whole integer values.");
+				}
+			} else {
+				System.out.println("Enter in the bank account number.");
+				try {
+
+				} catch (Exception e) {
+
+				}
+			}
+
 			System.out.println("Please enter credit card number.");
 			try {
-				cardNumber = Long.parseLong(reader.readLine());
+				accountNumber = Long.parseLong(reader.readLine());
 			} catch (Exception e) {
 				System.out.println("Credit cards numbers are whole integer values.");
 			}
-			if (cardNumber == 0) {
+			if (accountNumber == 0) {
 				System.out.println("Credit card number can not be 0.");
 				if (yesOrNo("Would you like to cancel card addition?")) {
 					return;
 				}
 			}
-		} while (cardNumber == 0);
+		} while (accountNumber == 0);
 
 		double amount = 0;
 		do {
@@ -252,9 +280,9 @@ public class UserInterface {
 			}
 		} while (amount == 0);
 
-		Donation donation = new Donation(cardNumber, amount);
-		donor.addDonation(donation);
-		System.out.println(donor.toString() + " added Card: " + cardNumber + " with a donation amount of " + amount);
+		// Donation donation = new Donation(accountNumber, amount);
+		// donor.addDonation(donation);
+		System.out.println(donor.toString() + " added Card: " + accountNumber + " with a donation amount of " + amount);
 	}
 
 	/**
@@ -274,9 +302,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for removing a credit card. It will take in the Id and card
-	 * number and check for being valid If both are vaild it will call the remove
-	 * credit card method from organization.java
+	 * This is a method for removing a credit card. It will take in the Id and
+	 * card number and check for being valid If both are vaild it will call the
+	 * remove credit card method from organization.java
 	 */
 	public void removeCreditCard() {
 		System.out.println("Please enter donor ID");
@@ -310,22 +338,25 @@ public class UserInterface {
 	}
 
 	/**
-	 * Prints a specific donor according to the donor id entered by the user. [JJS]
+	 * Prints a specific donor according to the donor id entered by the user.
+	 * [JJS]
 	 */
 	public void listSpecificDonor() {
 		System.out.println(organization.getDonor(getNumber("Enter donor ID\n")).getAllDonorInfo());
 	}
 
 	/**
-	 * Initially displays all command options. When a command is chosen it processes
-	 * the command until done then calls, start(), again unless the command 0, Exit,
-	 * is chosen.
+	 * Initially displays all command options. When a command is chosen it
+	 * processes the command until done then calls, start(), again unless the
+	 * command 0, Exit, is chosen.
 	 */
 	public void start() {
 
-		int command = -1; // Set to -1 to indicate that no valid command has been picked.
+		int command = -1; // Set to -1 to indicate that no valid command has
+							// been picked.
 
-		// While there is not a valid command the system will loop and ask for a valid
+		// While there is not a valid command the system will loop and ask for a
+		// valid
 		// command.
 		while (command == -1) {
 			String input = "";
@@ -343,7 +374,8 @@ public class UserInterface {
 			}
 		}
 
-		// Calling the necessary methods to complete the given command then return to
+		// Calling the necessary methods to complete the given command then
+		// return to
 		// start() unless exit is called.
 		switch (command) {
 		case 0: // Exit
@@ -353,8 +385,8 @@ public class UserInterface {
 			start();
 			break;
 		case 2: // This is now Add Payment Method
-			//Needs to be implemented
-			//addDonation(); //old code
+			// Needs to be implemented
+			// addDonation(); //old code
 			start();
 			break;
 		case 3: // Process transactions
@@ -382,23 +414,23 @@ public class UserInterface {
 			start();
 			break;
 		case 9: // Remove Bank Account
-			//Needs to be implemented
+			// Needs to be implemented
 			start();
 			break;
 		case 10: // Add Expenses
-			//Needs to be implemented
+			// Needs to be implemented
 			start();
 			break;
 		case 11: // Organization Info
-			//Needs to be implemented
+			// Needs to be implemented
 			start();
 			break;
 		case 12: // List Payment Method Info
-			//Needs to be implemented
+			// Needs to be implemented
 			start();
 			break;
 		case 13: // List all Expenses
-			//Needs to be implemented
+			// Needs to be implemented
 			start();
 			break;
 		case 14: // Save the data
@@ -414,7 +446,7 @@ public class UserInterface {
 
 	/**
 	 * Creates a save of the donors DonorList object in Organization
-	 * 
+	 *
 	 * @author Brahma Dathan
 	 */
 	private void save() {
@@ -426,9 +458,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for retrieving saved data. Uses the appropriate Library
-	 * method for retrieval.
-	 * 
+	 * Method to be called for retrieving saved data. Uses the appropriate
+	 * Library method for retrieval.
+	 *
 	 */
 	private void retrieve() {
 		try {

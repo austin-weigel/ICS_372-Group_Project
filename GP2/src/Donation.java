@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Donation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String accountNumber;
+	private long accountNumber;
 	private long routingNumber;
 	private double amount; // The amount to charge to the credit card.
 	private int accountType;
@@ -32,13 +32,20 @@ public class Donation implements Serializable {
 	 * @param amount
 	 *            The amount to be charged to the credit card.
 	 */
-	public Donation(String accountNumber, double amount) {
+	public Donation(long accountNumber, double amount) {
 		this.accountNumber = accountNumber;
 		this.amount = amount;
 		accountType = CCARD;
 	}
 
-	public Donation(String accountNumber, long routingNumber, double amount) {
+	/**
+	 * Creates a new donation that is the type bank account
+	 * 
+	 * @param accountNumber
+	 * @param routingNumber
+	 * @param amount
+	 */
+	public Donation(long accountNumber, long routingNumber, double amount) {
 		this.accountNumber = accountNumber;
 		this.routingNumber = routingNumber;
 		this.amount = amount;
@@ -50,8 +57,16 @@ public class Donation implements Serializable {
 	 *
 	 * @return The credit card/ bank account that will be charged.
 	 */
-	public String getAccountNumber() {
+	public long getAccountNumber() {
 		return accountNumber;
+	}
+
+	public void addDonation(long accountNumber, long routingNumber, double amount) {
+		// to be impletemented
+	}
+
+	public void addDonation(long accountNumber, double amount) {
+		// to be implemented
 	}
 
 	/**

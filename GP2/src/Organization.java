@@ -127,7 +127,7 @@ public class Organization implements Serializable {
 	 * @param creditCard
 	 *            Credit card to be removed
 	 */
-	public void removeCreditCard(int id, String creditCard) {
+	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
 			if (donor.getID() == id) {
 				donor.getDonationList().removeDonation(creditCard);
