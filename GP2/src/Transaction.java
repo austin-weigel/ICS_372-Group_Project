@@ -27,7 +27,9 @@ public class Transaction implements Serializable {
 	}
 
 	public Transaction(Donation donation) {
-
+		accountNumber = donation.getAccountNumber();
+		amount = donation.getAmount();
+		date = new Date();
 	}
 
 	/**

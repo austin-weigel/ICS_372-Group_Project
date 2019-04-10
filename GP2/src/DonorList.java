@@ -41,7 +41,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 	 * Creates a new DonorList object with an initial ID of 0 that gets incremented
 	 * at every addDonor. ID never gets decremented.
 	 */
-	public DonorList() {
+	private DonorList() {
 	}
 
 	/**

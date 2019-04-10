@@ -14,13 +14,26 @@ import java.util.Iterator;
 public class TransactionList implements Iterable<Transaction>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	ArrayList<Transaction> transactions; // The list of transactions
+	private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+	private static TransactionList transactionList;
 
 	/**
 	 * Creates an empty list of transactions.
 	 */
-	public TransactionList() {
-		transactions = new ArrayList<Transaction>();
+	private TransactionList() {
+	}
+
+	/**
+	 * Supports the singleton pattern
+	 *
+	 * @return the singleton object
+	 */
+	public static TransactionList instance() {
+		if (transactionList == null) {
+			return (transactionList = new TransactionList());
+		} else {
+			return transactionList;
+		}
 	}
 
 	/**
