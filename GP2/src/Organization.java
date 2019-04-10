@@ -41,14 +41,15 @@ public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DonorList donors;
 	private static Organization organization;
-	private TransactionList transactions;
+	private TransactionList income, expenses;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
 		donors = DonorList.instance();
-		transactions = TransactionList.instance();
+		income = TransactionList.instance();
+		expenses = TransactionList.instance();
 	}
 
 	/**
@@ -142,7 +143,7 @@ public class Organization implements Serializable {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
-				transactions.addTransaction(donation);
+				income.addTransaction(new Income(donation));
 				total += donation.getAmount();
 				donation.incrementTally();
 			}
@@ -157,11 +158,8 @@ public class Organization implements Serializable {
 	 */
 	public void printTransactions() {
 		System.out.println("Account Number        Amount   Date");
-		for (Transaction transaction : transactions) {
-
-			System.out.printf("%016d", transaction.getAccountNumber());
-			System.out.printf("%10.2f", transaction.getAmount());
-			System.out.println("     " + transaction.getDate());
+		for (Transaction transaction : income) {
+			transaction.print();
 		}
 	}
 
@@ -254,5 +252,22 @@ public class Organization implements Serializable {
 		}
 
 		return output;
+	}
+
+	/**
+	 * Adds an expense to the list of all expenses
+	 * 
+	 * @param amount The amount of the expense
+	 * @param type   A description of the type of expense.
+	 */
+	public void addExpense(double amount, String type) {
+		expenses.addTransaction(new Expense(amount, type));
+	}
+
+	public void printExpenses() {
+		System.out.println("Amount         Date                             Type");
+		for (Transaction expense : expenses) {
+			expense.print();
+		}
 	}
 }

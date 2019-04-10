@@ -42,8 +42,16 @@ public class TransactionList implements Iterable<Transaction>, Serializable {
 	 * @param donation The donations which gives the credit card and amount for the
 	 *                 transaction.
 	 */
-	public void addTransaction(Donation donation) {
-		transactions.add(new Transaction(donation));
+	public void addTransaction(Transaction transaction) {
+		transactions.add(transaction);
+	}
+
+	public double getTotal() {
+		double total = 0;
+		for (Transaction transaction : transactions) {
+			total += transaction.getAmount();
+		}
+		return total;
 	}
 
 	@Override

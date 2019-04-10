@@ -16,29 +16,15 @@ import java.util.Date;
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private long accountNumber;
 	private double amount;
 	private Date date;
 
 	/**
 	 * Transaction must be created from either a Donation or expense.
 	 */
-	private Transaction() {
-	}
-
-	public Transaction(Donation donation) {
-		accountNumber = donation.getAccountNumber();
-		amount = donation.getAmount();
+	public Transaction(double amount) {
+		this.amount = amount;
 		date = new Date();
-	}
-
-	/**
-	 * Returns the credit card associated with the transaction
-	 * 
-	 * @return The credit card associated with the transaction
-	 */
-	public long getAccountNumber() {
-		return accountNumber;
 	}
 
 	/**
@@ -59,4 +45,9 @@ public class Transaction implements Serializable {
 	public Date getDate() {
 		return date;
 	}
+
+	public void print() {
+		System.out.println(amount + " " + date);
+	}
+
 }

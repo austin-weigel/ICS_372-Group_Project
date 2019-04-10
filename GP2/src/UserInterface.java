@@ -141,6 +141,50 @@ public class UserInterface {
 		} while (true);
 	}
 
+	private double getDouble(String prompt) {
+		boolean notNumber = true;
+		double res = 0;
+		do {
+			String token = getToken(prompt);
+			try {
+				res = Double.parseDouble(token);
+				notNumber = false;
+			} catch (NumberFormatException nfe) {
+				System.out.println("'" + token + "' is not a number.");
+				notNumber = true;
+			}
+		} while (notNumber);
+		return res;
+	}
+
+	private long getLong(String prompt) {
+		boolean notNumber = true;
+		long res = 0;
+		do {
+			String token = getToken(prompt);
+			try {
+				res = Long.parseLong(token);
+				notNumber = false;
+			} catch (NumberFormatException nfe) {
+				System.out.println("'" + token + "' is not a number.");
+				notNumber = true;
+			}
+		} while (notNumber);
+		return res;
+	}
+
+	private void addExpenses() {
+		do {
+			String type = getToken("What is the type of expense?");
+			double amount = getDouble("How much was the expense?");
+			organization.addExpense(amount, type);
+		} while (yesOrNo("Would you like to add another expense?"));
+	}
+
+	private void listExpenses() {
+		organization.printExpenses();
+	}
+
 	/**
 	 * Prints a list of all the command options.
 	 */
@@ -210,16 +254,17 @@ public class UserInterface {
 			System.out.println("No such member exist with the ID given");
 			return;
 		}
-		Donation result;
+
 		do {
-			long accountNumber = Long.parseLong(getToken("Enter a bank account or credit card number"));
+			Donation result;
+			long accountNumber = getLong("Enter a bank account or credit card number");
 
 			if (yesOrNo("Is this a credit card?")) {
-				double amount = Double.parseDouble(getToken("Enter the amount"));
+				double amount = getDouble("Enter the amount");
 				result = organization.addCreditCardDonation(donorID, accountNumber, amount);
 			} else {
 				int routingNumber = Integer.parseInt(getToken("Enter bank routing number"));
-				double amount = Double.parseDouble(getToken("Enter the amount"));
+				double amount = getDouble("Enter the amount");
 				result = organization.addBankAccountDonation(donorID, accountNumber, routingNumber, amount);
 			}
 
@@ -375,7 +420,7 @@ public class UserInterface {
 			start();
 			break;
 		case 10: // Add Expenses
-			// Needs to be implemented
+			addExpenses();
 			start();
 			break;
 		case 11: // Organization Info
@@ -387,7 +432,7 @@ public class UserInterface {
 			start();
 			break;
 		case 13: // List all Expenses
-			// Needs to be implemented [JJS]
+			listExpenses();
 			start();
 			break;
 		case 14: // Save the data
