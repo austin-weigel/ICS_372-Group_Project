@@ -51,8 +51,8 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	 * @param creditCard
 	 *            The number of the credit card to remove.
 	 */
-	public void removeDonation(long accountNumber) {
-		donations.remove(new Donation(accountNumber, 0.0));
+	public void removeDonation(Donation donation) {
+		donations.remove(donation);
 	}
 
 	@Override

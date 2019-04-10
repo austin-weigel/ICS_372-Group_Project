@@ -128,9 +128,11 @@ public class Organization implements Serializable {
 	 */
 	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
-			if (donor.getID() == id) {
-				donor.getDonationList().removeDonation(creditCard);
-				return;
+			for (Donation donation : donor.getDonationList()) {
+				if (donor.getID() == id && donation.getAccountNumber() == creditCard) {
+					donor.getDonationList().removeDonation(donation);
+					return;
+				}
 			}
 		}
 	}
