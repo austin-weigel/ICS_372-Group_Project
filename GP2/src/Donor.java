@@ -20,6 +20,7 @@
  */
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * 
@@ -108,16 +109,25 @@ public class Donor implements Serializable {
 	public String getAllDonorInfo() {
 		// Get the standard donor information
 		String output = toString() + ",";
-		double sumOfCreditCards = 0;
+		double sumPayments = 0;
 
 		// Output all credit cards and keep track of total value of those cards
 		for (Donation item : donations) {
-			output += " Card number " + item.getAccountNumber() + ",";
-			sumOfCreditCards += item.getAmount();
+
+			if (item.getRoutingNumber() == 0) {
+				output += " Bank Account #: " + item.getAccountNumber() + ",";
+
+			} else {
+				output += " Credit Card #: " + item.getAccountNumber() + ",";
+			}
+
+			sumPayments += item.getAmount();
 		}
 
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
 		// Add the total value of the cards to the output
-		output += " Total donations per cycle " + sumOfCreditCards;
+		output += " Total donations per cycle $" + decimalFormat.format(sumPayments);
 
 		return output;
 	}
