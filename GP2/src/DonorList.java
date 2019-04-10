@@ -1,9 +1,9 @@
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -16,11 +16,11 @@
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 
 /**
- * This class makes use of MemberList by Dathan, and Ramnath adaptations and additions made by 
+ * This class makes use of MemberList by Dathan, and Ramnath adaptations and additions made by
  * @author Brodsky R, Schreifels J, Vang J, Weigel A
  */
 import java.io.Serializable;
@@ -46,7 +46,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 
 	/**
 	 * Supports the singleton pattern
-	 * 
+	 *
 	 * @return the singleton object
 	 */
 	public static DonorList instance() {
@@ -59,7 +59,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 
 	/**
 	 * Adds a donor to the donor list
-	 * 
+	 *
 	 * @param name  The name of the new donor
 	 * @param phone The phone number of the new donor
 	 * @return The integer generated as an ID for the donor.
@@ -71,7 +71,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 
 	/**
 	 * Removes a donor from the donor list
-	 * 
+	 *
 	 * @param donorID The ID of the donor to be removed.
 	 * @return The donor who was removed or null if no donor had that ID.
 	 */
@@ -85,7 +85,7 @@ public class DonorList implements Iterable<Donor>, Serializable {
 
 	/**
 	 * Gets the donor with a given ID
-	 * 
+	 *
 	 * @param id The ID of the donor
 	 * @return The donor with the given ID number or null if no Donor was found with
 	 *         that ID.
@@ -98,6 +98,24 @@ public class DonorList implements Iterable<Donor>, Serializable {
 		}
 		return null;
 	}
+	 /**
+     * Checks whether a donor with a given member id exists.
+     *
+     * @param donorId
+     *            the id of the member
+     * @return true iff donor exists
+     *
+     */
+    public Donor search(int memberId) {
+        for (Iterator iterator = donors.iterator(); iterator.hasNext();) {
+            Donor donor = (Donor) iterator.next();
+            if (donor.getID() == memberId) {
+                return donor;
+            }
+        }
+        return null;
+    }
+
 
 	/**
 	 * Iterates through the list of donors.

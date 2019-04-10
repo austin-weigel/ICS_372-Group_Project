@@ -35,6 +35,16 @@ public class DonationList implements Iterable<Donation>, Serializable {
 	}
 
 	/**
+	 * Returns a boolean value to check if a donation has been added.
+	 * 
+	 * @param donation
+	 * @return true if the donation has been added
+	 */
+	public boolean insertDonation(Donation donation) {
+		return donations.add(donation);
+	}
+
+	/**
 	 * Removes the first donation in the donations list with a matching credit
 	 * card number.
 	 *
