@@ -1,9 +1,9 @@
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -16,11 +16,11 @@
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 
 /**
- * This class makes use of Library by Dathan, and Ramnath adaptations and additions made by 
+ * This class makes use of Library by Dathan, and Ramnath adaptations and additions made by
  * @author Brodsky R, Schreifels J, Vang J, Weigel A
  */
 
@@ -51,7 +51,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Supports the singleton pattern
-	 * 
+	 *
 	 * @return the singleton object
 	 */
 	public static Organization instance() {
@@ -64,7 +64,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Retrieves a deserialized version of the library from disk
-	 * 
+	 *
 	 * @return a Library object
 	 */
 	public static Organization retrieve() {
@@ -85,7 +85,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Serializes the Library object
-	 * 
+	 *
 	 * @return true iff the data could be saved
 	 */
 	public static boolean save() {
@@ -104,9 +104,11 @@ public class Organization implements Serializable {
 
 	/**
 	 * Organizes the operations for adding a donor
-	 * 
-	 * @param name  donor name
-	 * @param phone donor phone
+	 *
+	 * @param name
+	 *            donor name
+	 * @param phone
+	 *            donor phone
 	 * @return the Donor object created
 	 */
 	public Donor addDonor(String name, String phoneNumber) {
@@ -119,11 +121,13 @@ public class Organization implements Serializable {
 
 	/**
 	 * Removes a credit card to the donor with the given ID
-	 * 
-	 * @param id         ID of the donor
-	 * @param creditCard Credit card to be removed
+	 *
+	 * @param id
+	 *            ID of the donor
+	 * @param creditCard
+	 *            Credit card to be removed
 	 */
-	public void removeCreditCard(int id, long creditCard) {
+	public void removeCreditCard(int id, String creditCard) {
 		for (Donor donor : donors) {
 			if (donor.getID() == id) {
 				donor.getDonationList().removeDonation(creditCard);
@@ -166,7 +170,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Returns a list of all donors in the system. [JJS]
-	 * 
+	 *
 	 * @return The full donor list
 	 */
 	public DonorList getAllDonors() {
@@ -175,8 +179,9 @@ public class Organization implements Serializable {
 
 	/**
 	 * Returns a specific donor. [JJS]
-	 * 
-	 * @param donorId The Id of the donor to be returned
+	 *
+	 * @param donorId
+	 *            The Id of the donor to be returned
 	 * @return The donor
 	 */
 	public Donor getDonor(int donorId) {
@@ -185,8 +190,9 @@ public class Organization implements Serializable {
 
 	/**
 	 * Removes a donor from the organization
-	 * 
-	 * @param id The id of the donor to remove
+	 *
+	 * @param id
+	 *            The id of the donor to remove
 	 * @return The donor who was removed.
 	 */
 	public Donor removeDonor(int id) {
