@@ -9,10 +9,6 @@ public class BankAccount extends Donation implements Visitable {
 		super(bankAccountNumber, routingNumber, amount);
 	}
 
-	public int getDonationValue() {
-		return 0;
-	}
-
 	@Override
 	public String accept(Visitor visitor) {
 		return visitor.visit(this);

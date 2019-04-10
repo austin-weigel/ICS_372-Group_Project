@@ -1,15 +1,16 @@
 
 public class PaymentVisitor implements Visitor {
 
-	int threshold = 1;
+	int threshold;
 
-	public PaymentVisitor() {
+	public PaymentVisitor(int threshold) {
+		this.threshold = threshold;
 	}
 
 	@Override
 	public String visit(CreditCard item) {
-		if (item.getAmount() < threshold)
-			return "Account type: " + 1 + " Number of associated transactions: " + 1 + " Total amount donated: "
+		if (item.getAmount() >= threshold)
+			return "Account type: Credit Card. Number of associated transactions: " + 1 + " Total amount donated: "
 					+ item.getAmount();
 
 		return "";
@@ -17,11 +18,19 @@ public class PaymentVisitor implements Visitor {
 
 	@Override
 	public String visit(BankAccount item) {
-		if (item.getAmount() < threshold)
-			return "Account type: " + 1 + " Number of associated transactions: " + 1 + " Total amount donated: "
+		if (item.getAmount() >= threshold)
+			return "Account type: Bank Account. Number of associated transactions: " + 1 + " Total amount donated: "
 					+ item.getAmount();
 
 		return "";
+	}
+
+	public int getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(int threshold) {
+		this.threshold = threshold;
 	}
 
 }

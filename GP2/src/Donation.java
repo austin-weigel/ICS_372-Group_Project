@@ -18,16 +18,15 @@ public class Donation implements Serializable {
 	private long accountNumber;
 	private long routingNumber;
 	private double amount; // The amount to charge to the credit card.
+	private int numTransactions = 0;
 
 	/**
 	 * Creates a new donations. Credit card number and amount must be given at
 	 * construction of class.
 	 *
-	 * @param THe
-	 *            creditCard number or bank account number to charge the
-	 *            donation amount to.
-	 * @param amount
-	 *            The amount to be charged to the credit card.
+	 * @param THe    creditCard number or bank account number to charge the donation
+	 *               amount to.
+	 * @param amount The amount to be charged to the credit card.
 	 */
 	public Donation(long accountNumber, double amount) {
 		this.accountNumber = accountNumber;

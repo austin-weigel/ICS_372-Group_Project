@@ -86,9 +86,8 @@ public class DonorList implements Iterable<Donor>, Serializable {
 	/**
 	 * Gets the donor with a given ID
 	 *
-	 * @param id The ID of the donor
-	 * @return The donor with the given ID number or null if no Donor was found with
-	 *         that ID.
+	 * @param id The donor ID
+	 * @return The donor with the given ID number or null if no Donor is found.
 	 */
 	public Donor getDonor(int id) {
 		for (Donor donor : donors) {
@@ -98,24 +97,6 @@ public class DonorList implements Iterable<Donor>, Serializable {
 		}
 		return null;
 	}
-	 /**
-     * Checks whether a donor with a given member id exists.
-     *
-     * @param donorId
-     *            the id of the member
-     * @return true iff donor exists
-     *
-     */
-    public Donor search(int memberId) {
-        for (Iterator iterator = donors.iterator(); iterator.hasNext();) {
-            Donor donor = (Donor) iterator.next();
-            if (donor.getID() == memberId) {
-                return donor;
-            }
-        }
-        return null;
-    }
-
 
 	/**
 	 * Iterates through the list of donors.
