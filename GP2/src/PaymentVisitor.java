@@ -1,28 +1,25 @@
+import java.text.DecimalFormat;
 
 public class PaymentVisitor implements Visitor {
 
 	int threshold;
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
 	public PaymentVisitor(int threshold) {
 		this.threshold = threshold;
 	}
 
 	@Override
-	public String visit(CreditCard item) {
+	public String visit(Donation item) {
 		if (item.getAmount() >= threshold)
-			return "Account type: Credit Card. Number of associated transactions: " + item.getTally()
-					+ ". Total amount donated: " + item.getAmount() + ".";
+			return "Account type: " + getAccountType(item) + ". Number of associated transactions: " + item.getTally()
+					+ ". Donation amount: $" + decimalFormat.format(item.getAmount());
 
 		return "";
 	}
 
-	@Override
-	public String visit(BankAccount item) {
-		if (item.getAmount() >= threshold)
-			return "Account type: Bank Account. Number of associated transactions: " + item.getTally()
-					+ ". Total amount donated: " + item.getAmount() + ".";
-
-		return "";
+	public String getAccountType(Donation item) {
+		return (item.getRoutingNumber() == 0) ? "Credit Card" : "Bank Account";
 	}
 
 	public int getThreshold() {

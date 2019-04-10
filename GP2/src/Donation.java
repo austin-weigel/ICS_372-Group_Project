@@ -17,6 +17,7 @@ public class Donation implements Serializable, Visitable {
 	private static final long serialVersionUID = 1L;
 	private long accountNumber;
 	private long routingNumber;
+
 	private double amount; // The amount to charge to the credit card.
 	private int tally = 0;
 
@@ -93,8 +94,11 @@ public class Donation implements Serializable, Visitable {
 	 * @return Information for the appropriate payment type.
 	 */
 	@Override
-	public String accept(Visitor vistor) {
-		return (routingNumber == 0) ? vistor.visit((CreditCard) this) : vistor.visit((BankAccount) this);
+	public String accept(Visitor visitor) {
+		return visitor.visit(this);
 	}
 
+	public long getRoutingNumber() {
+		return routingNumber;
+	}
 }

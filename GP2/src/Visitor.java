@@ -1,7 +1,4 @@
 
 public interface Visitor {
-
-	public String visit(CreditCard item);
-
-	public String visit(BankAccount item);
+	public String visit(Donation item);
 }
