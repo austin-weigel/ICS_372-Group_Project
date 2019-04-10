@@ -242,20 +242,14 @@ public class UserInterface {
 					System.out.println("Credit card are whole integer values.");
 				}
 			} else {
-				System.out.println("Enter in the bank account number.");
+
 				try {
-
+					accountNumber = Long.parseLong(("Enter in the bank account number."));
 				} catch (Exception e) {
-
+					System.out.println("Bank account care whole integer values.");
 				}
 			}
 
-			System.out.println("Please enter credit card number.");
-			try {
-				accountNumber = Long.parseLong(reader.readLine());
-			} catch (Exception e) {
-				System.out.println("Credit cards numbers are whole integer values.");
-			}
 			if (accountNumber == 0) {
 				System.out.println("Credit card number can not be 0.");
 				if (yesOrNo("Would you like to cancel card addition?")) {
