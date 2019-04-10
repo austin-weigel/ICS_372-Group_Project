@@ -304,6 +304,21 @@ public class UserInterface {
 	}
 
 	/**
+	 * List the total amount ever donated, the total expenses, and the current
+	 * balance. [JJS]
+	 */
+	public void printOrganizationInfo() {
+		System.out.println(organization.getOrganizationInfo());
+	}
+
+	/**
+	 * List all expenses. Display all attributes.
+	 */
+	public void listAllExpenses() {
+		System.out.println(organization.listAllExpenses());
+	}
+
+	/**
 	 * Initially displays all command options. When a command is chosen it processes
 	 * the command until done then calls, start(), again unless the command 0, Exit,
 	 * is chosen.
@@ -378,8 +393,8 @@ public class UserInterface {
 			// Needs to be implemented
 			start();
 			break;
-		case 11: // Organization Info
-			// Needs to be implemented [JJS]
+		case 11: // Organization Info [JJS]
+			// Needs to be implemented
 			start();
 			break;
 		case 12: // List Payment Method Info [JJS]
@@ -387,7 +402,7 @@ public class UserInterface {
 			start();
 			break;
 		case 13: // List all Expenses
-			// Needs to be implemented [JJS]
+			listAllExpenses();
 			start();
 			break;
 		case 14: // Save the data

@@ -1,10 +1,20 @@
 import java.text.DecimalFormat;
 
+/**
+ * 
+ * @author Joseph S
+ *
+ */
 public class PaymentVisitor implements Visitor {
 
-	int threshold;
+	private int threshold;
 	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
+	/**
+	 * Constructs a PaymentVisitor object.
+	 * 
+	 * @param threshold The minimum amount a payment source must pay to be included.
+	 */
 	public PaymentVisitor(int threshold) {
 		this.threshold = threshold;
 	}
@@ -21,13 +31,4 @@ public class PaymentVisitor implements Visitor {
 	public String getAccountType(Donation item) {
 		return (item.getRoutingNumber() == 0) ? "Credit Card" : "Bank Account";
 	}
-
-	public int getThreshold() {
-		return threshold;
-	}
-
-	public void setThreshold(int threshold) {
-		this.threshold = threshold;
-	}
-
 }

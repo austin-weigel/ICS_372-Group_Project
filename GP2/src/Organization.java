@@ -240,10 +240,9 @@ public class Organization implements Serializable {
 	 * 
 	 * @param threshold The minimum amount a payment method must have to be
 	 *                  included.
-	 * @return A string containing all the requested information
+	 * @return A string containing all the requested information.
 	 */
 	public String listPaymentMethodInfo(int threshold) {
-
 		String output = "";
 
 		PaymentVisitor paymentVisitor = new PaymentVisitor(threshold);
@@ -256,4 +255,28 @@ public class Organization implements Serializable {
 
 		return output;
 	}
+
+	/**
+	 * List organization info: List the total amount ever donated, the total
+	 * expenses, and the current balance. [JJS]
+	 * 
+	 * @return A string containing all organization information.
+	 */
+	public String getOrganizationInfo() {
+		String output = "";
+		// TODO: INCOMPLETE
+		return output;
+	}
+
+	/**
+	 * List all expenses. Display all attributes. [JJS]
+	 * 
+	 * @return A string containing all expenses information.
+	 */
+	public String listAllExpenses() {
+		String output = "";
+		// TODO: INCOMPLETE
+		return output;
+	}
+
 }
