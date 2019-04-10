@@ -41,13 +41,14 @@ public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DonorList donors;
 	private static Organization organization;
-	private DonationList donationList;
+	private TransactionList transactions;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
 		donors = DonorList.instance();
+		transactions = TransactionList.instance();
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class Organization implements Serializable {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
-				donor.getTransactionList().addTransaction(donation);
+				transactions.addTransaction(donation);
 				total += donation.getAmount();
 				donation.incrementTally();
 			}
@@ -155,14 +156,12 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card          Amount    Date");
-		for (Donor donor : donors) {
-			for (Transaction transaction : donor.getTransactionList()) {
+		System.out.println("Account Number        Amount   Date");
+		for (Transaction transaction : transactions) {
 
-				System.out.printf("%016d", transaction.getAccountNumber());
-				System.out.printf("%10.2f", transaction.getAmount());
-				System.out.println("     " + transaction.getDate());
-			}
+			System.out.printf("%016d", transaction.getAccountNumber());
+			System.out.printf("%10.2f", transaction.getAmount());
+			System.out.println("     " + transaction.getDate());
 		}
 	}
 
