@@ -174,6 +174,33 @@ public class Organization implements Serializable {
 	}
 
 	/**
+	 * Returns the total expenses occurring over the lifetime of the Organization
+	 * 
+	 * @return Expenses since the Organization was created
+	 */
+	public double getOrganizationExpenseTotal() {
+		return expenses.getTotal();
+	}
+
+	/**
+	 * Returns the total incomes occurring over the lifetime of the company.
+	 * 
+	 * @return The total income
+	 */
+	public double getOrganizationIncomeTotal() {
+		return income.getTotal();
+	}
+
+	/**
+	 * Adds the total expenses(negative) to the total income(positive).
+	 * 
+	 * @return The income after expenses of the Organization.
+	 */
+	public double getOrgranizationNetTotal() {
+		return expenses.getTotal() + income.getTotal();
+	}
+
+	/**
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
