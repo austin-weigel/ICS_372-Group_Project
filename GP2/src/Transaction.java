@@ -47,7 +47,13 @@ public class Transaction implements Serializable {
 	}
 
 	public void print() {
-		System.out.println(amount + " " + date);
+		System.out.printf("%10.2f", getAmount());
+		System.out.println("     " + getDate());
+	}
+
+	@Override
+	public String toString() {
+		return amount + " " + date + " ";
 	}
 
 }

@@ -53,12 +53,13 @@ public class UserInterface {
 	/**
 	 * Creates a new interface for the given organization.
 	 *
-	 * @param org The organization to provide a Interface for.
+	 * @param org
+	 *            The organization to provide a Interface for.
 	 */
 
 	/**
-	 * Made private for singleton pattern. Conditionally looks for any saved data.
-	 * Otherwise, it gets a singleton Library object.
+	 * Made private for singleton pattern. Conditionally looks for any saved
+	 * data. Otherwise, it gets a singleton Library object.
 	 *
 	 * @author Bramha Dathan
 	 */
@@ -87,7 +88,8 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 *
-	 * @param prompt - whatever the user wants as prompt
+	 * @param prompt
+	 *            - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 *
 	 */
@@ -110,7 +112,8 @@ public class UserInterface {
 	 * Queries for a yes or no and returns true for yes and false for no
 	 *
 	 * @author Bramha Dathan
-	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @param prompt
+	 *            The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 *
 	 */
@@ -125,7 +128,8 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 *
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the integer corresponding to the string
 	 *
 	 */
@@ -209,8 +213,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for adding donors It takes takes in the name and phone number
-	 * then calls the add donor method from organization.java
+	 * This method is for adding donors It takes takes in the name and phone
+	 * number then calls the add donor method from organization.java
 	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
@@ -224,8 +228,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for removing donors it will check to make sure the id entered
-	 * exists if so it will call the remove donor method from organization.java
+	 * This method is for removing donors it will check to make sure the id
+	 * entered exists if so it will call the remove donor method from
+	 * organization.java
 	 */
 	public void removeDonor() {
 		System.out.println("Please enter donor ID");
@@ -244,9 +249,10 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for adding a donation. It checks to make sure the id exists,
-	 * the credit card is a integer, and the amount is not negative if all pass, it
-	 * will call the add donation method found in the organization.java
+	 * This is a method for adding a donation. It checks to make sure the id
+	 * exists, the credit card is a integer, and the amount is not negative if
+	 * all pass, it will call the add donation method found in the
+	 * organization.java
 	 */
 	public void addDonation() {
 		int donorID = Integer.parseInt(getToken("Enter donor ID"));
@@ -297,9 +303,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for removing a credit card. It will take in the Id and card
-	 * number and check for being valid If both are valid it will call the remove
-	 * credit card method from organization.java
+	 * This is a method for removing a credit card. It will take in the Id and
+	 * card number and check for being valid If both are valid it will call the
+	 * remove credit card method from organization.java
 	 */
 	public void removeCreditCard() {
 		System.out.println("Please enter donor ID");
@@ -325,8 +331,8 @@ public class UserInterface {
 
 	/**
 	 * This is a method for removing a Bank Account. It will take in the Id and
-	 * account number and check for being valid If both are valid it will call the
-	 * remove bank account method from organization.java
+	 * account number and check for being valid If both are valid it will call
+	 * the remove bank account method from organization.java
 	 */
 	public void removeBankAccount() {
 		System.out.println("Please enter donor ID");
@@ -361,7 +367,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Prints a specific donor according to the donor id entered by the user. [JJS]
+	 * Prints a specific donor according to the donor id entered by the user.
+	 * [JJS]
 	 */
 	public void listSpecificDonor() {
 		System.out.println(organization.getDonor(getNumber("Enter donor ID\n")).getAllDonorInfo());
@@ -376,10 +383,10 @@ public class UserInterface {
 	}
 
 	/**
-	 * The actor supplies a threshold amount and the system displays for each bank
-	 * account and credit card, the number of transactions and the amount received
-	 * through it, provided the amount received is more than the threshold amount.
-	 * [JJS]
+	 * The actor supplies a threshold amount and the system displays for each
+	 * bank account and credit card, the number of transactions and the amount
+	 * received through it, provided the amount received is more than the
+	 * threshold amount. [JJS]
 	 */
 	public void listPaymentMethodInfo() {
 		int threshold = getNumber("Enter threshold amount\n");
@@ -387,9 +394,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * Initially displays all command options. When a command is chosen it processes
-	 * the command until done then calls, start(), again unless the command 0, Exit,
-	 * is chosen.
+	 * Initially displays all command options. When a command is chosen it
+	 * processes the command until done then calls, start(), again unless the
+	 * command 0, Exit, is chosen.
 	 */
 	public void start() {
 
@@ -498,8 +505,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for retrieving saved data. Uses the appropriate Library
-	 * method for retrieval.
+	 * Method to be called for retrieving saved data. Uses the appropriate
+	 * Library method for retrieval.
 	 *
 	 */
 	private void retrieve() {

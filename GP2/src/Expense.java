@@ -1,6 +1,7 @@
 
 public class Expense extends Transaction {
-	String type;
+	private String type;
+	private static final long serialVersionUID = 1L;
 
 	public Expense(double amount, String type) {
 		super(amount * -1);
@@ -15,5 +16,10 @@ public class Expense extends Transaction {
 	public void print() {
 		System.out.printf("%10.2f", getAmount());
 		System.out.println("     " + getDate() + "     " + getType());
+	}
+
+	@Override
+	public String toString() {
+		return type;
 	}
 }
