@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ *
+ */
 public class Expense extends Transaction {
 	private String type;
 	private static final long serialVersionUID = 1L;
