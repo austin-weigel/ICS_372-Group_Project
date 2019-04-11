@@ -339,7 +339,6 @@ public class UserInterface {
 			start();
 			break;
 		case 2: // This is now Add Payment Method
-			// Needs to be implemented
 			addDonation();
 			start();
 			break;
