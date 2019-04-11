@@ -42,15 +42,14 @@ public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DonorList donors;
 	private static Organization organization;
-	private TransactionList income, expenses;
+	private TransactionList transactions;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
 		donors = DonorList.instance();
-		income = TransactionList.instance();
-		expenses = TransactionList.instance();
+		transactions = TransactionList.instance();
 	}
 
 	/**
@@ -163,7 +162,7 @@ public class Organization implements Serializable {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
-				income.addTransaction(new Income(donation));
+				transactions.addTransaction(new Income(donation));
 				total += donation.getAmount();
 				donation.incrementTally();
 			}
@@ -179,16 +178,28 @@ public class Organization implements Serializable {
 	 * @return Expenses since the Organization was created
 	 */
 	public double getOrganizationExpenseTotal() {
-		return expenses.getTotal();
+		double total = 0;
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Expense) {
+				total += transaction.getAmount();
+			}
+		}
+		return total;
 	}
 
 	/**
-	 * Returns the total incomes occurring over the lifetime of the company.
+	 * Returns the total expenses occurring over the lifetime of the Organization
 	 * 
-	 * @return The total income
+	 * @return Expenses since the Organization was created
 	 */
 	public double getOrganizationIncomeTotal() {
-		return income.getTotal();
+		double total = 0;
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Income) {
+				total += transaction.getAmount();
+			}
+		}
+		return total;
 	}
 
 	/**
@@ -197,7 +208,7 @@ public class Organization implements Serializable {
 	 * @return The income after expenses of the Organization.
 	 */
 	public double getOrgranizationNetTotal() {
-		return expenses.getTotal() + income.getTotal();
+		return getOrganizationIncomeTotal() + getOrganizationExpenseTotal();
 	}
 
 	/**
@@ -205,8 +216,10 @@ public class Organization implements Serializable {
 	 */
 	public void printTransactions() {
 		System.out.println("Account Number        Amount   Date");
-		for (Transaction transaction : income) {
-			transaction.print();
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Income) {
+				System.out.println(transaction.toString());
+			}
 		}
 	}
 
@@ -289,11 +302,13 @@ public class Organization implements Serializable {
 		double totalExpense = 0;
 		double currentBalance = 0;
 
-		for (Transaction transaction : income) {
-			totalRevenue += transaction.getAmount();
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Income)
+				totalRevenue += transaction.getAmount();
 		}
-		for (Transaction expense : expenses) {
-			totalExpense += expense.getAmount();
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Expense)
+				totalExpense += transaction.getAmount();
 		}
 
 		currentBalance = totalRevenue - totalExpense;
@@ -333,13 +348,15 @@ public class Organization implements Serializable {
 	 * @param type   A description of the type of expense.
 	 */
 	public void addExpense(double amount, String type) {
-		expenses.addTransaction(new Expense(amount, type));
+		transactions.addTransaction(new Expense(amount, type));
 	}
 
 	public void printExpenses() {
 		System.out.println("Amount         Date                             Type");
-		for (Transaction expense : expenses) {
-			expense.print();
+		for (Transaction transaction : transactions) {
+			if (transaction instanceof Expense) {
+				System.out.println(transaction);
+			}
 		}
 	}
 }

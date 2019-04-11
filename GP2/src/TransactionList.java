@@ -46,14 +46,6 @@ public class TransactionList implements Iterable<Transaction>, Serializable {
 		transactions.add(transaction);
 	}
 
-	public double getTotal() {
-		double total = 0;
-		for (Transaction transaction : transactions) {
-			total += transaction.getAmount();
-		}
-		return total;
-	}
-
 	@Override
 	public Iterator<Transaction> iterator() {
 		return new TransactionIterator();
