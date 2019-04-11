@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 
 /**
  * 
- * @author Joseph S
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
  *
  */
 public class PaymentVisitor implements Visitor {
@@ -13,7 +13,8 @@ public class PaymentVisitor implements Visitor {
 	/**
 	 * Constructs a PaymentVisitor object.
 	 * 
-	 * @param threshold The minimum amount a payment source must pay to be included.
+	 * @param threshold
+	 *            The minimum amount a payment source must pay to be included.
 	 */
 	public PaymentVisitor(int threshold) {
 		this.threshold = threshold;
