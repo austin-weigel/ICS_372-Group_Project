@@ -19,8 +19,13 @@ public class Income extends Transaction {
 
 	@Override
 	public void print() {
-		System.out.printf("%016d", getAccountNumber());
+		System.out.print(accountNumber + "           ");
 		System.out.printf("%10.2f", getAmount());
 		System.out.println("     " + getDate());
+	}
+
+	@Override
+	public String toString() {
+		return accountNumber + " ";
 	}
 }

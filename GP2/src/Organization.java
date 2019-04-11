@@ -108,8 +108,10 @@ public class Organization implements Serializable {
 	/**
 	 * Organizes the operations for adding a donor
 	 *
-	 * @param name  donor name
-	 * @param phone donor phone
+	 * @param name
+	 *            donor name
+	 * @param phone
+	 *            donor phone
 	 * @return the Donor object created
 	 */
 	public Donor addDonor(String name, String phoneNumber) {
@@ -123,8 +125,10 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a credit card to the donor with the given ID
 	 *
-	 * @param id         ID of the donor
-	 * @param creditCard Credit card to be removed
+	 * @param id
+	 *            ID of the donor
+	 * @param creditCard
+	 *            Credit card to be removed
 	 */
 	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
@@ -140,8 +144,10 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a Bank Account to the donor with the given ID
 	 *
-	 * @param id            ID of the donor
-	 * @param accountNumber Bank Account to be removed
+	 * @param id
+	 *            ID of the donor
+	 * @param accountNumber
+	 *            Bank Account to be removed
 	 */
 	public void removeBankAccount(int id, long accountNumber) {
 		for (Donor donor : donors) {
@@ -173,7 +179,8 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Returns the total expenses occurring over the lifetime of the Organization
+	 * Returns the total expenses occurring over the lifetime of the
+	 * Organization
 	 * 
 	 * @return Expenses since the Organization was created
 	 */
@@ -188,7 +195,8 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Returns the total expenses occurring over the lifetime of the Organization
+	 * Returns the total expenses occurring over the lifetime of the
+	 * Organization
 	 * 
 	 * @return Expenses since the Organization was created
 	 */
@@ -215,10 +223,9 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Account Number        Amount   Date");
 		for (Transaction transaction : transactions) {
 			if (transaction instanceof Income) {
-				System.out.println(transaction.toString());
+				transaction.print();
 			}
 		}
 	}
@@ -235,7 +242,8 @@ public class Organization implements Serializable {
 	/**
 	 * Returns a specific donor. [JJS]
 	 *
-	 * @param donorId The ID of the donor to be returned
+	 * @param donorId
+	 *            The ID of the donor to be returned
 	 * @return The donor or null if none exists
 	 */
 	public Donor getDonor(int donorId) {
@@ -245,7 +253,8 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a donor from the organization
 	 *
-	 * @param id The id of the donor to remove
+	 * @param id
+	 *            The id of the donor to remove
 	 * @return The donor who was removed.
 	 */
 	public Donor removeDonor(int id) {
@@ -322,8 +331,8 @@ public class Organization implements Serializable {
 	 * amount received through it, provided the amount received is more than the
 	 * threshold amount. [JJS]
 	 * 
-	 * @param threshold The minimum amount a payment method must have to be
-	 *                  included.
+	 * @param threshold
+	 *            The minimum amount a payment method must have to be included.
 	 * @return A string containing all the requested information
 	 */
 	public String listPaymentMethodInfo(int threshold) {
@@ -344,18 +353,19 @@ public class Organization implements Serializable {
 	/**
 	 * Adds an expense to the list of all expenses
 	 * 
-	 * @param amount The amount of the expense
-	 * @param type   A description of the type of expense.
+	 * @param amount
+	 *            The amount of the expense
+	 * @param type
+	 *            A description of the type of expense.
 	 */
 	public void addExpense(double amount, String type) {
 		transactions.addTransaction(new Expense(amount, type));
 	}
 
 	public void printExpenses() {
-		System.out.println("Amount         Date                             Type");
 		for (Transaction transaction : transactions) {
 			if (transaction instanceof Expense) {
-				System.out.println(transaction);
+				transaction.print();
 			}
 		}
 	}
