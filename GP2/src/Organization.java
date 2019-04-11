@@ -41,13 +41,15 @@ public class Organization implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DonorList donors;
 	private static Organization organization;
-	private DonationList donationList;
+	private TransactionList income, expenses;
 
 	/**
 	 * Creates a new Organization with an empty list of donors.
 	 */
 	public Organization() {
 		donors = DonorList.instance();
+		income = TransactionList.instance();
+		expenses = TransactionList.instance();
 	}
 
 	/**
@@ -106,10 +108,8 @@ public class Organization implements Serializable {
 	/**
 	 * Organizes the operations for adding a donor
 	 *
-	 * @param name
-	 *            donor name
-	 * @param phone
-	 *            donor phone
+	 * @param name  donor name
+	 * @param phone donor phone
 	 * @return the Donor object created
 	 */
 	public Donor addDonor(String name, String phoneNumber) {
@@ -123,16 +123,34 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a credit card to the donor with the given ID
 	 *
-	 * @param id
-	 *            ID of the donor
-	 * @param creditCard
-	 *            Credit card to be removed
+	 * @param id         ID of the donor
+	 * @param creditCard Credit card to be removed
 	 */
 	public void removeCreditCard(int id, long creditCard) {
 		for (Donor donor : donors) {
-			if (donor.getID() == id) {
-				donor.getDonationList().removeDonation(creditCard);
-				return;
+			for (Donation donation : donor.getDonationList()) {
+				if (donor.getID() == id && donation.getAccountNumber() == creditCard) {
+					donor.getDonationList().removeDonation(donation);
+					return;
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * Removes a Bank Account to the donor with the given ID
+	 *
+	 * @param id         ID of the donor
+	 * @param accountNumber Bank Account to be removed
+	 */
+	public void removeBankAccount(int id, long accountNumber) {
+		for (Donor donor : donors) {
+			for (Donation donation : donor.getDonationList()) {
+				if (donor.getID() == id && donation.getAccountNumber() == accountNumber) {
+					donor.getDonationList().removeDonation(donation);
+					return;
+				}
 			}
 		}
 	}
@@ -145,8 +163,9 @@ public class Organization implements Serializable {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
-				donor.getTransactionList().addTransaction(donation);
+				income.addTransaction(new Income(donation));
 				total += donation.getAmount();
+				donation.incrementTally();
 			}
 		}
 		System.out.print("Total amount in donations: $");
@@ -158,14 +177,9 @@ public class Organization implements Serializable {
 	 * Prints all transactions to the console.
 	 */
 	public void printTransactions() {
-		System.out.println("Credit card          Amount    Date");
-		for (Donor donor : donors) {
-			for (Transaction transaction : donor.getTransactionList()) {
-
-				System.out.printf("%016d", transaction.getAccountNumber());
-				System.out.printf("%10.2f", transaction.getAmount());
-				System.out.println("     " + transaction.getDate());
-			}
+		System.out.println("Account Number        Amount   Date");
+		for (Transaction transaction : income) {
+			transaction.print();
 		}
 	}
 
@@ -181,9 +195,8 @@ public class Organization implements Serializable {
 	/**
 	 * Returns a specific donor. [JJS]
 	 *
-	 * @param donorId
-	 *            The Id of the donor to be returned
-	 * @return The donor
+	 * @param donorId The ID of the donor to be returned
+	 * @return The donor or null if none exists
 	 */
 	public Donor getDonor(int donorId) {
 		return donors.getDonor(donorId);
@@ -192,8 +205,7 @@ public class Organization implements Serializable {
 	/**
 	 * Removes a donor from the organization
 	 *
-	 * @param id
-	 *            The id of the donor to remove
+	 * @param id The id of the donor to remove
 	 * @return The donor who was removed.
 	 */
 	public Donor removeDonor(int id) {
@@ -210,7 +222,7 @@ public class Organization implements Serializable {
 	 */
 	public Donation addCreditCardDonation(int donorID, long accountNumber, double amount) {
 		Donation donation = new Donation(accountNumber, amount);
-		Donor donor = donors.search(donorID);
+		Donor donor = donors.getDonor(donorID);
 		if (donor != null) {
 			donor.addDonation(donation);
 			return donation;
@@ -229,7 +241,7 @@ public class Organization implements Serializable {
 	 */
 	public Donation addBankAccountDonation(int donorID, long accountNumber, long routingNumber, double amount) {
 		Donation donation = new Donation(accountNumber, routingNumber, amount);
-		Donor donor = donors.search(donorID);
+		Donor donor = donors.getDonor(donorID);
 		if (donor != null) {
 			donor.addDonation(donation);
 			return donation;
@@ -239,12 +251,43 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * Searches the donorList for a donor with the given donorID
+	 * For each bank account and credit card, the number of transactions and the
+	 * amount received through it, provided the amount received is more than the
+	 * threshold amount. [JJS]
 	 * 
-	 * @param donorID
-	 * @return donor with the matching id number
+	 * @param threshold The minimum amount a payment method must have to be
+	 *                  included.
+	 * @return A string containing all the requested information
 	 */
-	public Donor searchDonors(int donorId) {
-		return donors.search(donorId);
+	public String listPaymentMethodInfo(int threshold) {
+
+		String output = "";
+
+		PaymentVisitor paymentVisitor = new PaymentVisitor(threshold);
+
+		for (Donor donor : donors) {
+			for (Donation donation : donor.getDonationList()) {
+				output += donation.accept(paymentVisitor) + "\n\n";
+			}
+		}
+
+		return output;
+	}
+
+	/**
+	 * Adds an expense to the list of all expenses
+	 * 
+	 * @param amount The amount of the expense
+	 * @param type   A description of the type of expense.
+	 */
+	public void addExpense(double amount, String type) {
+		expenses.addTransaction(new Expense(amount, type));
+	}
+
+	public void printExpenses() {
+		System.out.println("Amount         Date                             Type");
+		for (Transaction expense : expenses) {
+			expense.print();
+		}
 	}
 }

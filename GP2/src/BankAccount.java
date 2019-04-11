@@ -1,5 +1,5 @@
 
-public class BankAccount extends Donation implements Visitable {
+public class BankAccount extends Donation {
 	/**
 	 *
 	 */
@@ -7,14 +7,5 @@ public class BankAccount extends Donation implements Visitable {
 
 	public BankAccount(long bankAccountNumber, long routingNumber, double amount) {
 		super(bankAccountNumber, routingNumber, amount);
-	}
-
-	public int getDonationValue() {
-		return 0;
-	}
-
-	@Override
-	public String accept(Visitor visitor) {
-		return visitor.visit(this);
 	}
 }

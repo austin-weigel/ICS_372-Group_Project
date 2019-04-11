@@ -53,13 +53,12 @@ public class UserInterface {
 	/**
 	 * Creates a new interface for the given organization.
 	 *
-	 * @param org
-	 *            The organization to provide a Interface for.
+	 * @param org The organization to provide a Interface for.
 	 */
 
 	/**
-	 * Made private for singleton pattern. Conditionally looks for any saved
-	 * data. Otherwise, it gets a singleton Library object.
+	 * Made private for singleton pattern. Conditionally looks for any saved data.
+	 * Otherwise, it gets a singleton Library object.
 	 *
 	 * @author Bramha Dathan
 	 */
@@ -88,8 +87,7 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 *
-	 * @param prompt
-	 *            - whatever the user wants as prompt
+	 * @param prompt - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 *
 	 */
@@ -112,8 +110,7 @@ public class UserInterface {
 	 * Queries for a yes or no and returns true for yes and false for no
 	 *
 	 * @author Bramha Dathan
-	 * @param prompt
-	 *            The string to be prepended to the yes/no prompt
+	 * @param prompt The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 *
 	 */
@@ -128,8 +125,7 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 *
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the integer corresponding to the string
 	 *
 	 */
@@ -143,6 +139,50 @@ public class UserInterface {
 				System.out.println("Please input a number ");
 			}
 		} while (true);
+	}
+
+	private double getDouble(String prompt) {
+		boolean notNumber = true;
+		double res = 0;
+		do {
+			String token = getToken(prompt);
+			try {
+				res = Double.parseDouble(token);
+				notNumber = false;
+			} catch (NumberFormatException nfe) {
+				System.out.println("'" + token + "' is not a number.");
+				notNumber = true;
+			}
+		} while (notNumber);
+		return res;
+	}
+
+	private long getLong(String prompt) {
+		boolean notNumber = true;
+		long res = 0;
+		do {
+			String token = getToken(prompt);
+			try {
+				res = Long.parseLong(token);
+				notNumber = false;
+			} catch (NumberFormatException nfe) {
+				System.out.println("'" + token + "' is not a number.");
+				notNumber = true;
+			}
+		} while (notNumber);
+		return res;
+	}
+
+	private void addExpenses() {
+		do {
+			String type = getToken("What is the type of expense?");
+			double amount = getDouble("How much was the expense?");
+			organization.addExpense(amount, type);
+		} while (yesOrNo("Would you like to add another expense?"));
+	}
+
+	private void listExpenses() {
+		organization.printExpenses();
 	}
 
 	/**
@@ -169,8 +209,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for adding donors It takes takes in the name and phone
-	 * number then calls the add donor method from organization.java
+	 * This method is for adding donors It takes takes in the name and phone number
+	 * then calls the add donor method from organization.java
 	 */
 	public void addDonor() {
 		String name = getToken("Enter donor name");
@@ -184,9 +224,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * This method is for removing donors it will check to make sure the id
-	 * entered exists if so it will call the remove donor method from
-	 * organization.java
+	 * This method is for removing donors it will check to make sure the id entered
+	 * exists if so it will call the remove donor method from organization.java
 	 */
 	public void removeDonor() {
 		System.out.println("Please enter donor ID");
@@ -205,27 +244,27 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for adding a donation. It checks to make sure the id
-	 * exists, the credit card is a integer, and the amount is not negative if
-	 * all pass, it will call the add donation method found in the
-	 * organization.java
+	 * This is a method for adding a donation. It checks to make sure the id exists,
+	 * the credit card is a integer, and the amount is not negative if all pass, it
+	 * will call the add donation method found in the organization.java
 	 */
 	public void addDonation() {
 		int donorID = Integer.parseInt(getToken("Enter donor ID"));
-		if (organization.searchDonors(donorID) == null) {
+		if (organization.getDonor(donorID) == null) {
 			System.out.println("No such member exist with the ID given");
 			return;
 		}
-		Donation result;
+
 		do {
-			long accountNumber = Long.parseLong(getToken("Enter a bank account or credit card number"));
+			Donation result;
+			long accountNumber = getLong("Enter a bank account or credit card number");
 
 			if (yesOrNo("Is this a credit card?")) {
-				double amount = Double.parseDouble(getToken("Enter the amount"));
+				double amount = getDouble("Enter the amount");
 				result = organization.addCreditCardDonation(donorID, accountNumber, amount);
 			} else {
 				int routingNumber = Integer.parseInt(getToken("Enter bank routing number"));
-				double amount = Double.parseDouble(getToken("Enter the amount"));
+				double amount = getDouble("Enter the amount");
 				result = organization.addBankAccountDonation(donorID, accountNumber, routingNumber, amount);
 			}
 
@@ -256,9 +295,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for removing a credit card. It will take in the Id and
-	 * card number and check for being valid If both are vaild it will call the
-	 * remove credit card method from organization.java
+	 * This is a method for removing a credit card. It will take in the Id and card
+	 * number and check for being valid If both are valid it will call the remove
+	 * credit card method from organization.java
 	 */
 	public void removeCreditCard() {
 		System.out.println("Please enter donor ID");
@@ -283,6 +322,33 @@ public class UserInterface {
 	}
 
 	/**
+	 * This is a method for removing a Bank Account. It will take in the Id and account
+	 * number and check for being valid If both are valid it will call the remove
+	 * bank account method from organization.java
+	 */
+	public void removeBankAccount() {
+		System.out.println("Please enter donor ID");
+		int id = 0;
+		try {
+			id = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+		System.out.println("Please enter Bank Account Number");
+
+		long accountNumber = 0;
+		try {
+			accountNumber = Integer.parseInt(reader.readLine());
+		} catch (Exception e) {
+			System.out.println("Donors are removed using a integer ID.");
+		}
+
+		organization.removeBankAccount(id, accountNumber);
+		
+		System.out.println("Bank Account has been removed.");
+
+	}
+	/**
 	 * Prints all donors on file. Each donor is printed on their own line [JJS].
 	 */
 	public void listAllDonors() {
@@ -292,17 +358,27 @@ public class UserInterface {
 	}
 
 	/**
-	 * Prints a specific donor according to the donor id entered by the user.
-	 * [JJS]
+	 * Prints a specific donor according to the donor id entered by the user. [JJS]
 	 */
 	public void listSpecificDonor() {
 		System.out.println(organization.getDonor(getNumber("Enter donor ID\n")).getAllDonorInfo());
 	}
 
 	/**
-	 * Initially displays all command options. When a command is chosen it
-	 * processes the command until done then calls, start(), again unless the
-	 * command 0, Exit, is chosen.
+	 * The actor supplies a threshold amount and the system displays for each bank
+	 * account and credit card, the number of transactions and the amount received
+	 * through it, provided the amount received is more than the threshold amount.
+	 * [JJS]
+	 */
+	public void listPaymentMethodInfo() {
+		int threshold = getNumber("Enter threshold amount\n");
+		System.out.println(organization.listPaymentMethodInfo(threshold));
+	}
+
+	/**
+	 * Initially displays all command options. When a command is chosen it processes
+	 * the command until done then calls, start(), again unless the command 0, Exit,
+	 * is chosen.
 	 */
 	public void start() {
 
@@ -350,11 +426,11 @@ public class UserInterface {
 			listTransactions();
 			start();
 			break;
-		case 5: // List all donors
+		case 5: // List all donors [JJS]
 			listAllDonors();
 			start();
 			break;
-		case 6: // List a specific donor
+		case 6: // List a specific donor [JJS]
 			listSpecificDonor();
 			start();
 			break;
@@ -367,23 +443,23 @@ public class UserInterface {
 			start();
 			break;
 		case 9: // Remove Bank Account
-			// Needs to be implemented
+			removeBankAccount();
 			start();
 			break;
 		case 10: // Add Expenses
-			// Needs to be implemented
+			addExpenses();
 			start();
 			break;
 		case 11: // Organization Info
-			// Needs to be implemented
+			// Needs to be implemented [JJS]
 			start();
 			break;
-		case 12: // List Payment Method Info
-			// Needs to be implemented
+		case 12: // List Payment Method Info [JJS]
+			listPaymentMethodInfo();
 			start();
 			break;
 		case 13: // List all Expenses
-			// Needs to be implemented
+			listExpenses();
 			start();
 			break;
 		case 14: // Save the data
@@ -411,8 +487,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for retrieving saved data. Uses the appropriate
-	 * Library method for retrieval.
+	 * Method to be called for retrieving saved data. Uses the appropriate Library
+	 * method for retrieval.
 	 *
 	 */
 	private void retrieve() {

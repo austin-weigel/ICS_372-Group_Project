@@ -20,6 +20,7 @@
  */
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * 
@@ -37,19 +38,12 @@ public class Donor implements Serializable {
 															// donations
 															// promised by the
 															// donor.
-	private TransactionList transactions = new TransactionList(); // The list of
-																	// completed
-																	// transactions
-																	// from the
-																	// donor
 
 	/**
 	 * Creates a new donor with no donations or transaction history.
 	 * 
-	 * @param name
-	 *            The name of the new donor.
-	 * @param phoneNumber
-	 *            The phone number of the donor.
+	 * @param name        The name of the new donor.
+	 * @param phoneNumber The phone number of the donor.
 	 */
 	public Donor(String name, String phoneNumber) {
 		this.name = name;
@@ -99,15 +93,6 @@ public class Donor implements Serializable {
 	}
 
 	/**
-	 * Gets a list of all transactions by that donor.
-	 * 
-	 * @return The list of all transactions by that donor
-	 */
-	public TransactionList getTransactionList() {
-		return transactions;
-	}
-
-	/**
 	 * Overrides the toString method. Prints all donor info (except credit card
 	 * info)
 	 */
@@ -124,16 +109,25 @@ public class Donor implements Serializable {
 	public String getAllDonorInfo() {
 		// Get the standard donor information
 		String output = toString() + ",";
-		double sumOfCreditCards = 0;
+		double sumPayments = 0;
 
 		// Output all credit cards and keep track of total value of those cards
 		for (Donation item : donations) {
-			output += " Card number " + item.getAccountNumber() + ",";
-			sumOfCreditCards += item.getAmount();
+
+			if (item.getRoutingNumber() == 0) {
+				output += " Bank Account #: " + item.getAccountNumber() + ",";
+
+			} else {
+				output += " Credit Card #: " + item.getAccountNumber() + ",";
+			}
+
+			sumPayments += item.getAmount();
 		}
 
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
 		// Add the total value of the cards to the output
-		output += " Total donations per cycle " + sumOfCreditCards;
+		output += " Total donations per cycle $" + decimalFormat.format(sumPayments);
 
 		return output;
 	}
