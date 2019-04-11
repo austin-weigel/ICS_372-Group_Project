@@ -182,7 +182,7 @@ public class UserInterface {
 	}
 
 	private void listExpenses() {
-		organization.printExpenses();
+		System.out.println(organization.getExpenses());
 	}
 
 	/**
@@ -283,7 +283,9 @@ public class UserInterface {
 	 * processDonations method found in organizaion.java
 	 */
 	public void processTransactions() {
-		organization.processDonations();
+		System.out.print("Total amount in donations: $");
+		System.out.format("%10.2f", organization.processDonations());
+		System.out.println();
 	}
 
 	/**
@@ -291,7 +293,7 @@ public class UserInterface {
 	 * print transactions method found in organization.java
 	 */
 	public void listTransactions() {
-		organization.printTransactions();
+		System.out.println(organization.getTransactions());
 	}
 
 	/**
