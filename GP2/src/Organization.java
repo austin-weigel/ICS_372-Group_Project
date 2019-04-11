@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * An organization object that contains the methods for all use cases called by
@@ -136,12 +137,11 @@ public class Organization implements Serializable {
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * Removes a Bank Account to the donor with the given ID
 	 *
-	 * @param id         ID of the donor
+	 * @param id            ID of the donor
 	 * @param accountNumber Bank Account to be removed
 	 */
 	public void removeBankAccount(int id, long accountNumber) {
@@ -248,6 +248,31 @@ public class Organization implements Serializable {
 		}
 		return null;
 
+	}
+
+	/**
+	 * List the total amount ever donated, the total expenses, and the current
+	 * balance. [JJS]
+	 * 
+	 * @return A string containing all of the desired information
+	 */
+	public String listOrganizationInfo() {
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		double totalRevenue = 0;
+		double totalExpense = 0;
+		double currentBalance = 0;
+
+		for (Transaction transaction : income) {
+			totalRevenue += transaction.getAmount();
+		}
+		for (Transaction expense : expenses) {
+			totalExpense += expense.getAmount();
+		}
+
+		currentBalance = totalRevenue - totalExpense;
+
+		return "Total donations: $" + decimalFormat.format(totalRevenue) + "\nTotal expenses: $"
+				+ decimalFormat.format(totalExpense) + "\nCurrent balance: $" + decimalFormat.format(currentBalance);
 	}
 
 	/**

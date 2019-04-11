@@ -322,9 +322,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * This is a method for removing a Bank Account. It will take in the Id and account
-	 * number and check for being valid If both are valid it will call the remove
-	 * bank account method from organization.java
+	 * This is a method for removing a Bank Account. It will take in the Id and
+	 * account number and check for being valid If both are valid it will call the
+	 * remove bank account method from organization.java
 	 */
 	public void removeBankAccount() {
 		System.out.println("Please enter donor ID");
@@ -344,10 +344,11 @@ public class UserInterface {
 		}
 
 		organization.removeBankAccount(id, accountNumber);
-		
+
 		System.out.println("Bank Account has been removed.");
 
 	}
+
 	/**
 	 * Prints all donors on file. Each donor is printed on their own line [JJS].
 	 */
@@ -362,6 +363,14 @@ public class UserInterface {
 	 */
 	public void listSpecificDonor() {
 		System.out.println(organization.getDonor(getNumber("Enter donor ID\n")).getAllDonorInfo());
+	}
+
+	/**
+	 * List the total amount ever donated, the total expenses, and the current
+	 * balance. [JJS]
+	 */
+	public void listOrganizationInfo() {
+		System.out.println(organization.listOrganizationInfo());
 	}
 
 	/**
@@ -450,8 +459,8 @@ public class UserInterface {
 			addExpenses();
 			start();
 			break;
-		case 11: // Organization Info
-			// Needs to be implemented [JJS]
+		case 11: // Organization Info [JJS]
+			listOrganizationInfo();
 			start();
 			break;
 		case 12: // List Payment Method Info [JJS]
