@@ -362,6 +362,9 @@ public class Organization implements Serializable {
 		transactions.addTransaction(new Expense(amount, type));
 	}
 
+	/**
+	 * Grabs all the expenses and list them in order
+	 */
 	public void printExpenses() {
 		for (Transaction transaction : transactions) {
 			if (transaction instanceof Expense) {

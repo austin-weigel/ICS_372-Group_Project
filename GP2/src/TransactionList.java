@@ -39,8 +39,9 @@ public class TransactionList implements Iterable<Transaction>, Serializable {
 	/**
 	 * Adds a transaction to the list of transactions.
 	 * 
-	 * @param donation The donations which gives the credit card and amount for the
-	 *                 transaction.
+	 * @param donation
+	 *            The donations which gives the credit card and amount for the
+	 *            transaction.
 	 */
 	public void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
