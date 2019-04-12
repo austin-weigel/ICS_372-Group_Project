@@ -1,3 +1,9 @@
+/**
+ * Class to store and implement income information
+ * 
+ * @author Brodsky R, Schreifels J, Vang J, Weigel A
+ *
+ */
 public class Income extends Transaction {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +23,10 @@ public class Income extends Transaction {
 		return accountNumber;
 	}
 
+	/**
+	 * method to print and override the transactions print() to display the
+	 * correction transactions type
+	 */
 	@Override
 	public void print() {
 		System.out.print(accountNumber + "           ");
@@ -24,6 +34,9 @@ public class Income extends Transaction {
 		System.out.println("     " + getDate());
 	}
 
+	/**
+	 * Converting accountNumber to String
+	 */
 	@Override
 	public String toString() {
 		return accountNumber + " ";
