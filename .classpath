@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="GP1&amp;2/GP1/GroupProject/src"/>
+	<classpathentry kind="src" path="GP1&amp;2/GP1/InstructorExamples/src"/>
+	<classpathentry kind="src" path="GP1&amp;2/GP2/src"/>
+	<classpathentry kind="src" path="GP1&amp;2/InstructorExamples/Class Project 1 Vetsion 2"/>
+	<classpathentry kind="src" path="GP1&amp;2/InstructorExamples/Class Project 2 Version 1/Class Project 2 Version 1/src"/>
+	<classpathentry kind="output" path="GP1&amp;2/Class Project 1 Version 1/bin"/>
+</classpath>
