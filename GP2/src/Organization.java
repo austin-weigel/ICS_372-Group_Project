@@ -164,7 +164,7 @@ public class Organization implements Serializable {
 	 * Creates a transaction for every donation. Prints the total amount of
 	 * donations collected.
 	 */
-	public void processDonations() {
+	public double processDonations() {
 		double total = 0;
 		for (Donor donor : donors) {
 			for (Donation donation : donor.getDonationList()) {
@@ -173,61 +173,22 @@ public class Organization implements Serializable {
 				donation.incrementTally();
 			}
 		}
-		System.out.print("Total amount in donations: $");
-		System.out.format("%10.2f", total);
-		System.out.println();
-	}
-
-	/**
-	 * Returns the total expenses occurring over the lifetime of the
-	 * Organization
-	 * 
-	 * @return Expenses since the Organization was created
-	 */
-	public double getOrganizationExpenseTotal() {
-		double total = 0;
-		for (Transaction transaction : transactions) {
-			if (transaction instanceof Expense) {
-				total += transaction.getAmount();
-			}
-		}
 		return total;
-	}
-
-	/**
-	 * Returns the total expenses occurring over the lifetime of the
-	 * Organization
-	 * 
-	 * @return Expenses since the Organization was created
-	 */
-	public double getOrganizationIncomeTotal() {
-		double total = 0;
-		for (Transaction transaction : transactions) {
-			if (transaction instanceof Income) {
-				total += transaction.getAmount();
-			}
-		}
-		return total;
-	}
-
-	/**
-	 * Adds the total expenses(negative) to the total income(positive).
-	 * 
-	 * @return The income after expenses of the Organization.
-	 */
-	public double getOrgranizationNetTotal() {
-		return getOrganizationIncomeTotal() + getOrganizationExpenseTotal();
 	}
 
 	/**
 	 * Prints all transactions to the console.
 	 */
-	public void printTransactions() {
+	public String getTransactions() {
+		String result = "Transactions:\n	Account number   Amount  	 Date\n";
 		for (Transaction transaction : transactions) {
 			if (transaction instanceof Income) {
-				transaction.print();
+				result += "	" + String.format("%-16s", ((Income) transaction).getAccountNumber()) + " $"
+						+ String.format("%-10s", transaction.getAmount()) + "     " + transaction.getDate() + "\n";
+
 			}
 		}
+		return result;
 	}
 
 	/**
@@ -263,7 +224,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Add a credit card donation to the donation list through the donor
-	 * 
+	 *
 	 * @param donorID
 	 * @param accountNumber
 	 * @param amount
@@ -281,7 +242,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Add a bank account donation to the donation list through the donor
-	 * 
+	 *
 	 * @param donorID
 	 * @param accountNumber
 	 * @param routingNumber
@@ -302,7 +263,7 @@ public class Organization implements Serializable {
 	/**
 	 * List the total amount ever donated, the total expenses, and the current
 	 * balance. [JJS]
-	 * 
+	 *
 	 * @return A string containing all of the desired information
 	 */
 	public String listOrganizationInfo() {
@@ -320,7 +281,7 @@ public class Organization implements Serializable {
 				totalExpense += transaction.getAmount();
 		}
 
-		currentBalance = totalRevenue - totalExpense;
+		currentBalance = totalRevenue + totalExpense;
 
 		return "Total donations: $" + decimalFormat.format(totalRevenue) + "\nTotal expenses: $"
 				+ decimalFormat.format(totalExpense) + "\nCurrent balance: $" + decimalFormat.format(currentBalance);
@@ -330,7 +291,7 @@ public class Organization implements Serializable {
 	 * For each bank account and credit card, the number of transactions and the
 	 * amount received through it, provided the amount received is more than the
 	 * threshold amount. [JJS]
-	 * 
+	 *
 	 * @param threshold
 	 *            The minimum amount a payment method must have to be included.
 	 * @return A string containing all the requested information
@@ -352,7 +313,7 @@ public class Organization implements Serializable {
 
 	/**
 	 * Adds an expense to the list of all expenses
-	 * 
+	 *
 	 * @param amount
 	 *            The amount of the expense
 	 * @param type
@@ -365,11 +326,16 @@ public class Organization implements Serializable {
 	/**
 	 * Grabs all the expenses and list them in order
 	 */
-	public void printExpenses() {
+
+	public String getExpenses() {
+		String result = "Expenses:\n	Amount	    Date				Type\n";
 		for (Transaction transaction : transactions) {
 			if (transaction instanceof Expense) {
-				transaction.print();
+				result += "	$" + String.format("%-10s", transaction.getAmount()) + " " + transaction.getDate() + "	"
+						+ ((Expense) transaction).getType() + "\n";
+
 			}
 		}
+		return result;
 	}
 }
