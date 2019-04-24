@@ -29,7 +29,7 @@ import display.TemperatureControllerDisplay;
  */
 public class TemperatureControllerContext {
 	private TemperatureControllerDisplay display;
-	private AllOffState currentState;
+	private TemperatureControllerState currentState;
 	private static TemperatureControllerContext instance;
 
 	/**
@@ -37,7 +37,7 @@ public class TemperatureControllerContext {
 	 */
 	private TemperatureControllerContext() {
 		instance = this;
-		currentState = DoorClosedState.instance();
+		currentState = AllOffState.instance();
 	}
 
 	/**
