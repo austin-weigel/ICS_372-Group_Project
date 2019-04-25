@@ -8,21 +8,25 @@ package events;
  *
  */
 public class TimerAt10Event extends TemperatureControllerEvent {
-	private int timeLeft;
+	private static TimerAt10Event instance;
 
 	/**
-	 * Stores the amount of time left in the Timer.
+	 * Private for singleton
 	 * 
-	 * @param value the amount of time left
 	 */
-	public TimerAt10Event(int value) {
-		this.timeLeft = value;
+	private TimerAt10Event() {
+
 	}
 
 	/**
-	 * Needed for display purposes
+	 * For the singleton pattern
+	 * 
+	 * @return the only instance
 	 */
-	public int getTimeLeft() {
-		return timeLeft;
+	public static TimerAt10Event instance() {
+		if (instance == null) {
+			instance = new TimerAt10Event();
+		}
+		return instance;
 	}
 }

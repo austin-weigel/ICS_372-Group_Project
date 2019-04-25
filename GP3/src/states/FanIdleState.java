@@ -1,17 +1,17 @@
 package states;
 
 import events.ACEvent;
-import events.FanEvent;
+import events.AllOffEvent;
 import events.HeaterEvent;
 
-public class AllOffState extends TemperatureControllerState {
+public class FanIdleState extends TemperatureControllerState {
 
-	private static AllOffState instance;
+	private static FanIdleState instance;
 
 	/**
 	 * Private constructor for the singleton pattern
 	 */
-	private AllOffState() {
+	private FanIdleState() {
 		instance = this;
 	}
 
@@ -20,16 +20,16 @@ public class AllOffState extends TemperatureControllerState {
 	 * 
 	 * @return the object
 	 */
-	public static AllOffState instance() {
+	public static FanIdleState instance() {
 		if (instance == null) {
-			instance = new AllOffState();
+			instance = new FanIdleState();
 		}
 		return instance;
 	}
 
 	@Override
-	public void handleEvent(HeaterEvent event) {
-		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
+	public void handleEvent(AllOffEvent event) {
+		TemperatureControllerContext.instance().changeState(AllOffState.instance());
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class AllOffState extends TemperatureControllerState {
 	}
 
 	@Override
-	public void handleEvent(FanEvent event) {
-		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
+	public void handleEvent(HeaterEvent event) {
+		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
 	}
 
 	@Override

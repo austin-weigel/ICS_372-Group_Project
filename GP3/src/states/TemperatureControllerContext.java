@@ -37,7 +37,7 @@ public class TemperatureControllerContext {
 	 */
 	private TemperatureControllerContext() {
 		instance = this;
-		currentState = AllOffState.instance();
+		currentState = TemperatureControllerState.instance();
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class TemperatureControllerContext {
 	 * for clock
 	 */
 	public void initialize() {
-		instance.changeState(DoorClosedState.instance());
+		instance.changeState(AllOffState.instance());
 	}
 
 	/**

@@ -1,5 +1,14 @@
 package states;
 
+import events.ACEvent;
+import events.AllOffEvent;
+import events.FanEvent;
+import events.HeaterEvent;
+import events.IdealTempEvent;
+import events.IdealTempPlus3Event;
+import events.IdealTempSub3Event;
+import events.TimerAt10Event;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -39,28 +48,28 @@ public abstract class TemperatureControllerState {
 	/**
 	 * Specifies the actions to be taken when the Cook button is pressed.
 	 */
-	public void handleEvent(AllOffEvent event) {
+	public void handleEvent(ACEvent event) {
 
 	}
 
 	/**
 	 * Process door open request
 	 */
-	public void handleEvent(HeaterEvent event) {
+	public void handleEvent(AllOffEvent event) {
 
 	}
 
 	/**
 	 * Process door close request
 	 */
-	public void handleEvent(AirConditionerEvent event) {
+	public void handleEvent(FanEvent event) {
 
 	}
 
 	/**
 	 * Process clock tick Generates the timer runs out event
 	 */
-	public void handleEvent(FanEvent event) {
+	public void handleEvent(HeaterEvent event) {
 
 	}
 
@@ -74,21 +83,21 @@ public abstract class TemperatureControllerState {
 	/**
 	 * Process clock ticks Generates the timer runs out event
 	 */
-	public void handleEvent(IdealTempSub3 event) {
+	public void handleEvent(IdealTempPlus3Event event) {
 
 	}
 
 	/**
 	 * Process clock ticks Generates the timer runs out event
 	 */
-	public void handleEvent(IdealTempPlus3 event) {
+	public void handleEvent(IdealTempSub3Event event) {
 
 	}
 
 	/**
 	 * Process clock ticks Generates the timer runs out event
 	 */
-	public void handleEvent(TimerAt10 event) {
+	public void handleEvent(TimerAt10Event event) {
 
 	}
 
