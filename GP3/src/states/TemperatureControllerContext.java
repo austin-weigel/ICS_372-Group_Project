@@ -1,6 +1,10 @@
 package states;
 
 import display.TemperatureControllerDisplay;
+import events.ACEvent;
+import events.AllOffEvent;
+import events.FanEvent;
+import events.HeaterEvent;
 
 /**
  * 
@@ -37,7 +41,7 @@ public class TemperatureControllerContext {
 	 */
 	private TemperatureControllerContext() {
 		instance = this;
-		currentState = TemperatureControllerState.instance();
+		currentState = AllOffState.instance();
 	}
 
 	/**
@@ -80,21 +84,28 @@ public class TemperatureControllerContext {
 		currentState.enter();
 	}
 
-	public void handleEvent(CookRequestEvent event) {
+	public void handleEvent(ACEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
 	 * Process door open request
 	 */
-	public void handleEvent(DoorOpenEvent event) {
+	public void handleEvent(AllOffEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
 	 * Process door close request
 	 */
-	public void handleEvent(DoorCloseEvent event) {
+	public void handleEvent(FanEvent event) {
+		currentState.handleEvent(event);
+	}
+
+	/**
+	 * Process door close request
+	 */
+	public void handleEvent(HeaterEvent event) {
 		currentState.handleEvent(event);
 	}
 
@@ -104,7 +115,7 @@ public class TemperatureControllerContext {
 	 * 
 	 * @param time time left for cooking
 	 */
-	public void showTimeLeft(int time) {
+	public void showCurrentState() {
 		display.showTimeLeft(time);
 	}
 

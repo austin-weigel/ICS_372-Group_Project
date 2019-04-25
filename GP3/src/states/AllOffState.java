@@ -3,10 +3,12 @@ package states;
 import events.ACEvent;
 import events.FanEvent;
 import events.HeaterEvent;
+import timer.Timer;
 
 public class AllOffState extends TemperatureControllerState {
 
 	private static AllOffState instance;
+	private Timer timer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -44,14 +46,14 @@ public class AllOffState extends TemperatureControllerState {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
+		timer = new Timer(this, 10);
 
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-
+		timer.stop();
+		timer = null;
 	}
 
 }
