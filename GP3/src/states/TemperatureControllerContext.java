@@ -66,7 +66,7 @@ public class TemperatureControllerContext {
 	}
 
 	/**
-	 * Lets door closed state be the starting state adds the object as an observable
+	 * Lets all off state be the starting state. Adds the object? as an observable
 	 * for clock
 	 */
 	public void initialize() {
