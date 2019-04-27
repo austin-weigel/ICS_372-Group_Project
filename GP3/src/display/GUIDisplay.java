@@ -135,7 +135,7 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Microwave Version 2");
+		primaryStage.setTitle("Group Project 3");
 		try {
 			while (temperatureControllerContext == null) {
 				Thread.sleep(1000);
