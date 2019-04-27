@@ -42,4 +42,19 @@ public interface TemperatureControllerDisplay {
 	 */
 	public void showNotCooking();
 
+	/**
+	 * indicate the current room temp
+	 */
+    public void showCurrentTemp(int currentTemp);
+    
+	/**
+	 * indicate the Desired room temp
+	 */
+    public void showDesiredTemp(int desiredTemp);
+    
+	/**
+	 * indicate the outside temp
+	 */
+    public void showOutsideTemp(int outsideTemp);
+
 }
