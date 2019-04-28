@@ -3,6 +3,7 @@ package states;
 import events.ACEvent;
 import events.FanEvent;
 import events.HeaterEvent;
+import events.TimerTickedEvent;
 import timer.Timer;
 
 public class AllOffState extends TemperatureControllerState {
@@ -42,6 +43,23 @@ public class AllOffState extends TemperatureControllerState {
 	@Override
 	public void handleEvent(FanEvent event) {
 		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
+	}
+
+	/**
+	 * Process clock tick event
+	 */
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		TemperatureControllerContext.instance().showTimeLeft(timer.getTimeValue());
+	}
+
+	/**
+	 * Process the timer runs out event
+	 */
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		TemperatureControllerContext.instance().showTimeLeft(0);
+		TemperatureControllerContext.instance().changeState(DoorClosedState.instance());
 	}
 
 	@Override
