@@ -20,7 +20,7 @@ public class AllOffState extends TemperatureControllerState {
 
 	/**
 	 * For the singleton pattern
-	 * 
+	 *
 	 * @return the object
 	 */
 	public static AllOffState instance() {
@@ -50,21 +50,18 @@ public class AllOffState extends TemperatureControllerState {
 	 */
 	@Override
 	public void handleEvent(TimerTickedEvent event) {
-		TemperatureControllerContext.instance().showTimeLeft(timer.getTimeValue());
+		// Needs to be implemented
+		System.out.println("");
 	}
 
 	/**
 	 * Process the timer runs out event
 	 */
-	@Override
-	public void handleEvent(TimerRanOutEvent event) {
-		TemperatureControllerContext.instance().showTimeLeft(0);
-		TemperatureControllerContext.instance().changeState(DoorClosedState.instance());
-	}
 
 	@Override
 	public void enter() {
-		timer = new Timer(this, 10);
+		// timer = new Timer(this,10);
+		TemperatureControllerContext.instance().showNoDeviceOn();
 
 	}
 

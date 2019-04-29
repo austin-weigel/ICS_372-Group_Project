@@ -2,12 +2,12 @@ package display;
 
 import buttons.AcButton;
 import buttons.FanButton;
+import buttons.GUIButton;
 import buttons.HeaterButton;
 import buttons.NoDeviceButton;
 import buttons.SetCurrentTempButton;
 import buttons.SetDesiredTempButton;
 import buttons.SetOutsideTempButton;
-import buttons.GUIButton;
 
 /**
  * 
@@ -45,29 +45,29 @@ import states.TemperatureControllerContext;
  *
  */
 public class GUIDisplay extends Application implements TemperatureControllerDisplay {
-	
-    private GUIButton heater;
-    private GUIButton ac;
-    private GUIButton fan;
-    private GUIButton noDevice;
-    private GUIButton setCurrentTemp;
-    private GUIButton setOutsideTemp;
-    private GUIButton setDesiredTemp;
-    
-    private Text tempLabel = new Text("Temperature ");
-    private Text currentTemp = new Text("            ");
-    private Text desiredTemp = new Text("            ");
-    private Text outsideTemp = new Text("            ");
-    private Text devices = new Text("No Device is on");
-    
-//	private GUIButton doorCloser;
-//	private GUIButton doorOpener;
-//	private GUIButton cookButton;
-//	private Text doorStatus = new Text("Door Closed");
-//	private Text timerValue = new Text("            ");
-//	private Text lightStatus = new Text("Light Off");
-//	private Text cookingStatus = new Text("Not cooking");
-    
+
+	private GUIButton heater;
+	private GUIButton ac;
+	private GUIButton fan;
+	private GUIButton noDevice;
+	private GUIButton setCurrentTemp;
+	private GUIButton setOutsideTemp;
+	private GUIButton setDesiredTemp;
+
+	private Text tempLabel = new Text("Temperature ");
+	private Text currentTemp = new Text("            ");
+	private Text desiredTemp = new Text("            ");
+	private Text outsideTemp = new Text("            ");
+	private Text deviceStatus = new Text("             ");
+
+	// private GUIButton doorCloser;
+	// private GUIButton doorOpener;
+	// private GUIButton cookButton;
+	// private Text doorStatus = new Text("Door Closed");
+	// private Text timerValue = new Text(" ");
+	// private Text lightStatus = new Text("Light Off");
+	// private Text cookingStatus = new Text("Not cooking");
+
 	private static TemperatureControllerDisplay display;
 	private TemperatureControllerContext temperatureControllerContext;
 
@@ -80,59 +80,42 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		temperatureControllerContext = temperatureControllerContext.instance();
+		temperatureControllerContext = TemperatureControllerContext.instance();
 		temperatureControllerContext.setDisplay(this);
 		display = this;
-		
-//		doorCloser = new DoorCloseButton("close door");
-//		doorOpener = new DoorOpenButton("open door");
-//		cookButton = new CookButton("cook");
-		
-        heater = new HeaterButton("Heater");
-        ac = new AcButton("AC");
-        fan = new FanButton("Fan");
-        noDevice = new NoDeviceButton("No Device");
-        setCurrentTemp = new SetCurrentTempButton("Set Current Room Temp");
-        setOutsideTemp = new SetOutsideTempButton("Set Outside Temp");
-        setDesiredTemp = new SetDesiredTempButton("Set Desired Room Temp");
-        TextField enteredTemp = new TextField();
-		
+
+		heater = new HeaterButton("Heater");
+		ac = new AcButton("AC");
+		fan = new FanButton("Fan");
+		noDevice = new NoDeviceButton("No Device");
+		setCurrentTemp = new SetCurrentTempButton("Set Current Room Temp");
+		setOutsideTemp = new SetOutsideTempButton("Set Outside Temp");
+		setDesiredTemp = new SetDesiredTempButton("Set Desired Room Temp");
+		TextField enteredTemp = new TextField();
 
 		GridPane pane = new GridPane();
 		pane.setHgap(10);
 		pane.setVgap(10);
 		pane.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		pane.add(tempLabel, 0, 0);
-        pane.add(enteredTemp, 1, 0);
-        pane.add(setCurrentTemp, 2, 0);
-        pane.add(setOutsideTemp, 3, 0);
-        pane.add(setDesiredTemp, 4, 0);
-        pane.add(heater, 0, 1);
-        pane.add(ac, 1, 1);
-        pane.add(fan, 2, 1);
-        pane.add(noDevice, 3, 1);
-        pane.add(currentTemp, 0, 2);
-        pane.add(desiredTemp, 1, 2);
-        pane.add(outsideTemp, 2, 2);
-        pane.add(devices, 3, 2);
+		pane.add(enteredTemp, 1, 0);
+		pane.add(setCurrentTemp, 2, 0);
+		pane.add(setOutsideTemp, 3, 0);
+		pane.add(setDesiredTemp, 4, 0);
+		pane.add(heater, 0, 1);
+		pane.add(ac, 1, 1);
+		pane.add(fan, 2, 1);
+		pane.add(noDevice, 3, 1);
+		pane.add(currentTemp, 0, 2);
+		pane.add(desiredTemp, 1, 2);
+		pane.add(outsideTemp, 2, 2);
+		pane.add(deviceStatus, 3, 2);
 
-        showCurrentTemp(0);
-        showDesiredTemp(0);
-        showOutsideTemp(0);
+		showCurrentTemp(0);
+		showDesiredTemp(0);
+		showOutsideTemp(0);
 
-		
-//		pane.add(doorStatus, 0, 0);
-//		pane.add(lightStatus, 1, 0);
-//		pane.add(timerValue, 2, 0);
-//		pane.add(cookingStatus, 3, 0);
-//		pane.add(doorCloser, 4, 0);
-//		pane.add(doorOpener, 5, 0);
-//		pane.add(cookButton, 6, 0);
-//		showDoorClosed();
-//		showLightOff();
-//		showTimeLeft(0);
-		
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Group Project 3");
@@ -153,82 +136,56 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	}
 
 	/**
-	 * Indicate that the light is on
+	 * Indicate that no device is on
 	 */
 	@Override
-	public void showLightOn() {
-		//lightStatus.setText("Light On");
+	public void showNoDeviceOn() {
+		deviceStatus.setText("No device is on");
 	}
 
 	/**
-	 * Indicate that the light is off
+	 * Indicate that Fan is on
 	 */
 	@Override
-	public void showLightOff() {
-		//lightStatus.setText("Light Off");
+	public void showFanOn() {
+		deviceStatus.setText("Fan is on");
 	}
 
 	/**
-	 * Indicate that the door is closed
+	 * Indicate that AC is on
 	 */
 	@Override
-	public void showDoorClosed() {
-		//doorStatus.setText("Door Closed");
+	public void showAcOn() {
+		deviceStatus.setText("AC is on");
 	}
 
 	/**
-	 * Indicate that the door is opened
+	 * Indicate that heater is on
 	 */
 	@Override
-	public void showDoorOpened() {
-		//doorStatus.setText("Door Opened");
+	public void showHeaterOn() {
+		deviceStatus.setText("Heater is on");
 	}
 
-	/**
-	 * display the remaining time
-	 * 
-	 * @param the value remaining
-	 */
-	@Override
-	public void showTimeLeft(int value) {
-		//timerValue.setText(" " + value);
-	}
-
-	/**
-	 * Indicate that it is cooking
-	 */
-	@Override
-	public void showCooking() {
-		//cookingStatus.setText("Cooking");
-	}
-
-	/**
-	 * Indicate that cooking is done
-	 */
-	@Override
-	public void showNotCooking() {
-		//cookingStatus.setText("Not cooking");
-	}
-	
 	/**
 	 * Indicate the current room temp
 	 */
-    public void showCurrentTemp(int value) {
-    	currentTemp.setText("Current Temp " + value);
-    }
+	public void showCurrentTemp(int value) {
+		currentTemp.setText("Current Temp " + value);
+	}
 
 	/**
 	 * Indicate the desired room temp
 	 */
-    public void showDesiredTemp(int value) {
-    	desiredTemp.setText("Desired Temp " + value);
-    }
-    
+	public void showDesiredTemp(int value) {
+		desiredTemp.setText("Desired Temp " + value);
+	}
+
 	/**
 	 * Indicate the outside temp
 	 */
-    public void showOutsideTemp(int value) {
-    	outsideTemp.setText("Outside Temp " + value);
-    }
+	public void showOutsideTemp(int value) {
+		outsideTemp.setText("Outside Temp " + value);
+	}
 
 }

@@ -7,10 +7,10 @@ import events.FanEvent;
 import events.HeaterEvent;
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -23,7 +23,7 @@ import events.HeaterEvent;
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 
 /**
@@ -46,7 +46,7 @@ public class TemperatureControllerContext {
 
 	/**
 	 * Return the instance
-	 * 
+	 *
 	 * @return the object
 	 */
 	public static TemperatureControllerContext instance() {
@@ -58,16 +58,17 @@ public class TemperatureControllerContext {
 
 	/**
 	 * The display could change. So we have to get its refrence.
-	 * 
-	 * @param display The current display object
+	 *
+	 * @param display
+	 *            The current display object
 	 */
 	public void setDisplay(TemperatureControllerDisplay display) {
 		this.display = display;
 	}
 
 	/**
-	 * Lets all off state be the starting state. Adds the object? as an observable
-	 * for clock
+	 * Lets all off state be the starting state. Adds the object? as an
+	 * observable for clock
 	 */
 	public void initialize() {
 		instance.changeState(AllOffState.instance());
@@ -75,8 +76,9 @@ public class TemperatureControllerContext {
 
 	/**
 	 * Called from the states to change the current state
-	 * 
-	 * @param nextState the next state
+	 *
+	 * @param nextState
+	 *            the next state
 	 */
 	public void changeState(TemperatureControllerState nextState) {
 		currentState.leave();
@@ -110,66 +112,42 @@ public class TemperatureControllerContext {
 	}
 
 	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
-	 * @param time time left for cooking
+	 * This invokes the right method of the display. This helps protect the
+	 * states from changes to the way the system utilizes the state changes.
+	 *
 	 */
-	public void showCurrentState() {
-		display.showTimeLeft(time);
+	public void showNoDeviceOn() {
+		display.showNoDeviceOn();
+	}
+
+	public void showFanOn() {
+		display.showFanOn();
+	}
+
+	public void showAcOn() {
+		display.showAcOn();
+
+	}
+
+	public void showHeaterOn() {
+		display.showHeaterOn();
+	}
+
+	public void showCurrentTemp(int currentTemp) {
+		display.showCurrentTemp(currentTemp);
 	}
 
 	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
+	 * indicate the Desired room temp
 	 */
-	public void showLightOn() {
-		display.showLightOn();
+	public void showDesiredTemp(int desiredTemp) {
+		display.showDesiredTemp(desiredTemp);
 	}
 
 	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
+	 * indicate the outside temp
 	 */
-	public void showLightOff() {
-		display.showLightOff();
-	}
-
-	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
-	 */
-	public void showCooking() {
-		display.showCooking();
-	}
-
-	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
-	 */
-	public void showNotCooking() {
-		display.showNotCooking();
-	}
-
-	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
-	 */
-	public void showDoorOpened() {
-		display.showDoorOpened();
-	}
-
-	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
-	 * 
-	 */
-	public void showDoorClosed() {
-		display.showDoorClosed();
+	public void showOutsideTemp(int outsideTemp) {
+		display.showOutsideTemp(outsideTemp);
 	}
 }

@@ -8,12 +8,13 @@ import events.IdealTempEvent;
 import events.IdealTempPlus3Event;
 import events.IdealTempSub3Event;
 import events.TimerAt10Event;
+import events.TimerTickedEvent;
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -26,11 +27,11 @@ import events.TimerAt10Event;
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 /**
  * Super class for all states
- * 
+ *
  *
  */
 public abstract class TemperatureControllerState {
@@ -98,6 +99,10 @@ public abstract class TemperatureControllerState {
 	 * Process clock ticks Generates the timer runs out event
 	 */
 	public void handleEvent(TimerAt10Event event) {
+
+	}
+
+	public void handleEvent(TimerTickedEvent event) {
 
 	}
 

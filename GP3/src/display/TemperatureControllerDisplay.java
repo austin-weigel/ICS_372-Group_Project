@@ -5,56 +5,25 @@ package display;
  * a lot of freedom to choose its display.
  */
 public interface TemperatureControllerDisplay {
-	/**
-	 * Displays the cook time remaining
-	 * 
-	 * @param time remaining time
-	 */
-	public void showTimeLeft(int time);
 
-	/**
-	 * Indicate that the light is on
-	 */
-	public void showLightOn();
+	public void showNoDeviceOn();
 
-	/**
-	 * Indicate that the light is off
-	 */
-	public void showLightOff();
+	public void showFanOn();
 
-	/**
-	 * Indicate that the door is now closed
-	 */
-	public void showDoorClosed();
+	public void showAcOn();
 
-	/**
-	 * Indicate that the door is now open
-	 */
-	public void showDoorOpened();
+	public void showHeaterOn();
 
-	/**
-	 * indicate that cooking has begun
-	 */
-	public void showCooking();
+	public void showCurrentTemp(int currentTemp);
 
-	/**
-	 * indicate that cooking has ended
-	 */
-	public void showNotCooking();
-
-	/**
-	 * indicate the current room temp
-	 */
-    public void showCurrentTemp(int currentTemp);
-    
 	/**
 	 * indicate the Desired room temp
 	 */
-    public void showDesiredTemp(int desiredTemp);
-    
+	public void showDesiredTemp(int desiredTemp);
+
 	/**
 	 * indicate the outside temp
 	 */
-    public void showOutsideTemp(int outsideTemp);
+	public void showOutsideTemp(int outsideTemp);
 
 }

@@ -3,14 +3,13 @@ package states;
 import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
-import timer.Notifiable;
-import timer.TimerRanOutEvent;
-import timer.TimerTickedEvent;
+import thermometer.Notifiable;
+import thermometer.Thermometer;
 
 public class HeaterIdleState extends TemperatureControllerState implements Notifiable {
 
 	private static HeaterIdleState instance;
-	private static Timer timer;
+	private static Thermometer thermometer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -21,7 +20,7 @@ public class HeaterIdleState extends TemperatureControllerState implements Notif
 
 	/**
 	 * For the singleton pattern
-	 * 
+	 *
 	 * @return the object
 	 */
 	public static HeaterIdleState instance() {
@@ -48,24 +47,11 @@ public class HeaterIdleState extends TemperatureControllerState implements Notif
 
 	@Override
 	public void enter() {
-		timer = new Timer(10);
+		thermometer = new Thermometer(this, 10);
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handleEvent(TimerTickedEvent event) {
-		if (TemperatureControllerContext.getInsideTemp() != TemperatureControllerContext.getOutsideTemp) {
-
-		}
-	}
-
-	@Override
-	public void handleEvent(TimerRanOutEvent event) {
 		// TODO Auto-generated method stub
 
 	}
