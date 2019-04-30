@@ -1,8 +1,13 @@
 package states;
 
+import events.ACEvent;
+import events.AllOffEvent;
+import events.FanEvent;
 import events.HeaterEvent;
 import events.IdealTempEvent;
 import events.IdealTempSub3Event;
+import events.TimerAt10Event;
+import events.TimerTickedEvent;
 import thermometer.Thermometer;
 
 public class HeaterState extends TemperatureControllerState {
@@ -42,6 +47,26 @@ public class HeaterState extends TemperatureControllerState {
 
 	public void handleEvent(IdealTempSub3Event event) {
 		// to be implemented
+	}
+
+	public void handleEvent(AllOffEvent event) {
+		TemperatureControllerContext.instance().changeState(AllOffState.instance());
+	}
+
+	public void handeEvent(ACEvent event) {
+		TemperatureControllerContext.instance().changeState(ACState.instance());
+	}
+
+	public void handleEvent(FanEvent event) {
+		TemperatureControllerContext.instance().changeState(FanState.instance());
+	}
+
+	public void handleEvent(TimerAt10Event event) {
+		TemperatureControllerContext.instance().changeState(FanState.instance());
+	}
+
+	public void handleEvent(TimerTickedEvent event) {
+
 	}
 
 	@Override

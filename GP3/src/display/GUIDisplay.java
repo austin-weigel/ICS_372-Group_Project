@@ -54,19 +54,13 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	private GUIButton setOutsideTemp;
 	private GUIButton setDesiredTemp;
 
+	private TextField enteredTemp = new TextField();
+
 	private Text tempLabel = new Text("Temperature ");
 	private Text currentTemp = new Text("            ");
 	private Text desiredTemp = new Text("            ");
 	private Text outsideTemp = new Text("            ");
 	private Text deviceStatus = new Text("             ");
-
-	// private GUIButton doorCloser;
-	// private GUIButton doorOpener;
-	// private GUIButton cookButton;
-	// private Text doorStatus = new Text("Door Closed");
-	// private Text timerValue = new Text(" ");
-	// private Text lightStatus = new Text("Light Off");
-	// private Text cookingStatus = new Text("Not cooking");
 
 	private static TemperatureControllerDisplay display;
 	private TemperatureControllerContext temperatureControllerContext;
@@ -91,7 +85,6 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		setCurrentTemp = new SetCurrentTempButton("Set Current Room Temp");
 		setOutsideTemp = new SetOutsideTempButton("Set Outside Temp");
 		setDesiredTemp = new SetDesiredTempButton("Set Desired Room Temp");
-		TextField enteredTemp = new TextField();
 
 		GridPane pane = new GridPane();
 		pane.setHgap(10);
