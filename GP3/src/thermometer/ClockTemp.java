@@ -29,9 +29,9 @@ import java.beans.PropertyChangeSupport;
  * pattern.
  *
  */
-public class Clock implements Runnable {
+public class ClockTemp implements Runnable {
 	private Thread thread = new Thread(this);
-	private static Clock clock;
+	private static ClockTemp clockTemp;
 	private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
 	/**
@@ -57,7 +57,7 @@ public class Clock implements Runnable {
 	/**
 	 * Start the thread
 	 */
-	private Clock() {
+	private ClockTemp() {
 		thread.start();
 	}
 
@@ -66,11 +66,11 @@ public class Clock implements Runnable {
 	 *
 	 * @return returns the clock
 	 */
-	public static Clock instance() {
-		if (clock == null) {
-			clock = new Clock();
+	public static ClockTemp instance() {
+		if (clockTemp == null) {
+			clockTemp = new ClockTemp();
 		}
-		return clock;
+		return clockTemp;
 	}
 
 	/**

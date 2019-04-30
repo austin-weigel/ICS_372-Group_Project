@@ -5,6 +5,9 @@ import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
 import events.HeaterEvent;
+import events.SetDesireTempEvent;
+import events.SetOutsideTempEvent;
+import events.SetTempEvent;
 
 /**
  *
@@ -149,5 +152,20 @@ public class TemperatureControllerContext {
 	 */
 	public void showOutsideTemp(int outsideTemp) {
 		display.showOutsideTemp(outsideTemp);
+	}
+
+	public void handleEvent(SetTempEvent event) {
+		currentState.handleEvent(event);
+
+	}
+
+	public void handleEvent(SetDesireTempEvent event) {
+		currentState.handleEvent(event);
+
+	}
+
+	public void handleEvent(SetOutsideTempEvent event) {
+		currentState.handleEvent(event);
+
 	}
 }

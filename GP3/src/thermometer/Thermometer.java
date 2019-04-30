@@ -26,7 +26,7 @@ public class Thermometer implements PropertyChangeListener {
 	public Thermometer(Notifiable client, int tempValue) {
 		this.client = client;
 		this.tempValue = tempValue;
-		Clock.instance().addPropertyChangeListener(this);
+		ClockTemp.instance().addPropertyChangeListener(this);
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Thermometer implements PropertyChangeListener {
 	 * Stops the gauge by deleting itself from the list of observers
 	 */
 	public void stop() {
-		Clock.instance().removePropertyChangeListener(this);
+		ClockTemp.instance().removePropertyChangeListener(this);
 	}
 
 	/**
