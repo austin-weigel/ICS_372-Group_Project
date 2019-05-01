@@ -7,9 +7,9 @@ import events.HeaterEvent;
 import events.IdealTempEvent;
 import events.IdealTempPlus3Event;
 import events.IdealTempSub3Event;
+import events.SetCurrentTempEvent;
 import events.SetDesireTempEvent;
 import events.SetOutsideTempEvent;
-import events.SetTempEvent;
 import events.TimerAt10Event;
 import events.TimerTickedEvent;
 
@@ -109,15 +109,16 @@ public abstract class TemperatureControllerState {
 
 	}
 
-	public void handleEvent(SetTempEvent event) {
-
-	}
-
 	public void handleEvent(SetDesireTempEvent event) {
 
 	}
 
 	public void handleEvent(SetOutsideTempEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void handleEvent(SetCurrentTempEvent event) {
 		// TODO Auto-generated method stub
 
 	}

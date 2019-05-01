@@ -10,10 +10,10 @@ import buttons.SetDesiredTempButton;
 import buttons.SetOutsideTempButton;
 
 /**
- * 
+ *
  * @author Brahma Dathan and Sarnath Ramnath
  * @Copyright (c) 2010
- 
+
  * Redistribution and use with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -26,7 +26,7 @@ import buttons.SetOutsideTempButton;
  *     from this software without specific prior written permission.
  *
  * The authors do not make any claims regarding the correctness of the code in this module
- * and are not responsible for any loss or damage resulting from its use.  
+ * and are not responsible for any loss or damage resulting from its use.
  */
 
 import javafx.application.Application;
@@ -179,6 +179,10 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	 */
 	public void showOutsideTemp(int value) {
 		outsideTemp.setText("Outside Temp " + value);
+	}
+
+	public int getEnteredTemp() {
+		return Integer.parseInt(enteredTemp.getText());
 	}
 
 }

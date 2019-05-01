@@ -26,4 +26,6 @@ public interface TemperatureControllerDisplay {
 	 */
 	public void showOutsideTemp(int outsideTemp);
 
+	public int getEnteredTemp();
+
 }

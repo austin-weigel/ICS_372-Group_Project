@@ -1,6 +1,8 @@
 package states;
 
-public class SetTempState {
+import events.SetCurrentTempEvent;
+
+public class SetTempState extends TemperatureControllerState {
 
 	private static SetTempState instance;
 
@@ -23,9 +25,14 @@ public class SetTempState {
 		return instance;
 	}
 
-	public void enter() {
-		// TODO Auto-generated method stub
+	public void handleEvent(SetCurrentTempEvent event) {
+		TemperatureControllerContext.instance().showCurrentTemp(100);
+		// not working
 
+	}
+
+	public void enter() {
+		TemperatureControllerContext.instance().showCurrentTemp(0);
 	}
 
 	public void leave() {
