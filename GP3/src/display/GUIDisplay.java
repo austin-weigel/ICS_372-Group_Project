@@ -108,6 +108,7 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		showCurrentTemp(0);
 		showDesiredTemp(0);
 		showOutsideTemp(0);
+		showNoDeviceOn();
 
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);

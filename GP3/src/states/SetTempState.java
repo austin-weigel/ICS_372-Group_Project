@@ -1,8 +1,13 @@
 package states;
 
 import events.SetCurrentTempEvent;
+import events.SetDesireTempEvent;
+import events.SetOutsideTempEvent;
+import thermometer.Notifiable;
+import thermometer.Thermometer;
 
-public class SetTempState extends TemperatureControllerState {
+public class SetTempState extends TemperatureControllerState implements Notifiable {
+	private Thermometer thermometer;
 
 	private static SetTempState instance;
 
@@ -26,13 +31,27 @@ public class SetTempState extends TemperatureControllerState {
 	}
 
 	public void handleEvent(SetCurrentTempEvent event) {
-		TemperatureControllerContext.instance().showCurrentTemp(100);
-		// not working
+		int temp = TemperatureControllerContext.instance().getTemp();
+		thermometer = new Thermometer(this, temp);
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
+
+	}
+
+	public void handleEvent(SetOutsideTempEvent event) {
+		int temp = TemperatureControllerContext.instance().getTemp();
+		TemperatureControllerContext.instance().showOutsideTemp(temp);
+	}
+
+	public void handleEvent(SetDesireTempEvent event) {
+		int temp = TemperatureControllerContext.instance().getTemp();
+		TemperatureControllerContext.instance().showDesiredTemp(temp);
 
 	}
 
 	public void enter() {
-		TemperatureControllerContext.instance().showCurrentTemp(0);
+		// test
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
+
 	}
 
 	public void leave() {

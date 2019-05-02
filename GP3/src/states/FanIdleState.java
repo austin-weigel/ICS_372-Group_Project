@@ -44,7 +44,7 @@ public class FanIdleState extends TemperatureControllerState {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
+		TemperatureControllerContext.instance().showFanOn();
 
 	}
 

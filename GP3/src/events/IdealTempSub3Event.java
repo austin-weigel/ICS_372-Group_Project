@@ -1,25 +1,14 @@
 package events;
 
 public class IdealTempSub3Event extends TemperatureControllerEvent {
-	private static IdealTempSub3Event instance;
+	private int currentTemp;
 
-	/**
-	 * Private for singleton
-	 * 
-	 */
-	private IdealTempSub3Event() {
-
+	private IdealTempSub3Event(int value) {
+		this.currentTemp = value;
 	}
 
-	/**
-	 * For the singleton pattern
-	 * 
-	 * @return the only instance
-	 */
-	public static IdealTempSub3Event instance() {
-		if (instance == null) {
-			instance = new IdealTempSub3Event();
-		}
-		return instance;
+	public int getTimeLeft() {
+		return currentTemp;
 	}
+
 }

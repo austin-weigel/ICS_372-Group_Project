@@ -11,9 +11,11 @@ public class TimerTickedEvent extends TemperatureControllerEvent {
 	private int timeLeft;
 
 	/**
-	 * Stores the amount of time left in the Timer.
+	 * Not a singleton Stores the amount of time left in the Timer. This is
+	 * needed for the fan idle state to sit for 10 minutes
 	 * 
-	 * @param value the amount of time left
+	 * @param value
+	 *            the amount of time left
 	 */
 	public TimerTickedEvent(int value) {
 		this.timeLeft = value;

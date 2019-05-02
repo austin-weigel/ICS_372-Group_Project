@@ -3,9 +3,6 @@ package timer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import events.TimerAt10Event;
-import events.TimerTickedEvent;
-
 /**
  *
  * @author Brahma Dathan and Sarnath Ramnath
@@ -80,11 +77,15 @@ public class Timer implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		if (--timeValue <= 0) {
-			client.handleEvent(TimerAt10Event.instance());
-			Clock.instance().removePropertyChangeListener(this);
-		} else {
-			client.handleEvent(new TimerTickedEvent(timeValue));
-		}
+		// code for this part needs to be rewritten for timertickedevent and
+		// timerat10event
+		//
+		// if (--timeValue <= 0) {
+		// client.handleEvent(TimerAt10Event.instance());
+
+		// Clock.instance().removePropertyChangeListener(this);
+		// } else {
+		// client.handleEvent(new TimerTickedEvent(timeValue));
+		// }
 	}
 }

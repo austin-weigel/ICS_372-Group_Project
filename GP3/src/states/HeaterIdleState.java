@@ -3,6 +3,7 @@ package states;
 import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
+import events.IdealTempEvent;
 import thermometer.Notifiable;
 import thermometer.Thermometer;
 
@@ -45,9 +46,13 @@ public class HeaterIdleState extends TemperatureControllerState implements Notif
 		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
 	}
 
+	public void handleEvent(IdealTempEvent event) {
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
+	}
+
 	@Override
 	public void enter() {
-		thermometer = new Thermometer(this, 10);
+		TemperatureControllerContext.instance().showHeaterOn();
 	}
 
 	@Override

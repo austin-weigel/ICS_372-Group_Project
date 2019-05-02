@@ -8,25 +8,17 @@ package events;
  *
  */
 public class TimerAt10Event extends TemperatureControllerEvent {
-	private static TimerAt10Event instance;
-
 	/**
-	 * Private for singleton
-	 * 
+	 * Not a singleton This event is for fan not idle state. The timer to tick
+	 * for air being blown at 10 minutes
 	 */
-	private TimerAt10Event() {
+	private int timeLeft;
 
+	private TimerAt10Event(int value) {
+		this.timeLeft = value;
 	}
 
-	/**
-	 * For the singleton pattern
-	 * 
-	 * @return the only instance
-	 */
-	public static TimerAt10Event instance() {
-		if (instance == null) {
-			instance = new TimerAt10Event();
-		}
-		return instance;
+	public int getTimeLeft() {
+		return timeLeft;
 	}
 }

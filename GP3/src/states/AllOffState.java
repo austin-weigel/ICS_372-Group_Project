@@ -3,13 +3,13 @@ package states;
 import events.ACEvent;
 import events.FanEvent;
 import events.HeaterEvent;
-import events.TimerTickedEvent;
-import timer.Timer;
+import events.IdealTempEvent;
+import thermometer.Notifiable;
+import thermometer.Thermometer;
 
-public class AllOffState extends TemperatureControllerState {
-
+public class AllOffState extends TemperatureControllerState implements Notifiable {
+	private Thermometer thermometer;
 	private static AllOffState instance;
-	private Timer timer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -46,12 +46,11 @@ public class AllOffState extends TemperatureControllerState {
 	}
 
 	/**
-	 * Process clock tick event
+	 * Process current temp to move to outside temp by 1 degree per min
 	 */
 	@Override
-	public void handleEvent(TimerTickedEvent event) {
-		// Needs to be implemented
-		System.out.println("");
+	public void handleEvent(IdealTempEvent event) {
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
 	/**
@@ -60,15 +59,13 @@ public class AllOffState extends TemperatureControllerState {
 
 	@Override
 	public void enter() {
-		// timer = new Timer(this,10);
 		TemperatureControllerContext.instance().showNoDeviceOn();
 
 	}
 
 	@Override
 	public void leave() {
-		timer.stop();
-		timer = null;
+		// not sure what happens when we leave this state
 	}
 
 }

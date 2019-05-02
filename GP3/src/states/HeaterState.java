@@ -4,10 +4,7 @@ import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
 import events.HeaterEvent;
-import events.IdealTempEvent;
 import events.IdealTempSub3Event;
-import events.TimerAt10Event;
-import events.TimerTickedEvent;
 import thermometer.Thermometer;
 
 public class HeaterState extends TemperatureControllerState {
@@ -37,16 +34,11 @@ public class HeaterState extends TemperatureControllerState {
 	 */
 	@Override
 	public void handleEvent(HeaterEvent event) {
-		thermometer.addTempValue(10); // needs fixing
 		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
-	public void handleEvent(IdealTempEvent event) {
-		// to be implemented
-	}
-
 	public void handleEvent(IdealTempSub3Event event) {
-		// to be implemented
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
 	public void handleEvent(AllOffEvent event) {
@@ -61,14 +53,6 @@ public class HeaterState extends TemperatureControllerState {
 		TemperatureControllerContext.instance().changeState(FanState.instance());
 	}
 
-	public void handleEvent(TimerAt10Event event) {
-		TemperatureControllerContext.instance().changeState(FanState.instance());
-	}
-
-	public void handleEvent(TimerTickedEvent event) {
-
-	}
-
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showHeaterOn();
@@ -79,8 +63,7 @@ public class HeaterState extends TemperatureControllerState {
 	 * Performs any necessary clean up while leaving the state
 	 */
 	public void leave() {
-		thermometer.stop();
-		thermometer = null;
+
 		// not sure
 	}
 
