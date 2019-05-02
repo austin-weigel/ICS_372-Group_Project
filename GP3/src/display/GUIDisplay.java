@@ -55,6 +55,7 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	private GUIButton setDesiredTemp;
 
 	private TextField enteredTemp = new TextField();
+	private int temp;
 
 	private Text tempLabel = new Text("Temperature ");
 	private Text currentTemp = new Text("            ");
@@ -183,7 +184,8 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	}
 
 	public int getEnteredTemp() {
-		return Integer.parseInt(enteredTemp.getText());
+		this.temp = Integer.parseInt(enteredTemp.getText());
+		return temp;
 	}
 
 }

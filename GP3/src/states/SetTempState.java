@@ -8,7 +8,9 @@ import thermometer.Thermometer;
 
 public class SetTempState extends TemperatureControllerState implements Notifiable {
 	private Thermometer thermometer;
-
+	private int currentTemp = 9;
+	private int desireTemp = 9;
+	private int outsideTemp = 9;
 	private static SetTempState instance;
 
 	/**
@@ -31,31 +33,41 @@ public class SetTempState extends TemperatureControllerState implements Notifiab
 	}
 
 	public void handleEvent(SetCurrentTempEvent event) {
-		int temp = TemperatureControllerContext.instance().getTemp();
-		thermometer = new Thermometer(this, temp);
+		this.currentTemp = TemperatureControllerContext.instance().getTemp();
+		thermometer = new Thermometer(this, currentTemp);
 		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 
 	}
 
 	public void handleEvent(SetOutsideTempEvent event) {
-		int temp = TemperatureControllerContext.instance().getTemp();
-		TemperatureControllerContext.instance().showOutsideTemp(temp);
+		this.outsideTemp = TemperatureControllerContext.instance().getTemp();
+		TemperatureControllerContext.instance().showOutsideTemp(outsideTemp);
 	}
 
 	public void handleEvent(SetDesireTempEvent event) {
-		int temp = TemperatureControllerContext.instance().getTemp();
-		TemperatureControllerContext.instance().showDesiredTemp(temp);
+		this.desireTemp = TemperatureControllerContext.instance().getTemp();
+		TemperatureControllerContext.instance().showDesiredTemp(desireTemp);
 
+	}
+
+	public int getOutsideTemp() {
+		return outsideTemp;
+	}
+
+	public int getDesireTemp() {
+		return desireTemp;
 	}
 
 	public void enter() {
-		// test
 		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
-
+		TemperatureControllerContext.instance().showOutsideTemp(outsideTemp);
+		TemperatureControllerContext.instance().showDesiredTemp(desireTemp);
 	}
 
 	public void leave() {
-		// TODO Auto-generated method stub
+		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
+		TemperatureControllerContext.instance().showOutsideTemp(outsideTemp);
+		TemperatureControllerContext.instance().showDesiredTemp(desireTemp);
 
 	}
 }

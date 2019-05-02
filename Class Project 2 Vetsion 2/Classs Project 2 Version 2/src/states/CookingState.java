@@ -32,79 +32,79 @@ import timer.Timer;
  *
  */
 public class CookingState extends MicrowaveState implements Notifiable {
-    private static CookingState instance;
-    private Timer timer;
+	private static CookingState instance;
+	private Timer timer;
 
-    /**
-     * Private for the singleton pattern
-     */
-    private CookingState() {
-    }
+	/**
+	 * Private for the singleton pattern
+	 */
+	private CookingState() {
+	}
 
-    /**
-     * For singleton
-     * 
-     * @return the object
-     */
-    public static CookingState instance() {
-        if (instance == null) {
-            instance = new CookingState();
-        }
-        return instance;
-    }
+	/**
+	 * For singleton
+	 * 
+	 * @return the object
+	 */
+	public static CookingState instance() {
+		if (instance == null) {
+			instance = new CookingState();
+		}
+		return instance;
+	}
 
-    /**
-     * Process Cook request
-     */
-    @Override
-    public void handleEvent(CookRequestEvent event) {
-        timer.addTimeValue(10);
-        MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process Cook request
+	 */
+	@Override
+	public void handleEvent(CookRequestEvent event) {
+		timer.addTimeValue(10);
+		MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    /**
-     * Process door open request
-     */
-    @Override
-    public void handleEvent(DoorOpenEvent event) {
-        MicrowaveContext.instance().changeState(DoorOpenState.instance());
-    }
+	/**
+	 * Process door open request
+	 */
+	@Override
+	public void handleEvent(DoorOpenEvent event) {
+		MicrowaveContext.instance().changeState(DoorOpenState.instance());
+	}
 
-    /**
-     * Process clock tick event
-     */
-    @Override
-    public void handleEvent(TimerTickedEvent event) {
-        MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process clock tick event
+	 */
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    /**
-     * Process the timer runs out event
-     */
-    @Override
-    public void handleEvent(TimerRanOutEvent event) {
-        MicrowaveContext.instance().showTimeLeft(0);
-        MicrowaveContext.instance().changeState(DoorClosedState.instance());
-    }
+	/**
+	 * Process the timer runs out event
+	 */
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		MicrowaveContext.instance().showTimeLeft(0);
+		MicrowaveContext.instance().changeState(DoorClosedState.instance());
+	}
 
-    /**
-     * Initializes the state Adds itself as a listener to managers Updates the
-     * displays
-     * 
-     */
-    @Override
-    public void enter() {
-        timer = new Timer(this, 10);
-        MicrowaveContext.instance().showCooking();
-        MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Initializes the state Adds itself as a listener to managers Updates the
+	 * displays
+	 * 
+	 */
+	@Override
+	public void enter() {
+		timer = new Timer(this, 10);
+		MicrowaveContext.instance().showCooking();
+		MicrowaveContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    @Override
-    public void leave() {
-        timer.stop();
-        timer = null;
-        MicrowaveContext.instance().showNotCooking();
-        MicrowaveContext.instance().showTimeLeft(0);
-    }
+	@Override
+	public void leave() {
+		timer.stop();
+		timer = null;
+		MicrowaveContext.instance().showNotCooking();
+		MicrowaveContext.instance().showTimeLeft(0);
+	}
 
 }
