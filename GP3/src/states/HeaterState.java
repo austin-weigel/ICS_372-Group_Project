@@ -3,11 +3,9 @@ package states;
 import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
-import thermometer.Thermometer;
 
 public class HeaterState extends TemperatureControllerState {
 	private static HeaterState instance;
-	private Thermometer thermometer;
 
 	/**
 	 * Private for the singleton pattern

@@ -1,6 +1,5 @@
 package timer;
 
-import events.TimerAt10Event;
 import events.TimerTickedEvent;
 
 /**
@@ -15,8 +14,4 @@ public interface Notifiable {
 	 */
 	public void handleEvent(TimerTickedEvent event);
 
-	/**
-	 * Process timer runs out event
-	 */
-	public void handleEvent(TimerAt10Event event);
 }

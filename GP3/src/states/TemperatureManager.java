@@ -1,21 +1,15 @@
-package thermometer;
+package states;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import states.ACIdleState;
-import states.ACState;
-import states.HeaterIdleState;
-import states.HeaterState;
-import states.TemperatureControllerContext;
-import states.TemperatureControllerState;
 import timer.Clock;
 
 public class TemperatureManager implements PropertyChangeListener {
 	private static TemperatureManager instance;
-	private int currentTemp;
-	private int desiredTemp;
-	private int outsideTemp;
+	private int currentTemp = 70;
+	private int desiredTemp = 70;
+	private int outsideTemp = 70;
 
 	@Override
 	/**

@@ -4,13 +4,10 @@ import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
 import events.HeaterEvent;
-import events.IdealTempEvent;
-import events.IdealTempPlus3Event;
-import events.IdealTempSub3Event;
 import events.SetCurrentTempEvent;
 import events.SetDesireTempEvent;
 import events.SetOutsideTempEvent;
-import events.TimerAt10Event;
+import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
 
 /**
@@ -78,49 +75,24 @@ public abstract class TemperatureControllerState {
 	}
 
 	/**
-	 * Process clock ticks Generates the timer runs out event
+	 * Process timer ran out event
 	 */
-	public void handleEvent(IdealTempEvent event) {
-
+	public void handleEvent(TimerRanOutEvent event) {
 	}
 
 	/**
-	 * Process clock ticks Generates the timer runs out event
+	 * Process timer ticked event
 	 */
-	public void handleEvent(IdealTempPlus3Event event) {
-
-	}
-
-	/**
-	 * Process clock ticks Generates the timer runs out event
-	 */
-	public void handleEvent(IdealTempSub3Event event) {
-
-	}
-
-	/**
-	 * Process clock ticks Generates the timer runs out event
-	 */
-	public void handleEvent(TimerAt10Event event) {
-
-	}
-
 	public void handleEvent(TimerTickedEvent event) {
-
 	}
 
 	public void handleEvent(SetDesireTempEvent event) {
-
 	}
 
 	public void handleEvent(SetOutsideTempEvent event) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void handleEvent(SetCurrentTempEvent event) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

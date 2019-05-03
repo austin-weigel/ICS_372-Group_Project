@@ -8,7 +8,6 @@ import events.HeaterEvent;
 import events.SetCurrentTempEvent;
 import events.SetDesireTempEvent;
 import events.SetOutsideTempEvent;
-import thermometer.TemperatureManager;
 
 /**
  *

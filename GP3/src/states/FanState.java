@@ -1,7 +1,12 @@
 package states;
 
-public class FanState extends TemperatureControllerState {
+import events.TimerRanOutEvent;
+import timer.Notifiable;
+import timer.Timer;
+
+public class FanState extends TemperatureControllerState implements Notifiable {
 	private static FanState instance;
+	private Timer timer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -22,16 +27,23 @@ public class FanState extends TemperatureControllerState {
 		return instance;
 	}
 
+	/**
+	 * Process the timer runs out event
+	 */
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		// TemperatureControllerContext.instance().showTimeLeft(0);
+		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
+	}
+
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		TemperatureControllerContext.instance().showFanOn();
+		timer = new Timer(this, 10);
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

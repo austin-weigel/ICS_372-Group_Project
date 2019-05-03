@@ -3,14 +3,11 @@ package states;
 import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
-import events.IdealTempEvent;
-import thermometer.Notifiable;
-import thermometer.Thermometer;
+import timer.Notifiable;
 
 public class HeaterIdleState extends TemperatureControllerState implements Notifiable {
 
 	private static HeaterIdleState instance;
-	private static Thermometer thermometer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -44,10 +41,6 @@ public class HeaterIdleState extends TemperatureControllerState implements Notif
 	@Override
 	public void handleEvent(FanEvent event) {
 		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
-	}
-
-	public void handleEvent(IdealTempEvent event) {
-		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
 	@Override

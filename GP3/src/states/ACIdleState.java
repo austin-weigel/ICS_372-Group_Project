@@ -3,12 +3,9 @@ package states;
 import events.AllOffEvent;
 import events.FanEvent;
 import events.HeaterEvent;
-import events.IdealTempEvent;
-import thermometer.Thermometer;
 import timer.Notifiable;
 
 public class ACIdleState extends TemperatureControllerState implements Notifiable {
-	private Thermometer thermometer;
 	private static ACIdleState instance;
 
 	/**
@@ -43,10 +40,6 @@ public class ACIdleState extends TemperatureControllerState implements Notifiabl
 	@Override
 	public void handleEvent(HeaterEvent event) {
 		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
-	}
-
-	public void handleEvent(IdealTempEvent event) {
-		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
 	@Override

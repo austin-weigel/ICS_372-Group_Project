@@ -3,7 +3,7 @@ package timer;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import thermometer.TemperatureManager;
+import states.TemperatureManager;
 
 /**
  *
