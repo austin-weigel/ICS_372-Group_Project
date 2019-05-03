@@ -45,6 +45,7 @@ public class HeaterState extends TemperatureControllerState {
 
 	@Override
 	public void enter() {
+		TemperatureControllerContext.instance().showHeaterOn();
 	}
 
 	/**

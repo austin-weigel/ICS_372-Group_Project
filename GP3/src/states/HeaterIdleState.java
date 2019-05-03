@@ -52,7 +52,7 @@ public class HeaterIdleState extends TemperatureControllerState implements Notif
 
 	@Override
 	public void enter() {
-		TemperatureControllerContext.instance().showHeaterOn();
+		TemperatureControllerContext.instance().showHeaterIdle();
 	}
 
 	@Override

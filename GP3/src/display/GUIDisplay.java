@@ -163,6 +163,30 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	}
 
 	/**
+	 * Indicate that Fan is Idle
+	 */
+	@Override
+	public void showFanIdle() {
+		deviceStatus.setText("Fan is on (idle)");
+	}
+
+	/**
+	 * Indicate that AC is idle
+	 */
+	@Override
+	public void showAcIdle() {
+		deviceStatus.setText("AC is on (idle)");
+	}
+
+	/**
+	 * Indicate that heater is idle
+	 */
+	@Override
+	public void showHeaterIdle() {
+		deviceStatus.setText("Heater is on (idle)");
+	}
+
+	/**
 	 * Indicate the current room temp
 	 */
 	public void showCurrentTemp(int value) {

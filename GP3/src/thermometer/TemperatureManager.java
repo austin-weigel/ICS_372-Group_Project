@@ -36,7 +36,7 @@ public class TemperatureManager implements PropertyChangeListener {
 
 		// Is the heater running?
 		if (currentState instanceof HeaterState) {
-			if (currentTemp < desiredTemp) {
+			if (currentTemp < desiredTemp - 1) {
 				currentTemp += 2;
 			} else {
 				TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
@@ -44,7 +44,7 @@ public class TemperatureManager implements PropertyChangeListener {
 		}
 		// Is the AC running?
 		if (currentState instanceof ACState) {
-			if (currentTemp > desiredTemp) {
+			if (currentTemp > desiredTemp + 1) {
 				currentTemp -= 2;
 			} else {
 				TemperatureControllerContext.instance().changeState(ACIdleState.instance());
@@ -52,12 +52,12 @@ public class TemperatureManager implements PropertyChangeListener {
 		}
 
 		// Is the heater on?
-		if (currentState instanceof HeaterIdleState && currentTemp <= desiredTemp - 2) {
+		if (currentState instanceof HeaterIdleState && currentTemp <= desiredTemp - 3) {
 			TemperatureControllerContext.instance().changeState(HeaterState.instance());
 		}
 
 		// Is the AC on?
-		if (currentState instanceof ACIdleState && currentTemp >= desiredTemp + 2) {
+		if (currentState instanceof ACIdleState && currentTemp >= desiredTemp + 3) {
 			TemperatureControllerContext.instance().changeState(ACState.instance());
 		}
 

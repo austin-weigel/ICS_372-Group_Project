@@ -148,6 +148,27 @@ public class TemperatureControllerContext {
 	}
 
 	/**
+	 * Show that the Fan is idle.
+	 */
+	public void showFanIdle() {
+		display.showFanIdle();
+	}
+
+	/**
+	 * Show that the AC is idle.
+	 */
+	public void showAcIdle() {
+		display.showAcIdle();
+	}
+
+	/**
+	 * Show that the Heater is idle.
+	 */
+	public void showHeaterIdle() {
+		display.showHeaterIdle();
+	}
+
+	/**
 	 * Show the current temperature.
 	 */
 	public void showCurrentTemp(int currentTemp) {

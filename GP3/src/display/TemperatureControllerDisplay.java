@@ -14,6 +14,12 @@ public interface TemperatureControllerDisplay {
 
 	public void showHeaterOn();
 
+	public void showFanIdle();
+
+	public void showAcIdle();
+
+	public void showHeaterIdle();
+
 	public void showCurrentTemp(int currentTemp);
 
 	/**

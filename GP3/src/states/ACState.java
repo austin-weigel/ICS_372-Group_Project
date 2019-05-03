@@ -46,6 +46,7 @@ public class ACState extends TemperatureControllerState {
 
 	@Override
 	public void enter() {
+		TemperatureControllerContext.instance().showAcOn();
 	}
 
 	@Override
