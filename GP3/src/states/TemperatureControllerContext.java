@@ -62,16 +62,15 @@ public class TemperatureControllerContext {
 	/**
 	 * The display could change. So we have to get its refrence.
 	 *
-	 * @param display
-	 *            The current display object
+	 * @param display The current display object
 	 */
 	public void setDisplay(TemperatureControllerDisplay display) {
 		this.display = display;
 	}
 
 	/**
-	 * Lets all off state be the starting state. Adds the object? as an
-	 * observable for clock
+	 * Lets all off state be the starting state. Adds the object? as an observable
+	 * for clock
 	 */
 	public void initialize() {
 		instance.changeState(AllOffState.instance());
@@ -80,8 +79,7 @@ public class TemperatureControllerContext {
 	/**
 	 * Called from the states to change the current state
 	 *
-	 * @param nextState
-	 *            the next state
+	 * @param nextState the next state
 	 */
 	public void changeState(TemperatureControllerState nextState) {
 		currentState.leave();
@@ -89,34 +87,37 @@ public class TemperatureControllerContext {
 		currentState.enter();
 	}
 
+	/**
+	 * Process ACEvent request
+	 */
 	public void handleEvent(ACEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
-	 * Process door open request
+	 * Process AllOffEvent request
 	 */
 	public void handleEvent(AllOffEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
-	 * Process door close request
+	 * Process FanEvent request
 	 */
 	public void handleEvent(FanEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
-	 * Process door close request
+	 * Process HeaterEvent request
 	 */
 	public void handleEvent(HeaterEvent event) {
 		currentState.handleEvent(event);
 	}
 
 	/**
-	 * This invokes the right method of the display. This helps protect the
-	 * states from changes to the way the system utilizes the state changes.
+	 * This invokes the right method of the display. This helps protect the states
+	 * from changes to the way the system utilizes the state changes.
 	 *
 	 */
 	public void showNoDeviceOn() {
