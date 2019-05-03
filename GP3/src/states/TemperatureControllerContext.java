@@ -124,25 +124,36 @@ public class TemperatureControllerContext {
 		display.showNoDeviceOn();
 	}
 
+	/**
+	 * Show that the Fan is on.
+	 */
 	public void showFanOn() {
 		display.showFanOn();
 	}
 
+	/**
+	 * Show that the AC is on.
+	 */
 	public void showAcOn() {
 		display.showAcOn();
-
 	}
 
+	/**
+	 * Show that the Heater is on.
+	 */
 	public void showHeaterOn() {
 		display.showHeaterOn();
 	}
 
+	/**
+	 * Show the current temperature.
+	 */
 	public void showCurrentTemp(int currentTemp) {
 		display.showCurrentTemp(currentTemp);
 	}
 
 	/**
-	 * indicate the Desired room temp
+	 * Show the Desired room temp.
 	 */
 	public void showDesiredTemp(int desiredTemp) {
 		display.showDesiredTemp(desiredTemp);
@@ -153,22 +164,30 @@ public class TemperatureControllerContext {
 	}
 
 	/**
-	 * indicate the outside temp
+	 * Show the outside temp.
 	 */
 	public void showOutsideTemp(int outsideTemp) {
 		display.showOutsideTemp(outsideTemp);
 	}
 
+	/**
+	 * Process SetDesireTempEvent request
+	 */
 	public void handleEvent(SetDesireTempEvent event) {
 		currentState.handleEvent(event);
-
 	}
 
+	/**
+	 * Process SetOutsideTempEvent request
+	 */
 	public void handleEvent(SetOutsideTempEvent event) {
 		currentState.handleEvent(event);
 
 	}
 
+	/**
+	 * Process SetCurrentTempEvent request
+	 */
 	public void handleEvent(SetCurrentTempEvent event) {
 		currentState.handleEvent(event);
 
