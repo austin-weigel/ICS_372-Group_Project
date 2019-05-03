@@ -54,21 +54,21 @@ public abstract class TemperatureControllerState {
 	}
 
 	/**
-	 * Process door open request
+	 * Process AllOfEvent request
 	 */
 	public void handleEvent(AllOffEvent event) {
 
 	}
 
 	/**
-	 * Process door close request
+	 * Process FanEvent request
 	 */
 	public void handleEvent(FanEvent event) {
 
 	}
 
 	/**
-	 * Process clock tick Generates the timer runs out event
+	 * Process HeaterEvent request
 	 */
 	public void handleEvent(HeaterEvent event) {
 

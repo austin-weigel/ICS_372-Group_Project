@@ -51,21 +51,18 @@ public class FanIdleState extends TemperatureControllerState implements Notifiab
 	 */
 	@Override
 	public void handleEvent(TimerRanOutEvent event) {
-		// TemperatureControllerContext.instance().showTimeLeft(0);
 		TemperatureControllerContext.instance().changeState(FanState.instance());
 	}
 
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showFanIdle();
-		timer = new Timer(this, 10);
-
+		timer = new Timer(this, 2);
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-
+		timer.stop();
+		timer = null;
 	}
-
 }

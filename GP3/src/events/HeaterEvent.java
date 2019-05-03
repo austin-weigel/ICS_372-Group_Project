@@ -1,6 +1,6 @@
 package events;
 
-public class HeaterEvent {
+public class HeaterEvent extends TemperatureControllerEvent {
 	private static HeaterEvent instance;
 
 	/**
