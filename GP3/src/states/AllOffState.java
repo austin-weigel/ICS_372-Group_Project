@@ -32,12 +32,12 @@ public class AllOffState extends TemperatureControllerState implements Notifiabl
 
 	@Override
 	public void handleEvent(HeaterEvent event) {
-		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
+		TemperatureControllerContext.instance().changeState(HeaterState.instance());
 	}
 
 	@Override
 	public void handleEvent(ACEvent event) {
-		TemperatureControllerContext.instance().changeState(ACIdleState.instance());
+		TemperatureControllerContext.instance().changeState(ACState.instance());
 	}
 
 	@Override

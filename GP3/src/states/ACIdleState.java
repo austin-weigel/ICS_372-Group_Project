@@ -52,7 +52,6 @@ public class ACIdleState extends TemperatureControllerState implements Notifiabl
 
 	@Override
 	public void enter() {
-		TemperatureControllerContext.instance().showAcOn();
 
 	}
 

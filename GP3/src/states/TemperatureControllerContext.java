@@ -161,7 +161,8 @@ public class TemperatureControllerContext {
 		display.showDesiredTemp(desiredTemp);
 	}
 
-	// TODO: What is this?
+	// Get the value in the text field.
+	// Zero is returned if improper input is entered.
 	public int getTemp() {
 		return display.getEnteredTemp();
 	}

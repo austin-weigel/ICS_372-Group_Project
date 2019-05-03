@@ -2,6 +2,7 @@ package timer;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import 
 
 /**
  *
@@ -57,8 +58,8 @@ public class Clock implements Runnable {
     /**
      * Start the thread
      */
-    private Clock() {
-        thread.start();
+    private Clock() {    	
+        thread.start();        
     }
 
     /**
@@ -69,6 +70,7 @@ public class Clock implements Runnable {
     public static Clock instance() {
         if (clock == null) {
             clock = new Clock();
+            
         }
         return clock;
     }

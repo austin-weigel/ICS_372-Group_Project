@@ -3,8 +3,6 @@ package states;
 import events.ACEvent;
 import events.AllOffEvent;
 import events.FanEvent;
-import events.HeaterEvent;
-import events.IdealTempSub3Event;
 import thermometer.Thermometer;
 
 public class HeaterState extends TemperatureControllerState {
@@ -32,14 +30,6 @@ public class HeaterState extends TemperatureControllerState {
 	/**
 	 * Process heater on request
 	 */
-	@Override
-	public void handleEvent(HeaterEvent event) {
-		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
-	}
-
-	public void handleEvent(IdealTempSub3Event event) {
-		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
-	}
 
 	public void handleEvent(AllOffEvent event) {
 		TemperatureControllerContext.instance().changeState(AllOffState.instance());
@@ -56,7 +46,7 @@ public class HeaterState extends TemperatureControllerState {
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showHeaterOn();
-		TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
+		// TemperatureControllerContext.instance().showCurrentTemp(thermometer.getTempValue());
 	}
 
 	/**
