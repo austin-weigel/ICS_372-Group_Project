@@ -7,9 +7,9 @@ import timer.Clock;
 
 public class TemperatureManager implements PropertyChangeListener {
 	private static TemperatureManager instance;
-	private int currentTemp = 70;
-	private int desiredTemp = 70;
-	private int outsideTemp = 70;
+	private int currentTemp;
+	private int desiredTemp;
+	private int outsideTemp;
 
 	@Override
 	/**
