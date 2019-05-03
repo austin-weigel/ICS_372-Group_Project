@@ -3,7 +3,9 @@ package thermometer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import states.ACIdleState;
 import states.ACState;
+import states.HeaterIdleState;
 import states.HeaterState;
 import states.TemperatureControllerContext;
 import states.TemperatureControllerState;
@@ -16,6 +18,9 @@ public class TemperatureManager implements PropertyChangeListener {
 	private int outsideTemp;
 
 	@Override
+	/**
+	 * This method is responsible for handling the change of temperatures.
+	 */
 	public void propertyChange(PropertyChangeEvent arg0) {
 
 		// Natural increase/decrease of the current temperature based on the outside
@@ -29,13 +34,31 @@ public class TemperatureManager implements PropertyChangeListener {
 
 		TemperatureControllerState currentState = TemperatureControllerContext.instance().getCurrentState();
 
-		// Is the heater on?
+		// Is the heater running?
 		if (currentState instanceof HeaterState) {
-			currentTemp += 2;
+			if (currentTemp < desiredTemp) {
+				currentTemp += 2;
+			} else {
+				TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
+			}
 		}
-		// Is the AC on?
+		// Is the AC running?
 		if (currentState instanceof ACState) {
-			currentTemp -= 2;
+			if (currentTemp > desiredTemp) {
+				currentTemp -= 2;
+			} else {
+				TemperatureControllerContext.instance().changeState(ACIdleState.instance());
+			}
+		}
+
+		// Is the heater on?
+		if (currentState instanceof HeaterIdleState && currentTemp <= desiredTemp - 2) {
+			TemperatureControllerContext.instance().changeState(HeaterState.instance());
+		}
+
+		// Is the AC on?
+		if (currentState instanceof ACIdleState && currentTemp >= desiredTemp + 2) {
+			TemperatureControllerContext.instance().changeState(ACState.instance());
 		}
 
 		// Show the user the changes.
