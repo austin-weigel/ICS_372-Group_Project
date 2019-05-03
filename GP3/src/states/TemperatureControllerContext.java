@@ -8,6 +8,7 @@ import events.HeaterEvent;
 import events.SetCurrentTempEvent;
 import events.SetDesireTempEvent;
 import events.SetOutsideTempEvent;
+import thermometer.TemperatureManager;
 
 /**
  *
@@ -37,6 +38,7 @@ import events.SetOutsideTempEvent;
 public class TemperatureControllerContext {
 	private TemperatureControllerDisplay display;
 	private TemperatureControllerState currentState;
+
 	private static TemperatureControllerContext instance;
 
 	/**
@@ -159,6 +161,7 @@ public class TemperatureControllerContext {
 		display.showDesiredTemp(desiredTemp);
 	}
 
+	// TODO: What is this?
 	public int getTemp() {
 		return display.getEnteredTemp();
 	}
@@ -174,22 +177,53 @@ public class TemperatureControllerContext {
 	 * Process SetDesireTempEvent request
 	 */
 	public void handleEvent(SetDesireTempEvent event) {
-		currentState.handleEvent(event);
+
+		// Read the desired temperature from the text box.
+		int desiredTemperature = this.getTemp();
+
+		// Store that value in the TemperatureManager.
+		TemperatureManager.instance().setDesiredTemp(desiredTemperature);
+
+		// Display the change to the user.
+		showDesiredTemp(desiredTemperature);
 	}
 
 	/**
 	 * Process SetOutsideTempEvent request
 	 */
 	public void handleEvent(SetOutsideTempEvent event) {
-		currentState.handleEvent(event);
 
+		// Read the outside temperature from the text box.
+		int outsideTemperature = this.getTemp();
+
+		// Store that value in the TemperatureManager.
+		TemperatureManager.instance().setOutsideTemp(outsideTemperature);
+
+		// Display the change to the user.
+		showOutsideTemp(outsideTemperature);
 	}
 
 	/**
 	 * Process SetCurrentTempEvent request
 	 */
 	public void handleEvent(SetCurrentTempEvent event) {
-		currentState.handleEvent(event);
 
+		// Read the current temperature from the text box.
+		int currentTemperature = this.getTemp();
+
+		// Store that value in the TemperatureManager.
+		TemperatureManager.instance().setCurrentTemp(currentTemperature);
+
+		// Display the change to the user.
+		showCurrentTemp(currentTemperature);
+	}
+
+	/**
+	 * The current state.
+	 * 
+	 * @return The current state.
+	 */
+	public TemperatureControllerState getCurrentState() {
+		return currentState;
 	}
 }

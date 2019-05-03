@@ -184,7 +184,12 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 	}
 
 	public int getEnteredTemp() {
-		this.temp = Integer.parseInt(enteredTemp.getText());
+		try {
+			this.temp = Integer.parseInt(enteredTemp.getText());
+		} catch (Exception e) {
+			this.temp = 0;
+		}
+		enteredTemp.setText("");
 		return temp;
 	}
 
