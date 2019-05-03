@@ -34,11 +34,11 @@ public class HeaterState extends TemperatureControllerState {
 	}
 
 	public void handeEvent(ACEvent event) {
-		TemperatureControllerContext.instance().changeState(ACState.instance());
+		TemperatureControllerContext.instance().changeState(ACIdleState.instance());
 	}
 
 	public void handleEvent(FanEvent event) {
-		TemperatureControllerContext.instance().changeState(FanState.instance());
+		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
 	}
 
 	@Override
