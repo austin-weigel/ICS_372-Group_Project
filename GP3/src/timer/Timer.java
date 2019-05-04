@@ -3,6 +3,8 @@ package timer;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import events.TimerRanOutEvent;
+
 /**
  *
  * @author Brahma Dathan and Sarnath Ramnath
@@ -38,10 +40,9 @@ public class Timer implements PropertyChangeListener {
 	/**
 	 * Sets up the timer for a certain client with an initial time value
 	 *
-	 * @param client
-	 *            the client, a Notifiable object
-	 * @param timeValue
-	 *            the initial time value after which the timer runs out of time.
+	 * @param client    the client, a Notifiable object
+	 * @param timeValue the initial time value after which the timer runs out of
+	 *                  time.
 	 */
 	public Timer(Notifiable client, int timeValue) {
 		this.client = client;
@@ -52,8 +53,7 @@ public class Timer implements PropertyChangeListener {
 	/**
 	 * The timer value could be changed using this method.
 	 *
-	 * @param value
-	 *            the increment (could be negative) for the time value.
+	 * @param value the increment (could be negative) for the time value.
 	 */
 	public void addTimeValue(int value) {
 		timeValue += value;
@@ -77,15 +77,9 @@ public class Timer implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		// code for this part needs to be rewritten for timertickedevent and
-		// timerat10event
-		//
-		// if (--timeValue <= 0) {
-		// client.handleEvent(TimerAt10Event.instance());
 
-		// Clock.instance().removePropertyChangeListener(this);
-		// } else {
-		// client.handleEvent(new TimerTickedEvent(timeValue));
-		// }
+		if (--timeValue <= 0) {
+			client.handleEvent(TimerRanOutEvent.instance());
+		}
 	}
 }

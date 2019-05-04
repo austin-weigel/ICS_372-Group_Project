@@ -48,11 +48,13 @@ public class TemperatureManager implements PropertyChangeListener {
 		// Is the heater idle?
 		if (currentState instanceof HeaterIdleState && currentTemp <= desiredTemp - 3) {
 			TemperatureControllerContext.instance().changeState(HeaterState.instance());
+			// TemperatureControllerContext.instance().setCurrentState(HeaterState.instance());
 		}
 
 		// Is the AC idle?
 		if (currentState instanceof ACIdleState && currentTemp >= desiredTemp + 3) {
 			TemperatureControllerContext.instance().changeState(ACState.instance());
+			// TemperatureControllerContext.instance().setCurrentState(ACState.instance());
 		}
 
 		// Show the user the changes.
