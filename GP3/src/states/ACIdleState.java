@@ -27,21 +27,33 @@ public class ACIdleState extends TemperatureControllerState implements Notifiabl
 		return instance;
 	}
 
+	/**
+	 * Process the AllOffEvent.
+	 */
 	@Override
 	public void handleEvent(AllOffEvent event) {
 		TemperatureControllerContext.instance().changeState(AllOffState.instance());
 	}
 
+	/**
+	 * Process the FanEvent.
+	 */
 	@Override
 	public void handleEvent(FanEvent event) {
 		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
 	}
 
+	/**
+	 * Process the HeaterEvent.
+	 */
 	@Override
 	public void handleEvent(HeaterEvent event) {
 		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
 	}
 
+	/**
+	 * What happens when the system enters this state.
+	 */
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showAcIdle();

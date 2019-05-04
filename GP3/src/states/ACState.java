@@ -32,27 +32,42 @@ public class ACState extends TemperatureControllerState {
 		return instance;
 	}
 
+	/**
+	 * Process AllOffEvent request
+	 */
+	@Override
 	public void handleEvent(AllOffEvent event) {
 		TemperatureControllerContext.instance().changeState(AllOffState.instance());
 	}
 
-	public void handeEvent(HeaterEvent event) {
+	/**
+	 * Process HeaterEvent request
+	 */
+	@Override
+	public void handleEvent(HeaterEvent event) {
 		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
 	}
 
+	/**
+	 * Process FanEvent request
+	 */
+	@Override
 	public void handleEvent(FanEvent event) {
 		TemperatureControllerContext.instance().changeState(FanIdleState.instance());
 	}
 
+	/**
+	 * What happens when the system enters this state.
+	 */
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showAcOn();
 	}
 
+	/**
+	 * What happens when the system exits this state.
+	 */
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-
 	}
-
 }

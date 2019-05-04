@@ -95,8 +95,8 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		pane.add(tempLabel, 0, 0);
 		pane.add(enteredTemp, 1, 0);
 		pane.add(setCurrentTemp, 2, 0);
-		pane.add(setOutsideTemp, 3, 0);
-		pane.add(setDesiredTemp, 4, 0);
+		pane.add(setDesiredTemp, 3, 0);
+		pane.add(setOutsideTemp, 4, 0);
 		pane.add(heater, 0, 1);
 		pane.add(ac, 1, 1);
 		pane.add(fan, 2, 1);
@@ -106,9 +106,9 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		pane.add(outsideTemp, 2, 2);
 		pane.add(deviceStatus, 3, 2);
 
-		showCurrentTemp(0);
-		showDesiredTemp(0);
-		showOutsideTemp(0);
+		showCurrentTemp(70);
+		showDesiredTemp(70);
+		showOutsideTemp(80);
 		showNoDeviceOn();
 
 		Scene scene = new Scene(pane);
@@ -213,6 +213,7 @@ public class GUIDisplay extends Application implements TemperatureControllerDisp
 		} catch (Exception e) {
 			this.temp = 0;
 		}
+		// Clear the text box when input is accepted.
 		enteredTemp.setText("");
 		return temp;
 	}

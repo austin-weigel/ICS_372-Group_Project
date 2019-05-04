@@ -31,35 +31,50 @@ public class FanIdleState extends TemperatureControllerState implements Notifiab
 		return instance;
 	}
 
+	/**
+	 * Process AllOffEvent request.
+	 */
 	@Override
 	public void handleEvent(AllOffEvent event) {
 		TemperatureControllerContext.instance().changeState(AllOffState.instance());
 	}
 
+	/**
+	 * Process ACEvent request.
+	 */
 	@Override
 	public void handleEvent(ACEvent event) {
 		TemperatureControllerContext.instance().changeState(ACIdleState.instance());
 	}
 
+	/**
+	 * Process HeaterEvent request.
+	 */
 	@Override
 	public void handleEvent(HeaterEvent event) {
 		TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
 	}
 
 	/**
-	 * Process the timer runs out event
+	 * Process the TimerRanOutEvent.
 	 */
 	@Override
 	public void handleEvent(TimerRanOutEvent event) {
 		TemperatureControllerContext.instance().changeState(FanState.instance());
 	}
 
+	/**
+	 * What happens when the system enters this state.
+	 */
 	@Override
 	public void enter() {
 		TemperatureControllerContext.instance().showFanIdle();
-		timer = new Timer(this, 2);
+		timer = new Timer(this, 10);
 	}
 
+	/**
+	 * What happens when the system exits this state.
+	 */
 	@Override
 	public void leave() {
 		timer.stop();

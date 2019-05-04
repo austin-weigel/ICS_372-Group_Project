@@ -50,49 +50,53 @@ public abstract class TemperatureControllerState {
 	 * Specifies the actions to be taken when the Cook button is pressed.
 	 */
 	public void handleEvent(ACEvent event) {
-
 	}
 
 	/**
-	 * Process AllOfEvent request
+	 * Process AllOfEvent request.
 	 */
 	public void handleEvent(AllOffEvent event) {
-
 	}
 
 	/**
-	 * Process FanEvent request
+	 * Process FanEvent request.
 	 */
 	public void handleEvent(FanEvent event) {
-
 	}
 
 	/**
-	 * Process HeaterEvent request
+	 * Process HeaterEvent request.
 	 */
 	public void handleEvent(HeaterEvent event) {
-
 	}
 
 	/**
-	 * Process timer ran out event
+	 * Process timer ran out event.
 	 */
 	public void handleEvent(TimerRanOutEvent event) {
 	}
 
 	/**
-	 * Process timer ticked event
+	 * Process timer ticked event.
 	 */
 	public void handleEvent(TimerTickedEvent event) {
 	}
 
+	/**
+	 * Process desired temperature change event.
+	 */
 	public void handleEvent(SetDesireTempEvent event) {
 	}
 
+	/**
+	 * Process outside temperature change event.
+	 */
 	public void handleEvent(SetOutsideTempEvent event) {
 	}
 
+	/**
+	 * Process current temperature change event.
+	 */
 	public void handleEvent(SetCurrentTempEvent event) {
 	}
-
 }

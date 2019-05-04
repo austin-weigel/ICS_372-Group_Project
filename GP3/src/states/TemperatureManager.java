@@ -7,13 +7,14 @@ import timer.Clock;
 
 public class TemperatureManager implements PropertyChangeListener {
 	private static TemperatureManager instance;
-	private int currentTemp;
-	private int desiredTemp;
-	private int outsideTemp;
+	private int currentTemp = 70;
+	private int desiredTemp = 70;
+	private int outsideTemp = 80;
 
 	@Override
 	/**
-	 * This method is responsible for handling the change of temperatures.
+	 * This method is responsible for handling the change of temperature and
+	 * managing temperature variance.
 	 */
 	public void propertyChange(PropertyChangeEvent arg0) {
 
@@ -28,7 +29,11 @@ public class TemperatureManager implements PropertyChangeListener {
 
 		TemperatureControllerState currentState = TemperatureControllerContext.instance().getCurrentState();
 
-		// Is the heater running?
+		/**
+		 * Handle the case where the Heater is currently running. If the temperature is
+		 * still not the desired temp, continue running. Otherwise, revert back to the
+		 * idle state.
+		 */
 		if (currentState instanceof HeaterState) {
 			if (currentTemp < desiredTemp - 1) {
 				currentTemp += 2;
@@ -36,7 +41,12 @@ public class TemperatureManager implements PropertyChangeListener {
 				TemperatureControllerContext.instance().changeState(HeaterIdleState.instance());
 			}
 		}
-		// Is the AC running?
+
+		/**
+		 * Handle the case where the AC is currently running. If the temperature is
+		 * still not the desired temp, continue running. Otherwise, revert back to the
+		 * idle state.
+		 */
 		if (currentState instanceof ACState) {
 			if (currentTemp > desiredTemp + 1) {
 				currentTemp -= 2;
@@ -45,16 +55,21 @@ public class TemperatureManager implements PropertyChangeListener {
 			}
 		}
 
-		// Is the heater idle?
+		/**
+		 * Handle the case where the Heater is currently idle. If the current
+		 * temperature is three degrees or more away from the desired temperature, run
+		 * the Heater.
+		 */
 		if (currentState instanceof HeaterIdleState && currentTemp <= desiredTemp - 3) {
 			TemperatureControllerContext.instance().changeState(HeaterState.instance());
-			// TemperatureControllerContext.instance().setCurrentState(HeaterState.instance());
 		}
 
-		// Is the AC idle?
+		/**
+		 * Handle the case where the AC is currently idle. If the current temperature is
+		 * three degrees or more away from the desired temperature, run the AC.
+		 */
 		if (currentState instanceof ACIdleState && currentTemp >= desiredTemp + 3) {
 			TemperatureControllerContext.instance().changeState(ACState.instance());
-			// TemperatureControllerContext.instance().setCurrentState(ACState.instance());
 		}
 
 		// Show the user the changes.

@@ -246,9 +246,4 @@ public class TemperatureControllerContext {
 	public TemperatureControllerState getCurrentState() {
 		return currentState;
 	}
-
-	public void setCurrentState(TemperatureControllerState currentState) {
-		this.currentState = currentState;
-	}
-
 }
